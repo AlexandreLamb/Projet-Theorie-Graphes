@@ -1,0 +1,10 @@
+Project -> Build options...
+Dans la fenêtre [Project build options]
+- Sélectionner le nom du projet en haut à gauche (au dessus de Debug Release)
+- Mettre en avant le panneau Linker settings
+- Dans le cadre Link libraries: utiliser le bouton Add pour ajouter les librairies suivantes : 
+  	loadpng
+	png16.dll
+	jpgalleg
+	alleg44.dll
+- Valider (OK OK)
