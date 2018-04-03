@@ -215,51 +215,72 @@ void Graph::make_graph_1(){
 void Graph::charger(std::string graphName){
 
     std::ifstream fichier (graphName+".txt",std::ios::in);
-    int ordre,nbrEdge;
     int indxVertex,posX, posY, indxEdge, vertexIn, vertexOut;
     double poidEdge,poidVertex;
     std::string picName;
 
+    Graph::v_from.clear();
+    Graph::v_to.clear();
     if (fichier){
 
-        fichier >> ordre;
+        fichier >> Graph::ordre;
 
-        fichier >> nbrEdge;
+        fichier >> Graph::nbrEdge;
         std::cout<< nbrEdge;
         for(int i=0 ; i < ordre ; i++){
-        fichier >> indxVertex;
+
         fichier >> poidVertex;
         fichier >> posX;
         fichier >> posY;
         fichier >> picName;
 
-        add_interfaced_vertex(indxVertex,poidVertex,posX,posY,picName+".jpg");
+        add_interfaced_vertex(i,poidVertex,posX,posY,picName+".jpg");
         }
-        for(int i=0 ; i < nbrEdge ; i++){
-            fichier >> indxEdge;
+        for(int j=0 ; j < nbrEdge ; j++){
+
             fichier >> vertexIn;
             fichier >> vertexOut;
             fichier >> poidEdge;
-
-            add_interfaced_edge(indxEdge,vertexIn,vertexOut,poidEdge);
+            add_interfaced_edge(j,vertexIn,vertexOut,poidEdge);
+            Graph::v_from.push_back(vertexIn);
+            Graph::v_to.push_back(vertexOut);
 
         }
+
 
     fichier.close();
     }
 
 }
 
-void Graphhe::sauvgarder(std::string graphName){
+void Graph::sauvgarder(std::string graphName){
 
     std::ofstream fichier(graphName+".txt",std::ios::out | std::ios::trunc);
-
+    std::string picName;
         if(fichier){
+            fichier << Graph::ordre <<std::endl;
+            fichier << Graph::nbrEdge<<std::endl;
 
             for(auto &elt : m_vertices){
-         std::cout<<elt.second.m_interface->m_top_box.get_frame_pos().x<<" "<<elt.second.m_interface->m_top_box.get_frame_pos().y;
-        system("pause");
+         fichier << elt.second.m_value<<" ";
+         fichier <<elt.second.m_interface->m_top_box.get_frame_pos().x<<" ";
+         fichier <<elt.second.m_interface->m_top_box.get_frame_pos().y<<" ";
+        picName=elt.second.m_interface->m_img.get_pic_name();
+        picName.erase(picName.size()-4,4);
+         fichier <<picName<<std::endl;
     }
+        int i = 0;
+        for(auto &elt : m_edges){
+                elt.second.v_from.push_back(Graph::v_from[i]);
+                elt.second.v_to.push_back(Graph::v_to[i]);
+            fichier << elt.second.m_from<<" ";
+            fichier << elt.second.m_to<<" ";
+            fichier << elt.second.m_weight<<std::endl;
+            i++;
+
+        }
+        fichier.close();
+        std::cout<<"Sauvgarde done";
         }
 
 }
@@ -308,6 +329,7 @@ void Graph::add_interfaced_vertex(int idx, double value, int x, int y, std::stri
 /// Aide à l'ajout d'arcs interfacés
 void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weight)
 {
+
     if ( m_edges.find(idx)!=m_edges.end() )
     {
         std::cerr << "Error adding edge at idx=" << idx << " already used..." << std::endl;
@@ -323,5 +345,7 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     EdgeInterface *ei = new EdgeInterface(m_vertices[id_vert1], m_vertices[id_vert2]);
     m_interface->m_main_box.add_child(ei->m_top_edge);
     m_edges[idx] = Edge(weight, ei);
+    m_edges[idx].m_from=id_vert1;
+    m_edges[idx].m_to=id_vert2;
 }
 

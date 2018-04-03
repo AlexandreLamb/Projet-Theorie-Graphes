@@ -25,8 +25,10 @@ int main()
 
         /// Mise à jour générale (clavier/souris/buffer etc...)
         grman::mettre_a_jour();
-    }
 
+
+    }
+g.sauvgarder("graph1");
     grman::fermer_allegro();
 
     return 0;

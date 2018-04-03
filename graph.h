@@ -150,6 +150,7 @@ class Vertex
         // VertexInterface * m_interface = nullptr;
 
 
+
     public:
 
         /// Les constructeurs sont à compléter selon vos besoin...
@@ -223,6 +224,10 @@ class Edge
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<EdgeInterface> m_interface = nullptr;
 
+std::vector<int> v_from;
+
+        std::vector<int> v_to;
+
 
     public:
 
@@ -265,6 +270,7 @@ class GraphInterface
         grman::WidgetBox m_tool_box;
 
 
+
         // A compléter éventuellement par des widgets de décoration ou
         // d'édition (boutons ajouter/enlever ...)
 
@@ -289,6 +295,11 @@ class Graph
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<GraphInterface> m_interface = nullptr;
 
+        int ordre;
+        int nbrEdge;
+        std::vector<int> v_from;
+
+        std::vector<int> v_to;
 
     public:
 
@@ -309,7 +320,7 @@ class Graph
         void make_graph_1();
 
         void charger(std::string graphName);
-        void sauvgarder();
+        void sauvgarder(std::string graphName);
 
 
 
