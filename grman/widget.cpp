@@ -154,6 +154,11 @@ void Widget::draw_border()
     rect_around(m_view_wb, get_border_color(), m_border);
 }
 
+
+
+
+
+
 /***************************************************
                         TEXT
 ****************************************************/
@@ -334,8 +339,36 @@ void WidgetBox::interact_focus()
         }
     }
 
+    selectwidget();
+
 }
 
+
+void WidgetBox::selectwidget()
+{
+
+    if(mouse_click&1 && is_mouse_over())
+    {
+        m_border=3;
+        m_border_color=VERT;
+        m_isselected=true;
+
+    }
+    if(mouse_click&2 && is_mouse_over() && m_isselected==true)
+    {
+
+        m_border=2;
+        m_border_color= GRISSOMBRE;
+        m_isselected=false;
+
+    }
+
+}
+
+bool WidgetBox:: get_isselected()
+{
+    return m_isselected;
+}
 
 /***************************************************
                     EDGE

@@ -140,10 +140,10 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_top_box.set_dim(1000,740);
     m_top_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
 
-    m_top_box.add_child(m_tool_box);
+ /*   m_top_box.add_child(m_tool_box);
     m_tool_box.set_dim(80,720);
     m_tool_box.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
-    m_tool_box.set_bg_color(BLANCBLEU);
+    m_tool_box.set_bg_color(BLANCBLEU);*/
 
     m_top_box.add_child(m_main_box);
     m_main_box.set_dim(908,720);
@@ -165,7 +165,7 @@ void Graph::make_example()
 
     /// Les sommets doivent être définis avant les arcs
     // Ajouter le sommet d'indice 0 de valeur 30 en x=200 et y=100 avec l'image clown1.jpg etc...
-    add_interfaced_vertex(0, 30.0, 200, 100, "clown1.jpg");
+    add_interfaced_vertex(0, 29, 0, 0, "clown2.jpg");
     add_interfaced_vertex(1, 60.0, 400, 100, "clown2.jpg");
     add_interfaced_vertex(2,  50.0, 200, 300, "clown3.jpg");
     add_interfaced_vertex(3,  0.0, 400, 300, "clown4.jpg");
