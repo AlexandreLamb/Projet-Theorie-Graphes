@@ -188,6 +188,83 @@ void Graph::make_example()
     add_interfaced_edge(9, 3, 7, 80.0);
 }
 
+
+void Graph::make_graph_1(){
+    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
+
+    Graph::charger("graph1");
+   /* add_interfaced_vertex(0,50.0,100,100,"requin.jpg");
+    add_interfaced_vertex(1, 60.0, 100, 200, "thon.jpg");
+    add_interfaced_vertex(2, 60.0, 100, 300, "maquerau.jpg");
+    add_interfaced_vertex(3, 60.0, 100, 400, "petit_poisson.jpg");
+    add_interfaced_vertex(4, 60.0, 100, 500, "langoustine.jpg");
+    add_interfaced_vertex(5, 60.0, 100, 350, "orga_uni.jpg");
+
+
+
+    add_interfaced_edge(0, 0, 1, 50.0);
+    add_interfaced_edge(1, 1, 2, 20.0);
+    add_interfaced_edge(2, 1, 3, 20.0);
+    add_interfaced_edge(3, 2, 4, 20.0);
+    add_interfaced_edge(4, 3, 4, 20.0);
+    add_interfaced_edge(5, 4, 5, 20.0);
+*/
+
+}
+
+void Graph::charger(std::string graphName){
+
+    std::ifstream fichier (graphName+".txt",std::ios::in);
+    int ordre,nbrEdge;
+    int indxVertex,posX, posY, indxEdge, vertexIn, vertexOut;
+    double poidEdge,poidVertex;
+    std::string picName;
+
+    if (fichier){
+
+        fichier >> ordre;
+
+        fichier >> nbrEdge;
+        std::cout<< nbrEdge;
+        for(int i=0 ; i < ordre ; i++){
+        fichier >> indxVertex;
+        fichier >> poidVertex;
+        fichier >> posX;
+        fichier >> posY;
+        fichier >> picName;
+
+        add_interfaced_vertex(indxVertex,poidVertex,posX,posY,picName+".jpg");
+        }
+        for(int i=0 ; i < nbrEdge ; i++){
+            fichier >> indxEdge;
+            fichier >> vertexIn;
+            fichier >> vertexOut;
+            fichier >> poidEdge;
+
+            add_interfaced_edge(indxEdge,vertexIn,vertexOut,poidEdge);
+
+        }
+
+    fichier.close();
+    }
+
+}
+
+void Graphhe::sauvgarder(std::string graphName){
+
+    std::ofstream fichier(graphName+".txt",std::ios::out | std::ios::trunc);
+
+        if(fichier){
+
+            for(auto &elt : m_vertices){
+         std::cout<<elt.second.m_interface->m_top_box.get_frame_pos().x<<" "<<elt.second.m_interface->m_top_box.get_frame_pos().y;
+        system("pause");
+    }
+        }
+
+}
+
+
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
 void Graph::update()
 {
@@ -207,6 +284,8 @@ void Graph::update()
 
     for (auto &elt : m_edges)
         elt.second.post_update();
+
+
 
 }
 

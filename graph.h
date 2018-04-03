@@ -75,6 +75,7 @@
 #include <map>
 #include <string>
 #include <memory>
+#include "fstream"
 
 #include "grman/grman.h"
 
@@ -304,6 +305,12 @@ class Graph
         /// Cette méthode est à enlever et remplacer par un système
         /// de chargement de fichiers par exemple.
         void make_example();
+
+        void make_graph_1();
+
+        void charger(std::string graphName);
+        void sauvgarder();
+
 
 
         /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
