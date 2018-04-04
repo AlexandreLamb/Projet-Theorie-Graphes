@@ -76,6 +76,7 @@
 #include <string>
 #include <memory>
 #include "fstream"
+#include "tools_bar.h"
 
 #include "grman/grman.h"
 
@@ -148,6 +149,7 @@ class Vertex
         // Docu shared_ptr : https://msdn.microsoft.com/fr-fr/library/hh279669.aspx
         // La ligne précédente est en gros équivalent à la ligne suivante :
         // VertexInterface * m_interface = nullptr;
+
 
 
     public:
@@ -223,6 +225,10 @@ class Edge
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<EdgeInterface> m_interface = nullptr;
 
+std::vector<int> v_from;
+
+        std::vector<int> v_to;
+
 
     public:
 
@@ -263,6 +269,11 @@ class GraphInterface
 
         /// Dans cette boite seront ajoutés des boutons de contrôle etc...
         grman::WidgetBox m_tool_box;
+        grman::WidgetButton m_savebutton;
+        grman::WidgetText m_savebutton_text;
+
+
+
 
 
         // A compléter éventuellement par des widgets de décoration ou
@@ -289,6 +300,10 @@ class Graph
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<GraphInterface> m_interface = nullptr;
 
+        int ordre;
+        int nbrEdge;
+
+
 
     public:
 
@@ -309,7 +324,13 @@ class Graph
         void make_graph_1();
 
         void charger(std::string graphName);
-        void sauvgarder();
+        void sauvgarder(std::string graphName);
+<<<<<<< HEAD
+        void addVertex();
+        void supprimerVertex();
+=======
+        void menugraph();
+>>>>>>> c90bcdabfc8a4e43579f1d32cdb4b0e386dc40a7
 
 
 

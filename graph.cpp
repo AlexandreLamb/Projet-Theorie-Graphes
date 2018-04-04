@@ -139,11 +139,20 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
 {
     m_top_box.set_dim(1000,740);
     m_top_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
+    m_top_box.set_bg_color(BLANCROSE);
 
     m_top_box.add_child(m_tool_box);
     m_tool_box.set_dim(80,720);
     m_tool_box.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
     m_tool_box.set_bg_color(BLANCBLEU);
+    m_tool_box.add_child(m_savebutton);
+    m_savebutton.set_dim(35,20);
+    m_savebutton.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
+    m_savebutton.set_bg_color(ROUGE);
+    m_savebutton.add_child(m_savebutton_text);
+    m_savebutton_text.set_message("save");
+    m_savebutton_text.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Center);
+
 
     m_top_box.add_child(m_main_box);
     m_main_box.set_dim(908,720);
@@ -193,6 +202,8 @@ void Graph::make_graph_1(){
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
     Graph::charger("graph1");
+
+
    /* add_interfaced_vertex(0,50.0,100,100,"requin.jpg");
     add_interfaced_vertex(1, 60.0, 100, 200, "thon.jpg");
     add_interfaced_vertex(2, 60.0, 100, 300, "maquerau.jpg");
@@ -212,58 +223,97 @@ void Graph::make_graph_1(){
 
 }
 
+void Graph::addVertex(){
+    int indxVertex,posX, posY, indxEdge, vertexIn, vertexOut;
+    double poidEdge,poidVertex;
+
+
+
+
+}
+
+void Graph::supprimerVertex(){
+
+    std::map<int,Vertex>::iterator it;
+
+}
+
 void Graph::charger(std::string graphName){
 
     std::ifstream fichier (graphName+".txt",std::ios::in);
-    int ordre,nbrEdge;
     int indxVertex,posX, posY, indxEdge, vertexIn, vertexOut;
     double poidEdge,poidVertex;
     std::string picName;
 
+
     if (fichier){
 
-        fichier >> ordre;
+        fichier >> Graph::ordre;
 
-        fichier >> nbrEdge;
+        fichier >> Graph::nbrEdge;
         std::cout<< nbrEdge;
         for(int i=0 ; i < ordre ; i++){
-        fichier >> indxVertex;
+
         fichier >> poidVertex;
         fichier >> posX;
         fichier >> posY;
         fichier >> picName;
 
-        add_interfaced_vertex(indxVertex,poidVertex,posX,posY,picName+".jpg");
+        add_interfaced_vertex(i,poidVertex,posX,posY,picName+".jpg");
         }
-        for(int i=0 ; i < nbrEdge ; i++){
-            fichier >> indxEdge;
+        for(int j=0 ; j < nbrEdge ; j++){
+
             fichier >> vertexIn;
             fichier >> vertexOut;
             fichier >> poidEdge;
+            add_interfaced_edge(j,vertexIn,vertexOut,poidEdge);
 
-            add_interfaced_edge(indxEdge,vertexIn,vertexOut,poidEdge);
 
         }
+
 
     fichier.close();
     }
 
 }
 
-void Graphhe::sauvgarder(std::string graphName){
+void Graph::sauvgarder(std::string graphName){
 
     std::ofstream fichier(graphName+".txt",std::ios::out | std::ios::trunc);
-
+    std::string picName;
         if(fichier){
+            fichier << Graph::ordre <<std::endl;
+            fichier << Graph::nbrEdge<<std::endl;
 
             for(auto &elt : m_vertices){
-         std::cout<<elt.second.m_interface->m_top_box.get_frame_pos().x<<" "<<elt.second.m_interface->m_top_box.get_frame_pos().y;
-        system("pause");
+         fichier << elt.second.m_value<<" ";
+         fichier <<elt.second.m_interface->m_top_box.get_frame_pos().x<<" ";
+         fichier <<elt.second.m_interface->m_top_box.get_frame_pos().y<<" ";
+        picName=elt.second.m_interface->m_img.get_pic_name();
+        picName.erase(picName.size()-4,4);
+         fichier <<picName<<std::endl;
     }
+        for(auto &elt : m_edges){
+
+            fichier << elt.second.m_from<<" ";
+            fichier << elt.second.m_to<<" ";
+            fichier << elt.second.m_weight<<std::endl;
+
+        }
+        fichier.close();
+        std::cout<<"Sauvgarde done";
         }
 
 }
 
+void Graph::menugraph()
+{
+    if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over())
+    {
+        sauvgarder("graph1");
+    }
+
+}
 
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
 void Graph::update()
@@ -278,6 +328,7 @@ void Graph::update()
         elt.second.pre_update();
 
     m_interface->m_top_box.update();
+    menugraph();
 
     for (auto &elt : m_vertices)
         elt.second.post_update();
@@ -308,6 +359,7 @@ void Graph::add_interfaced_vertex(int idx, double value, int x, int y, std::stri
 /// Aide à l'ajout d'arcs interfacés
 void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weight)
 {
+
     if ( m_edges.find(idx)!=m_edges.end() )
     {
         std::cerr << "Error adding edge at idx=" << idx << " already used..." << std::endl;
@@ -323,5 +375,7 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     EdgeInterface *ei = new EdgeInterface(m_vertices[id_vert1], m_vertices[id_vert2]);
     m_interface->m_main_box.add_child(ei->m_top_edge);
     m_edges[idx] = Edge(weight, ei);
+    m_edges[idx].m_from=id_vert1;
+    m_edges[idx].m_to=id_vert2;
 }
 

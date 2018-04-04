@@ -1,43 +1,9 @@
 # depslib dependency file v1.0
-1522751366 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
-	"grman/grman.h"
-	<iostream>
-	"graph.h"
-
-1522760907 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
-	"graph.h"
-	<string>
-
-1522758516 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
-	<vector>
-	<map>
-	<string>
-	<memory>
-	"fstream"
-	"grman/grman.h"
-
-1522695206 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman.h
-	<allegro.h>
-	<string>
-	"grman_couleurs.h"
+1522695206 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\coords.cpp
 	"coords.h"
-	"widget.h"
-
-1522695206 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman_couleurs.h
 
 1522695206 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\coords.h
 	<cmath>
-
-1522695206 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
-	"grman.h"
-	<iostream>
-	<string>
-	<vector>
-	<algorithm>
-	<allegro.h>
-
-1522695206 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\coords.cpp
-	"coords.h"
 
 1522695206 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman.cpp
 	<cmath>
@@ -53,33 +19,16 @@
 	<loadpng.h>
 	<jpgalleg.h>
 
-1522695206 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.cpp
-	"widget.h"
-
-1522746121 source:c:\users\931700378\documents\travail\projet-theorie-graphes\graph.cpp
-	"graph.h"
-	<string>
-
-1522746121 c:\users\931700378\documents\travail\projet-theorie-graphes\graph.h
-	<vector>
-	<map>
-	<string>
-	<memory>
-	"grman/grman.h"
-
-1522746121 c:\users\931700378\documents\travail\projet-theorie-graphes\grman\grman.h
+1522695206 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman.h
 	<allegro.h>
 	<string>
 	"grman_couleurs.h"
 	"coords.h"
 	"widget.h"
 
-1522746121 c:\users\931700378\documents\travail\projet-theorie-graphes\grman\grman_couleurs.h
+1522695206 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman_couleurs.h
 
-1522746121 c:\users\931700378\documents\travail\projet-theorie-graphes\grman\coords.h
-	<cmath>
-
-1522746121 c:\users\931700378\documents\travail\projet-theorie-graphes\grman\widget.h
+1522764728 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
 	"grman.h"
 	<iostream>
 	<string>
@@ -87,10 +36,70 @@
 	<algorithm>
 	<allegro.h>
 
-1522746121 source:c:\users\931700378\documents\travail\projet-theorie-graphes\grman\coords.cpp
+1522695206 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.cpp
+	"widget.h"
+
+1522781558 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+	"tools_bar.h"
+
+1522776047 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"fstream"
+	"tools_bar.h"
+	"grman/grman.h"
+
+1522781703 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
+	"graph.h"
+	<string>
+
+<<<<<<< HEAD
+1522776984 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\tools_bar.cpp
+	"tools_bar.h"
+
+1522776012 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\tools_bar.h
+=======
+1522828361 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\graph.cpp
+	"graph.h"
+	<string>
+
+1522827265 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\graph.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"fstream"
+	"grman/grman.h"
+
+1522792113 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\grman.h
+	<allegro.h>
+	<string>
+	"grman_couleurs.h"
+	"coords.h"
+	"widget.h"
+
+1522792113 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\grman_couleurs.h
+
+1522792113 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\coords.h
+	<cmath>
+
+1522825940 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\widget.h
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+
+1522792113 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\coords.cpp
 	"coords.h"
 
-1522746121 source:c:\users\931700378\documents\travail\projet-theorie-graphes\grman\grman.cpp
+1522792113 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\grman.cpp
 	<cmath>
 	<unordered_map>
 	<unordered_set>
@@ -104,10 +113,11 @@
 	<loadpng.h>
 	<jpgalleg.h>
 
-1522746121 source:c:\users\931700378\documents\travail\projet-theorie-graphes\grman\widget.cpp
+1522792325 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\widget.cpp
 	"widget.h"
 
-1522747800 source:c:\users\931700378\documents\travail\projet-theorie-graphes\main.cpp
+1522827996 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\main.cpp
+>>>>>>> c90bcdabfc8a4e43579f1d32cdb4b0e386dc40a7
 	"grman/grman.h"
 	<iostream>
 	"graph.h"
