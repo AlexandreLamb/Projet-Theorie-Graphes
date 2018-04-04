@@ -27,10 +27,6 @@ int main()
 
         /// Mise à jour générale (clavier/souris/buffer etc...)
         grman::mettre_a_jour();
-        if (key[KEY_Q]){
-            g.supprimerVertex();
-        }
-
 
     }
 //g.sauvgarder("graph1");
