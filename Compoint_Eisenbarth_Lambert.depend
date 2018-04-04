@@ -183,3 +183,70 @@
 1522786765 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\grman\widget.cpp
 	"widget.h"
 
+1522853509 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\graph.cpp
+	"graph.h"
+	<string>
+
+1522857163 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\graph.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"fstream"
+	"tools_bar.h"
+	"grman/grman.h"
+
+1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\tools_bar.h
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+
+1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\grman.h
+	<allegro.h>
+	<string>
+	"grman_couleurs.h"
+	"coords.h"
+	"widget.h"
+
+1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\grman_couleurs.h
+
+1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\coords.h
+	<cmath>
+
+1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\widget.h
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+
+1522849665 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\coords.cpp
+	"coords.h"
+
+1522849665 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\grman.cpp
+	<cmath>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<string>
+	<iostream>
+	<regex>
+	"grman.h"
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+
+1522849665 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\widget.cpp
+	"widget.h"
+
+1522853625 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+	"tools_bar.h"
+
+1522849665 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\tools_bar.cpp
+	"tools_bar.h"
+

@@ -226,12 +226,64 @@ void Graph::make_graph_1(){
 
 }
 
-void Graph::addVertex(){
+///zoe : sous prgramme qui gère partie fonctinnel sans affichage
+void Graph::fonctionnel()
+{
+    /// affichage du nombre de la population
+    for(int i= 0; i<ordre; i++)
+    {
+        std::cout << "la population est de" <<m_vertices[i].m_value <<std::endl;
+        std::cout << "son coeff est de" <<m_edges[i].m_weight <<std::endl;
+    }
+
+    /// variables
+    float K=0;
+    int indx=0;
+    bool play = false; // savoir quand c'est play ou non
+    bool pause =false;
+    bool mode_flux=false; // savoir si bouton mode flux est actif
+
+    if(mode_flux){
+
+    /// condition: si l'utilisateur appuie sur play et tant qu'il n'appuie pas sur pause
+    play = true; /// trouver : quand il clique sur play dans toolbar
+
+        if(play)
+        {
+            do
+            {
+                /// on parcourt sommets et on calcul leur K
+                for(int k=0; k<ordre; k++)
+                {
+                    int nb=m_vertices[k].m_out.size();
+
+                    for(int i=0; i<nb; i++)
+                    {
+                      indx=m_vertices[k].m_out[i];
+                    }
+
+                }
+
+            }
+            while(pause);
+        }
+
+
+    }
+
+
+
+
+
+
+}
+
+void Graph::addVertex()
+{
+
     int indxVertex,posX, posY, indxEdge, vertexIn, vertexOut;
+
     double poidEdge,poidVertex;
-
-
-
 
 }
 
