@@ -65,9 +65,11 @@ class Widget
         int m_border_color_over = VIOLETSOMBRE;
         int m_border_color_focus = ORANGESOMBRE;
 
-        int m_border = 1;
+        int m_border = 2;
         int m_margin = 1;
         int m_padding = 1;
+
+
 
     /// Méthodes utilisables dans les classes dérivées
     /// et les classes qui ont un Widget ou dérivé en attribut
@@ -184,6 +186,10 @@ class Widget
         bool is_gui_leave() {return this==gui_leave;}
 
         bool is_mouse_over();
+
+
+
+
 
         /// Les accesseurs de "styles" sont à compléter...
         void set_bg_color(int bgc) { m_bg_color = bgc; }
@@ -359,12 +365,16 @@ class WidgetBox : public Widget
         // Position au moment du click quand on commence à bouger la WidgetBox
         Coords m_pos_start_move;
 
+        //variable de selection
+        bool m_isselected=false;
 
     public :
 
         virtual void interact_focus();
         virtual bool captures_focus() { return true; }
         void set_moveable(bool moveable=true) { m_moveable = moveable; }
+        bool get_isselected();
+        void selectwidget();
 };
 
 
