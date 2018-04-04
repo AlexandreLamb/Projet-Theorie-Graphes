@@ -144,6 +144,14 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_tool_box.set_dim(80,720);
     m_tool_box.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
     m_tool_box.set_bg_color(BLANCBLEU);
+    m_tool_box.add_child(m_savebutton);
+    m_savebutton.set_dim(35,20);
+    m_savebutton.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
+    m_savebutton.set_bg_color(ROUGE);
+    m_savebutton.add_child(m_savebutton_text);
+    m_savebutton_text.set_message("save");
+    m_savebutton_text.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Center);
+
 
     m_top_box.add_child(m_main_box);
     m_main_box.set_dim(908,720);
@@ -285,6 +293,14 @@ void Graph::sauvgarder(std::string graphName){
 
 }
 
+void Graph::menugraph()
+{
+    if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over())
+    {
+        sauvgarder("graph1");
+    }
+
+}
 
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
 void Graph::update()
@@ -299,6 +315,7 @@ void Graph::update()
         elt.second.pre_update();
 
     m_interface->m_top_box.update();
+    menugraph();
 
     for (auto &elt : m_vertices)
         elt.second.post_update();

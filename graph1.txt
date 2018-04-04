@@ -3,8 +3,8 @@
 0 775 466 requin
 0 179 490 thon
 0 126 3 maquerau
-0 775 138 petit_poisson
-0 775 329 langoustine
+0 3 201 petit_poisson
+0 3 617 langoustine
 0 775 6 orga
 0 1 0
 1 2 0

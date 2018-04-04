@@ -268,6 +268,10 @@ class GraphInterface
 
         /// Dans cette boite seront ajoutés des boutons de contrôle etc...
         grman::WidgetBox m_tool_box;
+        grman::WidgetButton m_savebutton;
+        grman::WidgetText m_savebutton_text;
+
+
 
 
 
@@ -321,6 +325,7 @@ class Graph
 
         void charger(std::string graphName);
         void sauvgarder(std::string graphName);
+        void menugraph();
 
 
 
