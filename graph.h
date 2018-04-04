@@ -325,12 +325,9 @@ class Graph
 
         void charger(std::string graphName);
         void sauvgarder(std::string graphName);
-<<<<<<< HEAD
         void addVertex();
         void supprimerVertex();
-=======
         void menugraph();
->>>>>>> c90bcdabfc8a4e43579f1d32cdb4b0e386dc40a7
 
 
 

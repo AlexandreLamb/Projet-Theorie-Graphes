@@ -28,7 +28,7 @@
 
 1522695206 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman_couleurs.h
 
-1522764728 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
+1522832030 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
 	"grman.h"
 	<iostream>
 	<string>
@@ -36,16 +36,16 @@
 	<algorithm>
 	<allegro.h>
 
-1522695206 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.cpp
+1522832029 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.cpp
 	"widget.h"
 
-1522781558 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
+1522831878 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
 	"grman/grman.h"
 	<iostream>
 	"graph.h"
 	"tools_bar.h"
 
-1522776047 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
+1522832213 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
 	<vector>
 	<map>
 	<string>
@@ -54,16 +54,20 @@
 	"tools_bar.h"
 	"grman/grman.h"
 
-1522781703 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
+1522832309 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
 	"graph.h"
 	<string>
 
-<<<<<<< HEAD
-1522776984 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\tools_bar.cpp
+1522781703 D
+
+1522831878 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\tools_bar.cpp
 	"tools_bar.h"
 
-1522776012 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\tools_bar.h
-=======
+1522831878 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\tools_bar.h
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+
 1522828361 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\graph.cpp
 	"graph.h"
 	<string>
@@ -117,7 +121,8 @@
 	"widget.h"
 
 1522827996 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\main.cpp
->>>>>>> c90bcdabfc8a4e43579f1d32cdb4b0e386dc40a7
+
+1522827996 bcdabfc8a4e43579f1d32cdb4b0e386dc40a7
 	"grman/grman.h"
 	<iostream>
 	"graph.h"
