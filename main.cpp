@@ -33,7 +33,7 @@ int main()
 
 
     }
-g.sauvgarder("graph1");
+//g.sauvgarder("graph1");
     grman::fermer_allegro();
 
     return 0;
