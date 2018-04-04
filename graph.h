@@ -140,8 +140,12 @@ class Vertex
         /// liste des indices des arcs partant du sommet : accès aux successeurs
         std::vector<int> m_out;
 
-        /// un exemple de donnée associée à l'arc, on peut en ajouter d'autres...
-        double m_value;
+        /// Nombre de la population
+        float m_value;
+
+        ///Variable K qui nous permet de calculer la populataion a t+1
+        float K;
+
 
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<VertexInterface> m_interface = nullptr;
@@ -219,7 +223,7 @@ class Edge
         /// indice du sommet d'arrivée de l'arc
         int m_to;
 
-        /// un exemple de donnée associée à l'arc, on peut en ajouter d'autres...
+        /// Variable coefficient qui permet de savoir combien sont mangé
         double m_weight;
 
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
@@ -322,6 +326,8 @@ class Graph
         void make_example();
 
         void make_graph_1();
+
+        void fonctionnel();
 
         void charger(std::string graphName);
         void sauvgarder(std::string graphName);
