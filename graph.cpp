@@ -217,6 +217,7 @@ void Graph::make_graph_1(){
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
     Graph::charger("graph1");
+    m_nomgraph ="graph1";
 
 
    /* add_interfaced_vertex(0,50.0,100,100,"requin.jpg");
@@ -325,7 +326,7 @@ int Graph::menugraph()
 {
     if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over())
     {
-        sauvgarder("graph1");
+        sauvgarder(m_nomgraph);
     }
     if(grman::mouse_click && m_interface->m_retour.is_mouse_over())
     {

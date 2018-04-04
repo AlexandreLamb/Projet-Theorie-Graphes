@@ -310,6 +310,7 @@ class Graph
 
         int ordre;
         int nbrEdge;
+        std::string m_nomgraph;
 
 
 
