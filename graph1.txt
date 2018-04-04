@@ -1,11 +1,11 @@
 6
 6
 54.2857 125 463 requin
-28.5714 324 65 thon
-85.7143 549 146 maquerau
-40 375 346 petit_poisson
-0 673 252 langoustine
-57.1429 542 472 orga
+28.5714 83 33 thon
+85.7143 440 5 maquerau
+40 330 409 petit_poisson
+0 562 122 langoustine
+57.1429 549 419 orga
 0 1 0
 1 2 50
 1 3 0

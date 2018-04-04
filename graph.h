@@ -121,11 +121,15 @@ class VertexInterface
 
         grman::WidgetButton m_button_cacher;
 
+        grman::WidgetButton m_button_edit;
+
         grman::WidgetButton m_tools_button;
 
         grman::WidgetText m_tools_label;
 
         grman::WidgetText m_label_cacher;
+
+        grman::WidgetText m_label_edit;
 
         grman::WidgetText m_tools_text;
 
@@ -183,6 +187,8 @@ class Vertex
         void Toggle_Sommet();
 
         void Cacher_Sommet();
+
+        void Afficher_Somet();
 
         void Cacher_Arretes();
 };
@@ -267,6 +273,7 @@ std::vector<int> v_from;
 
         void hide_edge_in(Vertex& v);
         void hide_edge_out(Vertex& v);
+        void Afficher_Edges(Vertex& from , Vertex& to);
 };
 
 
@@ -296,6 +303,8 @@ class GraphInterface
         grman::WidgetBox m_tool_box;
         grman::WidgetButton m_savebutton;
         grman::WidgetText m_savebutton_text;
+
+        grman::WidgetButton m_afficher_sommet;
 
 
 
