@@ -28,7 +28,11 @@
 
 1522695206 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman_couleurs.h
 
+<<<<<<< HEAD
 1522864052 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
+=======
+1522864294 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
+>>>>>>> Menu/Flo
 	"grman.h"
 	<iostream>
 	<string>
@@ -39,13 +43,22 @@
 1522852016 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.cpp
 	"widget.h"
 
+<<<<<<< HEAD
 1522864043 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
+=======
+1522864378 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
+>>>>>>> Menu/Flo
 	"grman/grman.h"
 	<iostream>
 	"graph.h"
+	"Menu.h"
 	"tools_bar.h"
 
+<<<<<<< HEAD
 1522864053 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
+=======
+1522864378 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
+>>>>>>> Menu/Flo
 	<vector>
 	<map>
 	<string>
@@ -54,7 +67,11 @@
 	"tools_bar.h"
 	"grman/grman.h"
 
+<<<<<<< HEAD
 1522864053 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
+=======
+1522864378 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
+>>>>>>> Menu/Flo
 	"graph.h"
 	<string>
 
@@ -68,16 +85,17 @@
 	<iostream>
 	"graph.h"
 
-1522828361 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\graph.cpp
+1522862358 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\graph.cpp
 	"graph.h"
 	<string>
 
-1522827265 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\graph.h
+1522860948 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\graph.h
 	<vector>
 	<map>
 	<string>
 	<memory>
 	"fstream"
+	"tools_bar.h"
 	"grman/grman.h"
 
 1522792113 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\grman.h
@@ -92,7 +110,7 @@
 1522792113 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\coords.h
 	<cmath>
 
-1522825940 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\widget.h
+1522835539 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\widget.h
 	"grman.h"
 	<iostream>
 	<string>
@@ -117,10 +135,15 @@
 	<loadpng.h>
 	<jpgalleg.h>
 
-1522792325 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\widget.cpp
+1522847475 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\widget.cpp
 	"widget.h"
 
-1522827996 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\main.cpp
+1522861165 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+	"Menu.h"
+	"tools_bar.h"
 
 1522827996 bcdabfc8a4e43579f1d32cdb4b0e386dc40a7
 	"grman/grman.h"
@@ -183,6 +206,7 @@
 1522786765 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\grman\widget.cpp
 	"widget.h"
 
+<<<<<<< HEAD
 1522853509 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\graph.cpp
 	"graph.h"
 	<string>
@@ -197,10 +221,14 @@
 	"grman/grman.h"
 
 1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\tools_bar.h
+=======
+1522835539 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\tools_bar.h
+>>>>>>> Menu/Flo
 	"grman/grman.h"
 	<iostream>
 	"graph.h"
 
+<<<<<<< HEAD
 1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\grman.h
 	<allegro.h>
 	<string>
@@ -249,4 +277,18 @@
 
 1522849665 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\tools_bar.cpp
 	"tools_bar.h"
+=======
+1522835539 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\tools_bar.cpp
+	"tools_bar.h"
+
+1522848572 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\include\menu.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"../grman/grman.h"
+
+1522849736 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\src\menu.cpp
+	"Menu.h"
+>>>>>>> Menu/Flo
 

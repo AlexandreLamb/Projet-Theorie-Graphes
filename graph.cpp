@@ -299,29 +299,54 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_top_box.set_bg_color(VERTFLUO);
 
     m_top_box.add_child(m_main_box);
+<<<<<<< HEAD
     m_main_box.set_dim(708,720);
+=======
+    m_main_box.set_dim(908,730);
+>>>>>>> Menu/Flo
     m_main_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
     m_main_box.set_bg_color(BLANCJAUNE);
 
     m_top_box.add_child(m_tool_box);
+<<<<<<< HEAD
 
     m_tool_box.set_dim(80,720);
+=======
+    m_tool_box.set_dim(80,730);
+>>>>>>> Menu/Flo
     m_tool_box.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
     m_tool_box.set_bg_color(BLANCBLEU);
 
     m_tool_box.add_child(m_savebutton);
+<<<<<<< HEAD
     m_tool_box.add_child(m_afficher_sommet);
 
     m_savebutton.set_dim(35,20);
     m_savebutton.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
+=======
+    m_savebutton.set_dim(45,30);
+    m_savebutton.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Up);
+>>>>>>> Menu/Flo
     m_savebutton.set_bg_color(ROUGE);
     m_savebutton.add_child(m_savebutton_text);
     m_savebutton_text.set_message("save");
     m_savebutton_text.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Center);
 
+<<<<<<< HEAD
     m_afficher_sommet.set_dim(35,20);
     m_afficher_sommet.set_bg_color(ROUGE);
     m_afficher_sommet.set_pos(10,50);
+=======
+    m_tool_box.add_child(m_retour);
+    m_retour.set_dim(50,50);
+    m_retour.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Down);
+    m_retour.set_border(0);
+    m_retour.add_child(m_retour_img);
+    m_retour_img.set_pic_name("retour.bmp");
+    m_retour_img.set_pic_idx(0);
+    m_retour_img.set_border(0);
+    m_retour_img.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Down);
+>>>>>>> Menu/Flo
 
 
     m_tool_box.set_bg_color(BLANCBLEU);
@@ -532,13 +557,14 @@ void Graph::sauvgarder(std::string graphName){
 
 }
 
-void Graph::menugraph()
+int Graph::menugraph()
 {
     int i=0;
     if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over())
     {
         sauvgarder("graph1");
     }
+<<<<<<< HEAD
     if(grman::mouse_click && m_interface->m_afficher_sommet.is_mouse_over())
     {
         for ( auto &elmt : m_vertices ){
@@ -554,9 +580,42 @@ void Graph::menugraph()
 
     }
 
+=======
+    if(grman::mouse_click && m_interface->m_retour.is_mouse_over())
+    {
+        return 1;
+    }
+
+    return 0;
+>>>>>>> Menu/Flo
 
 }
 
+
+void Graph::destroy_graph()
+{
+
+    for(std::map<int,Vertex>::iterator it= m_vertices.begin(); it!=m_vertices.end();it++)
+    {
+        m_interface->m_main_box.remove_child(it->second.m_interface->m_top_box);
+
+    }
+
+    m_vertices.clear();
+
+    for(std::map<int,Edge>::iterator et= m_edges.begin(); et!=m_edges.end();et++)
+    {
+        m_interface->m_main_box.remove_child(et->second.m_interface->m_top_edge);
+
+
+    }
+    m_edges.clear();
+
+    m_interface.reset();
+    m_interface=nullptr;
+
+
+}
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
 void Graph::update()
 {
