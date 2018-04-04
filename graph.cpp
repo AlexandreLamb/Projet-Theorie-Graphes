@@ -139,6 +139,7 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
 {
     m_top_box.set_dim(1000,740);
     m_top_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
+    m_top_box.set_bg_color(BLANCROSE);
 
     m_top_box.add_child(m_tool_box);
     m_tool_box.set_dim(80,720);
@@ -193,6 +194,8 @@ void Graph::make_graph_1(){
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
     Graph::charger("graph1");
+
+
    /* add_interfaced_vertex(0,50.0,100,100,"requin.jpg");
     add_interfaced_vertex(1, 60.0, 100, 200, "thon.jpg");
     add_interfaced_vertex(2, 60.0, 100, 300, "maquerau.jpg");
@@ -212,6 +215,21 @@ void Graph::make_graph_1(){
 
 }
 
+void Graph::addVertex(){
+    int indxVertex,posX, posY, indxEdge, vertexIn, vertexOut;
+    double poidEdge,poidVertex;
+
+
+
+
+}
+
+void Graph::supprimerVertex(){
+
+    std::map<int,Vertex>::iterator it;
+
+}
+
 void Graph::charger(std::string graphName){
 
     std::ifstream fichier (graphName+".txt",std::ios::in);
@@ -219,8 +237,7 @@ void Graph::charger(std::string graphName){
     double poidEdge,poidVertex;
     std::string picName;
 
-    Graph::v_from.clear();
-    Graph::v_to.clear();
+
     if (fichier){
 
         fichier >> Graph::ordre;
@@ -242,8 +259,7 @@ void Graph::charger(std::string graphName){
             fichier >> vertexOut;
             fichier >> poidEdge;
             add_interfaced_edge(j,vertexIn,vertexOut,poidEdge);
-            Graph::v_from.push_back(vertexIn);
-            Graph::v_to.push_back(vertexOut);
+
 
         }
 
@@ -269,14 +285,11 @@ void Graph::sauvgarder(std::string graphName){
         picName.erase(picName.size()-4,4);
          fichier <<picName<<std::endl;
     }
-        int i = 0;
         for(auto &elt : m_edges){
-                elt.second.v_from.push_back(Graph::v_from[i]);
-                elt.second.v_to.push_back(Graph::v_to[i]);
+
             fichier << elt.second.m_from<<" ";
             fichier << elt.second.m_to<<" ";
             fichier << elt.second.m_weight<<std::endl;
-            i++;
 
         }
         fichier.close();

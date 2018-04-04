@@ -48,6 +48,8 @@
 		<Unit filename="grman/widget.cpp" />
 		<Unit filename="grman/widget.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="tools_bar.cpp" />
+		<Unit filename="tools_bar.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

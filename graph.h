@@ -76,6 +76,7 @@
 #include <string>
 #include <memory>
 #include "fstream"
+#include "tools_bar.h"
 
 #include "grman/grman.h"
 
@@ -297,9 +298,8 @@ class Graph
 
         int ordre;
         int nbrEdge;
-        std::vector<int> v_from;
 
-        std::vector<int> v_to;
+
 
     public:
 
@@ -321,6 +321,8 @@ class Graph
 
         void charger(std::string graphName);
         void sauvgarder(std::string graphName);
+        void addVertex();
+        void supprimerVertex();
 
 
 
