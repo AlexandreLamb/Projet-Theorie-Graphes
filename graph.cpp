@@ -252,8 +252,9 @@ m_interface->m_top_edge.detach_to();
 }
 void Edge::Afficher_Edges(Vertex& from , Vertex& to){
 
-    m_interface->m_top_edge.attach_from(from);
-    m_interface->m_top_edge.attach_to(to);
+    m_interface->m_top_edge.attach_from(from.m_interface->m_top_box);
+    m_interface->m_top_edge.attach_to(to.m_interface->m_top_box);
+    m_interface-> m_top_edge.reset_arrow_with_bullet();
 
 }
 
@@ -481,6 +482,7 @@ void Graph::sauvgarder(std::string graphName){
 
 void Graph::menugraph()
 {
+    int i=0;
     if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over())
     {
         sauvgarder("graph1");
@@ -492,7 +494,11 @@ void Graph::menugraph()
            elmt.second.Afficher_Somet();
         }
         for ( auto & elmt : m_edges ) {
-            elmt.second.Afficher_Edges();
+
+           elmt.second.Afficher_Edges(m_vertices[Sommet_suite_in[i]],m_vertices[Sommet_suite_out[i]]);
+           //std::cout<<i<<std::endl;
+           //std::cout<<Sommet_suite.size()<<std::endl;
+           i++;
         }
 
 
@@ -567,7 +573,8 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_edges[idx].m_to=id_vert2;
     m_vertices[id_vert1].m_in.push_back(idx);
     m_vertices[id_vert2].m_out.push_back(idx);
-    //std::cout<<"les sommet "<<id_vert1<<" et "<<id_vert2<<" sont relié par l'arrete " <<idx <<std::endl;
-
+    std::cout<<"les sommet "<<id_vert1<<" et "<<id_vert2<<" sont relié par l'arrete " <<idx <<std::endl;
+    Sommet_suite_in.push_back(id_vert1);
+    Sommet_suite_out.push_back(id_vert2);
 }
 

@@ -253,6 +253,7 @@ class Edge
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<EdgeInterface> m_interface = nullptr;
 
+
 std::vector<int> v_from;
 
         std::vector<int> v_to;
@@ -337,7 +338,8 @@ class Graph
         int ordre;
         int nbrEdge;
 
-
+std::vector<int> Sommet_suite_in;
+std::vector<int> Sommet_suite_out;
 
     public:
 
