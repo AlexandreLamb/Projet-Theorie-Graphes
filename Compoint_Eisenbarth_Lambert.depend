@@ -28,7 +28,7 @@
 
 1522695206 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman_couleurs.h
 
-1522832030 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
+1522864294 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
 	"grman.h"
 	<iostream>
 	<string>
@@ -36,16 +36,17 @@
 	<algorithm>
 	<allegro.h>
 
-1522832029 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.cpp
+1522852016 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.cpp
 	"widget.h"
 
-1522833388 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
+1522864378 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
 	"grman/grman.h"
 	<iostream>
 	"graph.h"
+	"Menu.h"
 	"tools_bar.h"
 
-1522832213 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
+1522864378 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
 	<vector>
 	<map>
 	<string>
@@ -54,7 +55,7 @@
 	"tools_bar.h"
 	"grman/grman.h"
 
-1522834394 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
+1522864378 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
 	"graph.h"
 	<string>
 
