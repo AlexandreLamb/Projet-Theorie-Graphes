@@ -8,6 +8,8 @@
 /// Le constructeur met en place les éléments de l'interface
 VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, int pic_idx)
 {
+
+
     // La boite englobante
     m_top_box.set_pos(x, y);
     m_top_box.set_dim(130, 100);
@@ -40,8 +42,65 @@ VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, in
 
     m_box_label_idx.add_child( m_label_idx );
     m_label_idx.set_message( std::to_string(idx) );
+
+    m_top_box.add_child(m_tools_button);
+    m_top_box.add_child(m_tools_text);
+
+    m_tools_button.set_pos(0,0);
+    m_tools_text.set_pos(4,3);
+
+    m_tools_text.set_message("Option");
+
+    m_tools_text.set_dim(30,10);
+    m_tools_button.set_dim(30,10);
+
+    m_top_box.add_child(m_tools_box);
+  /*  m_tools_box.set_pos(0,0);
+    m_tools_box.set_gravity_xy(grman::GravityX::Right,grman::GravityY::Up);
+    m_tools_box.set_dim(0,0);
+    m_tools_box.set_border(0);
+    //m_tools_box.set_bg_color(EFFACER);
+
+*/
+
+    m_tools_box.add_child(m_tools_label);
+    m_tools_box.add_child(m_button_cacher);
+    m_tools_box.add_child(m_label_cacher);
+
 }
 
+void Vertex::Afficher_option(){
+
+        if(grman::mouse_click && m_interface->m_tools_button.is_mouse_over())
+    {
+        m_interface->m_top_box.set_border(0);
+
+        m_interface->m_tools_box.set_pos(-10,-10);
+        m_interface->m_tools_box.set_gravity_xy(grman::GravityX::Right,grman::GravityY::Up);
+        m_interface->m_tools_box.set_dim(120,120);
+        m_interface->m_tools_box.set_border(1);
+        m_interface->m_tools_box.set_bg_color(CYAN);
+
+         m_interface-> m_tools_label.set_message("Option Sommet");
+         m_interface-> m_label_cacher.set_message("Cacher");
+
+         m_interface-> m_tools_label.set_pos(0,0);
+         m_interface->m_button_cacher.set_pos(0,20);
+         m_interface->m_label_cacher.set_pos(40,20);
+
+         m_interface->  m_button_cacher.set_bg_color(JAUNE);
+         m_interface->m_button_cacher.set_dim(30,10);
+    }
+
+}
+
+void Vertex::Toggle_Sommet(){
+
+    if(grman::mouse_click && m_interface->m_button_cacher.is_mouse_over()){
+        Vertex::IsHide = !Vertex::IsHide;
+    }
+
+}
 
 /// Gestion du Vertex avant l'appel à l'interface
 void Vertex::pre_update()
@@ -65,6 +124,9 @@ void Vertex::post_update()
 
     /// Reprendre la valeur du slider dans la donnée m_value locale
     m_value = m_interface->m_slider_value.get_value();
+
+    Afficher_option();
+    Toggle_Sommet();
 }
 
 

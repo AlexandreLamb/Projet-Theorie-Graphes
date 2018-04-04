@@ -116,6 +116,18 @@ class VertexInterface
         // Une boite pour le label précédent
         grman::WidgetText m_box_label_idx;
 
+        grman::WidgetBox m_tools_box;
+
+        grman::WidgetButton m_button_cacher;
+
+        grman::WidgetButton m_tools_button;
+
+        grman::WidgetText m_tools_label;
+
+        grman::WidgetText m_label_cacher;
+
+        grman::WidgetText m_tools_text;
+
     public :
 
         // Le constructeur met en place les éléments de l'interface
@@ -150,7 +162,7 @@ class Vertex
         // La ligne précédente est en gros équivalent à la ligne suivante :
         // VertexInterface * m_interface = nullptr;
 
-
+        bool IsHide=false;
 
     public:
 
@@ -164,6 +176,10 @@ class Vertex
         /// Voir l'implémentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
+
+        void Afficher_option();
+
+        void Toggle_Sommet();
 };
 
 
