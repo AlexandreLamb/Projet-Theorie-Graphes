@@ -28,11 +28,9 @@
 
 1522695206 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman_couleurs.h
 
-<<<<<<< HEAD
-1522864052 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
-=======
-1522864294 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
->>>>>>> Menu/Flo
+1522835539 D
+
+1522864474 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
 	"grman.h"
 	<iostream>
 	<string>
@@ -40,25 +38,42 @@
 	<algorithm>
 	<allegro.h>
 
+1522849736 u/Flo
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+	"Menu.h"
+	"tools_bar.h"
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"fstream"
+	"tools_bar.h"
+	"grman/grman.h"
+	"graph.h"
+	<string>
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+
 1522852016 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.cpp
 	"widget.h"
 
-<<<<<<< HEAD
-1522864043 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
-=======
-1522864378 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
->>>>>>> Menu/Flo
+1522865189 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
 	"grman/grman.h"
 	<iostream>
 	"graph.h"
 	"Menu.h"
 	"tools_bar.h"
 
-<<<<<<< HEAD
-1522864053 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
-=======
-1522864378 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
->>>>>>> Menu/Flo
+1522864880 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
 	<vector>
 	<map>
 	<string>
@@ -67,15 +82,9 @@
 	"tools_bar.h"
 	"grman/grman.h"
 
-<<<<<<< HEAD
-1522864053 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
-=======
-1522864378 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
->>>>>>> Menu/Flo
+1522865321 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
 	"graph.h"
 	<string>
-
-1522781703 D
 
 1522831878 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\tools_bar.cpp
 	"tools_bar.h"
@@ -206,7 +215,6 @@
 1522786765 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\grman\widget.cpp
 	"widget.h"
 
-<<<<<<< HEAD
 1522853509 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\graph.cpp
 	"graph.h"
 	<string>
@@ -221,14 +229,9 @@
 	"grman/grman.h"
 
 1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\tools_bar.h
-=======
-1522835539 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\tools_bar.h
->>>>>>> Menu/Flo
-	"grman/grman.h"
-	<iostream>
-	"graph.h"
 
-<<<<<<< HEAD
+1522835539 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\tools_bar.h
+
 1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\grman.h
 	<allegro.h>
 	<string>
@@ -277,7 +280,9 @@
 
 1522849665 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\tools_bar.cpp
 	"tools_bar.h"
-=======
+
+1522849665 .h"
+
 1522835539 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\tools_bar.cpp
 	"tools_bar.h"
 
@@ -290,5 +295,14 @@
 
 1522849736 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\src\menu.cpp
 	"Menu.h"
->>>>>>> Menu/Flo
+
+1522865825 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\menu.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
+
+1522865714 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\menu.cpp
+	"Menu.h"
 

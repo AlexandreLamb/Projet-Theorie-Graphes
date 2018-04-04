@@ -310,16 +310,15 @@ class GraphInterface
         grman::WidgetButton m_savebutton;
         grman::WidgetText m_savebutton_text;
 
-<<<<<<< HEAD
+
         grman::WidgetButton m_afficher_sommet;
-=======
+
         grman::WidgetButton m_retour;
         grman::WidgetImage m_retour_img;
 
 
 
 
->>>>>>> Menu/Flo
 
 
 
