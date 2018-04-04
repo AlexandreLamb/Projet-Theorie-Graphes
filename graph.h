@@ -91,6 +91,7 @@ class VertexInterface
     friend class Vertex;
     friend class EdgeInterface;
     friend class Graph;
+    friend class Edge;
 
     private :
 
@@ -180,6 +181,10 @@ class Vertex
         void Afficher_option();
 
         void Toggle_Sommet();
+
+        void Cacher_Sommet();
+
+        void Cacher_Arretes();
 };
 
 
@@ -194,6 +199,7 @@ class EdgeInterface
     // directement aux attributs (y compris privés)
     friend class Edge;
     friend class Graph;
+
 
     private :
 
@@ -258,6 +264,9 @@ std::vector<int> v_from;
         /// Voir l'implémentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
+
+        void hide_edge_in(Vertex& v);
+        void hide_edge_out(Vertex& v);
 };
 
 

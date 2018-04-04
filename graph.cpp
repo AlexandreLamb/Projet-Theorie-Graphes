@@ -90,6 +90,7 @@ void Vertex::Afficher_option(){
 
          m_interface->  m_button_cacher.set_bg_color(JAUNE);
          m_interface->m_button_cacher.set_dim(30,10);
+
     }
 
 }
@@ -98,7 +99,28 @@ void Vertex::Toggle_Sommet(){
 
     if(grman::mouse_click && m_interface->m_button_cacher.is_mouse_over()){
         Vertex::IsHide = !Vertex::IsHide;
+
+        if(IsHide==true){
+            //Cacher_Sommet();
+
+        }
     }
+
+}
+
+void Vertex::Cacher_Sommet(){
+
+    m_interface->m_top_box.remove_child(m_interface->m_img);
+    m_interface->m_top_box.remove_child(m_interface->m_tools_box);
+    m_interface->m_top_box.remove_child(m_interface->m_slider_value);
+    m_interface->m_top_box.remove_child(m_interface->m_box_label_idx);
+    m_interface->m_top_box.remove_child(m_interface->m_label_value);
+
+}
+
+void Vertex::Cacher_Arretes(){
+
+
 
 }
 
@@ -165,6 +187,20 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
 
 }
 
+void Edge::hide_edge_in(Vertex& v){
+
+m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
+m_interface->m_top_edge.detach_from();
+
+
+}
+void Edge::hide_edge_out(Vertex& v){
+
+m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
+m_interface->m_top_edge.detach_to();
+
+}
+
 
 /// Gestion du Edge avant l'appel à l'interface
 void Edge::pre_update()
@@ -187,6 +223,8 @@ void Edge::post_update()
 
     /// Reprendre la valeur du slider dans la donnée m_weight locale
     m_weight = m_interface->m_slider_weight.get_value();
+
+    //hide_edge();
 }
 
 
@@ -299,9 +337,32 @@ void Graph::addVertex(){
 
 void Graph::supprimerVertex(){
 
-    std::map<int,Vertex>::iterator it;
+    std::map<int,Vertex>::iterator it1;
+    std::map<int,Edge>::iterator it2;
 
-}
+    for ( auto &elmt : m_vertices){
+        if(elmt.second.IsHide==true){
+            elmt.second.Cacher_Sommet();
+
+            //std::cout<<elmt.second.m_out.size();
+            for(int i =0 ; i < elmt.second.m_in.size();i++){
+            m_edges[elmt.second.m_in[i]].hide_edge_in(elmt.second);
+
+            }
+
+            for(int i =0 ; i < elmt.second.m_out.size();i++){
+                m_edges[elmt.second.m_out[i]].hide_edge_out(elmt.second);
+
+
+            }
+            }
+        }
+    }
+
+
+
+
+
 
 void Graph::charger(std::string graphName){
 
@@ -394,6 +455,7 @@ void Graph::update()
 
     m_interface->m_top_box.update();
     menugraph();
+    supprimerVertex();
 
     for (auto &elt : m_vertices)
         elt.second.post_update();
@@ -419,6 +481,7 @@ void Graph::add_interfaced_vertex(int idx, double value, int x, int y, std::stri
     m_interface->m_main_box.add_child(vi->m_top_box);
     // On peut ajouter directement des vertices dans la map avec la notation crochet :
     m_vertices[idx] = Vertex(value, vi);
+
 }
 
 /// Aide à l'ajout d'arcs interfacés
@@ -442,5 +505,9 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_edges[idx] = Edge(weight, ei);
     m_edges[idx].m_from=id_vert1;
     m_edges[idx].m_to=id_vert2;
+    m_vertices[id_vert1].m_in.push_back(idx);
+    m_vertices[id_vert2].m_out.push_back(idx);
+    std::cout<<"les sommet "<<id_vert1<<" et "<<id_vert2<<" sont relié par l'arrete " <<idx <<std::endl;
+
 }
 
