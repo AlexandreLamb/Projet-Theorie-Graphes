@@ -8,6 +8,8 @@
 /// Le constructeur met en place les éléments de l'interface
 VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, int pic_idx)
 {
+
+
     // La boite englobante
     m_top_box.set_pos(x, y);
     m_top_box.set_dim(130, 100);
@@ -40,8 +42,136 @@ VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, in
 
     m_box_label_idx.add_child( m_label_idx );
     m_label_idx.set_message( std::to_string(idx) );
+
+    m_top_box.add_child(m_tools_button);
+    m_tools_button.add_child(m_tools_text);
+
+    m_tools_button.set_pos(0,0);
+    m_tools_text.set_pos(4,3);
+
+    m_tools_text.set_message("Option");
+
+    m_tools_text.set_dim(30,10);
+    m_tools_button.set_dim(30,10);
+
+
+
 }
 
+void Vertex::Afficher_option(){
+
+        if(grman::mouse_click && m_interface->m_tools_button.is_mouse_over())
+    {
+        m_interface->m_top_box.add_child(m_interface->m_tools_box);
+
+    m_interface->m_tools_box.add_child(m_interface->m_tools_label);
+    m_interface->m_tools_box.add_child(m_interface->m_button_cacher);
+    m_interface-> m_tools_box.add_child(m_interface->m_label_cacher);
+    m_interface->m_tools_box.add_child(m_interface->m_button_edit);
+    m_interface->m_tools_box.add_child(m_interface->m_label_edit);
+
+        m_interface->m_top_box.set_border(0);
+
+        m_interface->m_tools_box.set_pos(-10,-10);
+        m_interface->m_tools_box.set_gravity_xy(grman::GravityX::Right,grman::GravityY::Up);
+        m_interface->m_tools_box.set_dim(120,120);
+        m_interface->m_tools_box.set_border(1);
+        m_interface->m_tools_box.set_bg_color(CYAN);
+
+         m_interface-> m_tools_label.set_message("Option Sommet");
+         m_interface-> m_label_cacher.set_message("Cacher");
+         m_interface-> m_label_edit.set_message("Editer");
+
+         m_interface-> m_tools_label.set_pos(0,0);
+
+         m_interface->m_button_cacher.set_pos(0,20);
+         m_interface->m_button_edit.set_pos(0,40);
+
+         m_interface->m_label_cacher.set_pos(40,20);
+         m_interface->m_label_edit.set_pos(40,40);
+
+         m_interface->  m_button_cacher.set_bg_color(JAUNE);
+         m_interface-> m_button_edit.set_bg_color(JAUNE);
+
+         m_interface->m_button_cacher.set_dim(30,10);
+         m_interface->m_button_edit.set_dim(30,10);
+
+    }
+   /* else {
+
+        m_interface->m_tools_box.remove_child(m_interface->m_tools_label);
+       m_interface-> m_tools_box.remove_child(m_interface->m_button_cacher);
+       m_interface-> m_tools_box.remove_child(m_interface->m_label_cacher);
+       m_interface-> m_tools_box.remove_child(m_interface->m_button_edit);
+       m_interface-> m_tools_box.remove_child(m_interface->m_label_edit);
+
+    }*/
+
+}
+
+void Vertex::Toggle_Sommet(){
+
+    if(grman::mouse_click && m_interface->m_button_cacher.is_mouse_over()){
+        Vertex::IsHide = !Vertex::IsHide;
+
+        if(IsHide==true){
+            //Cacher_Sommet();
+
+        }
+    }
+
+}
+
+void Vertex::Afficher_Somet(){
+        m_interface->m_top_box.add_child( m_interface->m_img );
+
+        m_interface->m_top_box.add_child(m_interface->m_slider_value);
+
+        m_interface->m_top_box.add_child(m_interface->m_label_value);
+
+
+
+
+        m_interface->m_top_box.add_child(m_interface->m_tools_box);
+
+       m_interface->m_top_box.add_child(m_interface-> m_box_label_idx );
+
+       m_interface->m_box_label_idx.set_pos(115,90);
+        m_interface->m_img.set_pos(30,0);
+         m_interface->m_top_box.set_dim(130, 100);
+
+         m_interface->m_top_box.set_border(2);
+
+    m_interface->m_top_box.add_child(m_interface->m_tools_button);
+
+        m_interface->m_top_box.remove_child(m_interface->m_tools_box);
+        m_interface->m_tools_box.remove_child(m_interface->m_tools_label);
+       m_interface-> m_tools_box.remove_child(m_interface->m_button_cacher);
+       m_interface-> m_tools_box.remove_child(m_interface->m_label_cacher);
+       m_interface-> m_tools_box.remove_child(m_interface->m_button_edit);
+       m_interface-> m_tools_box.remove_child(m_interface->m_label_edit);
+
+
+}
+
+void Vertex::Cacher_Sommet(){
+
+    m_interface->m_top_box.remove_child(m_interface->m_img);
+    m_interface->m_top_box.remove_child(m_interface->m_tools_box);
+    m_interface->m_top_box.remove_child(m_interface->m_slider_value);
+    m_interface->m_top_box.remove_child(m_interface->m_box_label_idx);
+    m_interface->m_top_box.remove_child(m_interface->m_label_value);
+    m_interface->m_top_box.remove_child(m_interface->m_tools_button);
+    m_interface->m_top_box.set_dim(0,0);
+
+
+}
+
+void Vertex::Cacher_Arretes(){
+
+
+
+}
 
 /// Gestion du Vertex avant l'appel à l'interface
 void Vertex::pre_update()
@@ -65,6 +195,10 @@ void Vertex::post_update()
 
     /// Reprendre la valeur du slider dans la donnée m_value locale
     m_value = m_interface->m_slider_value.get_value();
+
+    Toggle_Sommet();
+    Afficher_option();
+
 }
 
 
@@ -103,6 +237,27 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
 
 }
 
+void Edge::hide_edge_in(Vertex& v){
+
+m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
+m_interface->m_top_edge.detach_from();
+
+
+}
+void Edge::hide_edge_out(Vertex& v){
+
+m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
+m_interface->m_top_edge.detach_to();
+
+}
+void Edge::Afficher_Edges(Vertex& from , Vertex& to){
+
+    m_interface->m_top_edge.attach_from(from.m_interface->m_top_box);
+    m_interface->m_top_edge.attach_to(to.m_interface->m_top_box);
+    m_interface-> m_top_edge.reset_arrow_with_bullet();
+
+}
+
 
 /// Gestion du Edge avant l'appel à l'interface
 void Edge::pre_update()
@@ -125,6 +280,8 @@ void Edge::post_update()
 
     /// Reprendre la valeur du slider dans la donnée m_weight locale
     m_weight = m_interface->m_slider_weight.get_value();
+
+    //hide_edge();
 }
 
 
@@ -137,26 +294,35 @@ void Edge::post_update()
 /// éléments qui seront ensuite ajoutés lors de la mise ne place du Graphe
 GraphInterface::GraphInterface(int x, int y, int w, int h)
 {
-    m_top_box.set_dim(1000,740);
+    m_top_box.set_dim(800,740);
     m_top_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
     m_top_box.set_bg_color(VERTFLUO);
 
     m_top_box.add_child(m_main_box);
-    m_main_box.set_dim(908,720);
+    m_main_box.set_dim(708,720);
     m_main_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
     m_main_box.set_bg_color(BLANCJAUNE);
 
-    m_main_box.add_child(m_tool_box);
+    m_top_box.add_child(m_tool_box);
+
     m_tool_box.set_dim(80,720);
     m_tool_box.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
     m_tool_box.set_bg_color(BLANCBLEU);
+
     m_tool_box.add_child(m_savebutton);
+    m_tool_box.add_child(m_afficher_sommet);
+
     m_savebutton.set_dim(35,20);
     m_savebutton.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
     m_savebutton.set_bg_color(ROUGE);
     m_savebutton.add_child(m_savebutton_text);
     m_savebutton_text.set_message("save");
     m_savebutton_text.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Center);
+
+    m_afficher_sommet.set_dim(35,20);
+    m_afficher_sommet.set_bg_color(ROUGE);
+    m_afficher_sommet.set_pos(10,50);
+
 
     m_tool_box.set_bg_color(BLANCBLEU);
 
@@ -205,24 +371,6 @@ void Graph::make_graph_1(){
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
     Graph::charger("graph1");
-
-
-   /* add_interfaced_vertex(0,50.0,100,100,"requin.jpg");
-    add_interfaced_vertex(1, 60.0, 100, 200, "thon.jpg");
-    add_interfaced_vertex(2, 60.0, 100, 300, "maquerau.jpg");
-    add_interfaced_vertex(3, 60.0, 100, 400, "petit_poisson.jpg");
-    add_interfaced_vertex(4, 60.0, 100, 500, "langoustine.jpg");
-    add_interfaced_vertex(5, 60.0, 100, 350, "orga_uni.jpg");
-
-
-
-    add_interfaced_edge(0, 0, 1, 50.0);
-    add_interfaced_edge(1, 1, 2, 20.0);
-    add_interfaced_edge(2, 1, 3, 20.0);
-    add_interfaced_edge(3, 2, 4, 20.0);
-    add_interfaced_edge(4, 3, 4, 20.0);
-    add_interfaced_edge(5, 4, 5, 20.0);
-*/
 
 }
 
@@ -289,9 +437,32 @@ void Graph::addVertex()
 
 void Graph::supprimerVertex(){
 
-    std::map<int,Vertex>::iterator it;
+    std::map<int,Vertex>::iterator it1;
+    std::map<int,Edge>::iterator it2;
 
-}
+    for ( auto &elmt : m_vertices){
+        if(elmt.second.IsHide==true){
+            elmt.second.Cacher_Sommet();
+
+            //std::cout<<elmt.second.m_out.size();
+            for(int i =0 ; i < elmt.second.m_in.size();i++){
+            m_edges[elmt.second.m_in[i]].hide_edge_in(elmt.second);
+
+            }
+
+            for(int i =0 ; i < elmt.second.m_out.size();i++){
+                m_edges[elmt.second.m_out[i]].hide_edge_out(elmt.second);
+
+
+            }
+            }
+        }
+    }
+
+
+
+
+
 
 void Graph::charger(std::string graphName){
 
@@ -363,10 +534,26 @@ void Graph::sauvgarder(std::string graphName){
 
 void Graph::menugraph()
 {
+    int i=0;
     if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over())
     {
         sauvgarder("graph1");
     }
+    if(grman::mouse_click && m_interface->m_afficher_sommet.is_mouse_over())
+    {
+        for ( auto &elmt : m_vertices ){
+            elmt.second.IsHide=false;
+           elmt.second.Afficher_Somet();
+        }
+        for ( auto & elmt : m_edges ) {
+
+           elmt.second.Afficher_Edges(m_vertices[Sommet_suite_in[i]],m_vertices[Sommet_suite_out[i]]);
+           i++;
+        }
+
+
+    }
+
 
 }
 
@@ -384,6 +571,7 @@ void Graph::update()
 
     m_interface->m_top_box.update();
     menugraph();
+    supprimerVertex();
 
     for (auto &elt : m_vertices)
         elt.second.post_update();
@@ -409,6 +597,7 @@ void Graph::add_interfaced_vertex(int idx, double value, int x, int y, std::stri
     m_interface->m_main_box.add_child(vi->m_top_box);
     // On peut ajouter directement des vertices dans la map avec la notation crochet :
     m_vertices[idx] = Vertex(value, vi);
+
 }
 
 /// Aide à l'ajout d'arcs interfacés
@@ -432,5 +621,10 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_edges[idx] = Edge(weight, ei);
     m_edges[idx].m_from=id_vert1;
     m_edges[idx].m_to=id_vert2;
+    m_vertices[id_vert1].m_in.push_back(idx);
+    m_vertices[id_vert2].m_out.push_back(idx);
+    std::cout<<"les sommet "<<id_vert1<<" et "<<id_vert2<<" sont relié par l'arrete " <<idx <<std::endl;
+    Sommet_suite_in.push_back(id_vert1);
+    Sommet_suite_out.push_back(id_vert2);
 }
 
