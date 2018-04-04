@@ -496,8 +496,6 @@ void Graph::menugraph()
         for ( auto & elmt : m_edges ) {
 
            elmt.second.Afficher_Edges(m_vertices[Sommet_suite_in[i]],m_vertices[Sommet_suite_out[i]]);
-           //std::cout<<i<<std::endl;
-           //std::cout<<Sommet_suite.size()<<std::endl;
            i++;
         }
 
