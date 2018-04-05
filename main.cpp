@@ -25,6 +25,8 @@ int main()
         {
         case 1:
              g.make_graph_1();
+                g.allouer_k_uplet();
+                        //g.find_K_connex();
              while(!key[KEY_ESC] &&    g.menugraph()!=1)
              {
               g.update();
@@ -36,6 +38,13 @@ int main()
             break;
 
         case 2:
+            g.make_graph_2();
+             while(!key[KEY_ESC] &&    g.menugraph()!=1)
+             {
+              g.update();
+              grman::mettre_a_jour();
+             }
+             g.destroy_graph();
             break;
 
         case 3:

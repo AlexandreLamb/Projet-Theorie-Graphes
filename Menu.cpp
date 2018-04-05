@@ -45,22 +45,21 @@ MenuInterface::MenuInterface(int x,int y,int w, int h)
  int Menu::choixgraph()
  {
 
-     int choix=0;
-
      if(grman::mouse_click&1 && m_interface->m_graph1.is_mouse_over())
      {
-         choix=1;
+         return 1;
      }
 
       if(grman::mouse_click&1 && m_interface->m_graph2.is_mouse_over())
      {
-         choix=2;
+         return 2;
      }
 
       if(grman::mouse_click&1 && m_interface->m_graph1.is_mouse_over())
      {
-         choix=3;
+         return 3;
      }
+
  }
 
 void Menu::demarermenu()

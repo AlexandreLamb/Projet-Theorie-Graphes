@@ -320,6 +320,12 @@ class GraphInterface
         grman::WidgetButton m_retour;
         grman::WidgetImage m_retour_img;
 
+        grman::WidgetButton m_button_flux;
+        grman::WidgetText m_text_flux;
+
+        grman::WidgetButton m_button_play;
+        grman::WidgetText m_text_play;
+
 
 
 
@@ -376,6 +382,14 @@ std::vector<int> Sommet_suite_out;
         void make_example();
 
         void make_graph_1();
+
+        void make_graph_2();
+
+        void find_K_connex();
+
+        int KparmisN(int k,int n);
+
+        int** allouer_k_uplet();
 
         void fonctionnel();
 

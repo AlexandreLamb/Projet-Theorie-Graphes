@@ -362,6 +362,16 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_retour_img.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Down);
 
 
+    m_tool_box.add_child(m_button_flux);
+
+    m_button_flux.set_pos(10,200);
+    m_button_flux.set_dim(45,30);
+    m_button_flux.set_bg_color(ROUGE);
+
+    m_button_flux.add_child(m_text_flux);
+    m_text_flux.set_message("ModeF");
+    m_text_flux.set_gravity_xy(grman::GravityX::Center,grman::GravityY::Center);
+
 
     m_tool_box.set_bg_color(BLANCBLEU);
 
@@ -413,6 +423,92 @@ void Graph::make_graph_1(){
     m_nomgraph ="graph1";
 
 }
+
+void Graph::make_graph_2(){
+
+    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
+    Graph::charger("graph2");
+    m_nomgraph ="graph2";
+}
+
+void Graph::find_K_connex(){
+    int kmin;
+    int cmp1=0;
+    int cmp2=1;
+    int cmp3=0;
+    int kParmisN;
+    bool IsKmin =false;
+    int** pyra=Graph::allouer_k_uplet();
+
+        for(int j = 0 ; j < ordre-1 ;j++){
+
+            for(int i = cmp3 ; i< ordre; i++){
+                std::cout<<i<<" "<<pyra[cmp1][i]<<std::endl;
+
+            }
+            cmp1++;
+            cmp3++;
+
+
+        }
+
+}
+
+int Graph::KparmisN(int k,int n){
+
+int result=0;
+int nFacto=1;
+int kFacto=1;
+int kMoinNFacto=1;
+int tmp =(n-k)+1;
+
+
+if( n != 0 && k != 0 ){
+
+    for(int i=1 ; i < n+1 ; i++){
+        nFacto=i*nFacto;
+    }
+
+    for(int i=1 ; i < k+1 ; i++){
+        kFacto=i*kFacto;
+    }
+    for(int i=1 ; i < tmp ; i++){
+        kMoinNFacto=i*kMoinNFacto;
+    }
+    result=(nFacto)/(kFacto*kMoinNFacto);
+
+    return result;
+}
+
+
+return result;
+}
+
+
+
+
+int** Graph::allouer_k_uplet(){
+    int** mat;
+    int cmp=0;
+    mat = new int*[ordre];
+    for(int i = 0 ; i < ordre ; i++ ){
+        mat[i]=new int [ordre-i];
+    }
+        for(int i = 0 ; i <ordre ; i++){
+            //mat[i][0]=i;
+            for(int j =0 ; j<ordre-i;j++){
+              mat[i][j]=cmp;
+              if(i!=mat[i][j]){
+               std::cout<<i<<" "<< mat[i][j]<<std::endl;
+              }
+                cmp++;
+            }
+            cmp=i+1;
+
+        }
+
+}
+
 
 ///zoe : sous prgramme qui gère partie fonctinnel sans affichage
 void Graph::fonctionnel()
@@ -707,5 +803,6 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     std::cout<<"les sommet "<<id_vert1<<" et "<<id_vert2<<" sont relié par l'arrete " <<idx <<std::endl;
     Sommet_suite_in.push_back(id_vert1);
     Sommet_suite_out.push_back(id_vert2);
+
 }
 
