@@ -560,7 +560,7 @@ void Graph::sauvgarder(std::string graphName){
          fichier <<picName<<std::endl;
     }
         for(auto &elt : m_edges){
-
+            std::cout<<elt.second.m_from;
             fichier << elt.second.m_from<<" ";
             fichier << elt.second.m_to<<" ";
             fichier << elt.second.m_weight<<std::endl;
@@ -589,6 +589,10 @@ int Graph::menugraph()
 
            elmt.second.Afficher_Edges(m_vertices[Sommet_suite_in[i]],m_vertices[Sommet_suite_out[i]]);
            i++;
+        //std::cout<<"l'arrete "<< i <<"est composé des sommet " << Sommet_suite_in[i]<<" et "<< Sommet_suite_out[i]<<std::endl;
+            if(Sommet_suite_in[i]==0 && Sommet_suite_out[i]==1){
+                std::cout<<i<<"t";
+            }
         }
 
 
