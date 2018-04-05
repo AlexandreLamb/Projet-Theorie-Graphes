@@ -78,15 +78,27 @@ bool Vertex:: get_marque()
     return m_ismarqued;
 }
 
-void Vertex::set_connexe(bool x)
+void Vertex::set_connexeout(bool x)
 {
-    m_isin_cmpconnexe=x;
+    m_isin_cmpconnexeout=x;
 }
 
-bool Vertex :: get_connexe()
+bool Vertex :: get_connexeout()
 {
-    return m_isin_cmpconnexe;
+    return m_isin_cmpconnexeout;
 }
+
+void Vertex::set_connexein(bool x)
+{
+    m_isin_cmpconnexein=x;
+}
+
+bool Vertex :: get_connexein()
+{
+    return m_isin_cmpconnexein;
+}
+
+
 
 int Vertex::get_idx()
 {
@@ -99,21 +111,49 @@ void Vertex::set_idx(int x)
 }
 
 
-bool Vertex::islinked(Vertex x)
+bool Vertex::islinked(Vertex x, int param)
 {
-    bool islinked;
-    for(int i=0; i<m_out.size();i++)
+    bool linked;
+     /// est liée pour les sommets partant de this
+    if(param==1)
     {
+
+        for(int i=0; i<m_out.size();i++)
+        {
          for(int j=0; j<x.m_in.size();j++)
         {
            if(m_out[i]==x.m_in[j])
-            islinked=true;
+           {
+               linked=true;
+           }
+
 
            else
-            islinked= false;
+            linked= false;
+        }
         }
     }
-       return islinked;
+    /// est liée pour les sommets arrivant sur this
+    if(param==0)
+    {
+
+        for(int i=0; i<m_out.size();i++)
+        {
+         for(int j=0; j<x.m_in.size();j++)
+        {
+           if(m_out[i]==x.m_in[j])
+           {
+              linked=true;
+
+           }
+
+           else
+            linked= false;
+        }
+        }
+    }
+
+       return linked;
 }
 /***************************************************
                     EDGE
@@ -379,6 +419,10 @@ int Graph::menugraph()
         return 1;
     }
 
+     if(grman::mouse_click && m_vertices[1].m_interface->m_top_box.is_mouse_over())
+     {
+         Cmp_fort_connexe_serach(m_vertices[0]);
+     }
     return 0;
 
 }
@@ -429,7 +473,7 @@ void Graph::Reset_marquage_vertex()
 
 void Graph:: Cmp_fort_connexe_serach(Vertex s)
 {
-
+    Reset_marquage_vertex();
     std::vector<Vertex*> c1; // comosante connexe partant de s
     std::vector<Vertex*> c2; // composante connexe arrivant à s
     std::vector<Vertex*> c ; // la composante fortement connexe
@@ -440,28 +484,68 @@ void Graph:: Cmp_fort_connexe_serach(Vertex s)
     c1.push_back(new Vertex(s));
     c2.push_back(new Vertex(s));
 
-    m_vertices[s.get_idx()].set_connexe(true);
+    m_vertices[s.get_idx()].set_connexeout(true);
+    m_vertices[s.get_idx()].set_connexein(true);
 
     while(add)
     {
         add=0;
         for(int i=0; i<ordre;i++)
         {
-            if(!m_vertices[i].get_marque() && m_vertices[i].get_connexe())
+            if(!m_vertices[i].get_marque() && m_vertices[i].get_connexeout())
             {
                 m_vertices[i].set_marque(true);
 
-               /* for(int k=0; k<ordre;k++)
+                for(int k=0; k<ordre;k++)
                 {
-                    if(!m_vertices[i].)
-                }*/
+                    if(m_vertices[i].islinked(m_vertices[k],1) && !m_vertices[k].get_marque())
+                    {
+                       // c1.push_back(new Vertex(m_vertices[k]));
+                        m_vertices[k].set_connexeout(true);
+                        add=1;
+                    }
+                }
             }
         }
     }
 
+    Reset_marquage_vertex();
+     add=true;
+     while(add)
+     {   add=0;
+          for(int i=0; i<ordre;i++)
+        {
+            if(!m_vertices[i].get_marque() && m_vertices[i].get_connexein())
+            {
+                m_vertices[i].set_marque(true);
 
+                for(int k=0; k<ordre;k++)
+                {
+                    if(m_vertices[i].islinked(m_vertices[k],0) && !m_vertices[k].get_marque())
+                    {
+                     //   c2.push_back(new Vertex(m_vertices[k]));
+                        m_vertices[k].set_connexein(true);
+                        add=1;//std::cout << m_vertices[k].get_idx();
+                    }
+                }
+            }
+        }
+     }
 
+   for (int z=0 ; z<ordre; z++)
+   {
+       if(m_vertices[z].get_connexein() & m_vertices[z].get_connexeout())
+       {
+           c.push_back(new Vertex(m_vertices[z]));
 
+       }
+   }
+
+  for(int i=0; i<c.size();i++)
+  {
+      std::cout << c[i]->get_idx();
+
+  }
 
 }
 
@@ -531,5 +615,7 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_edges[idx] = Edge(weight, ei);
     m_edges[idx].m_from=id_vert1;
     m_edges[idx].m_to=id_vert2;
+    m_vertices[id_vert1].m_in.push_back(idx);
+    m_vertices[id_vert2].m_out.push_back(idx);
 }
 

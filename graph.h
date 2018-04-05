@@ -152,8 +152,9 @@ class Vertex
 
        ///marquage
 
-        bool  m_ismarqued;
-        bool m_isin_cmpconnexe;
+        bool m_ismarqued=false;
+        bool m_isin_cmpconnexeout=false;
+        bool m_isin_cmpconnexein=false;
 
       ///indice du vertex dans la map de graph
         int m_idx;
@@ -167,6 +168,9 @@ class Vertex
         Vertex (double value=0, VertexInterface *interface=nullptr) :
             m_value(value), m_interface(interface)  {  }
 
+       // Vertex (Vertex &v): m_value(v.m_value), m_interface(new std::shared_ptr <VertexInterface>(v.m_interface)),
+            //   m_idx(v.m_idx) , m_in(v.m_in), m_out(v.m_out){  }
+
         /// Vertex étant géré par Graph ce sera la méthode update de graph qui appellera
         /// le pre_update et post_update de Vertex (pas directement la boucle de jeu)
         /// Voir l'implémentation Graph::update dans le .cpp
@@ -177,14 +181,16 @@ class Vertex
 
         void set_marque(bool x);
         bool get_marque();
-        void set_connexe(bool x);
-        bool get_connexe();
+        void set_connexeout(bool x);
+        bool get_connexeout();
+        void set_connexein(bool x);
+        bool get_connexein();
 
 
         int get_idx();
         void set_idx(int x);
 
-        bool islinked(Vertex x);
+        bool islinked(Vertex x,int param);
 };
 
 
