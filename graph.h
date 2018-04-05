@@ -242,6 +242,8 @@ class Edge
 
         std::vector<int> v_to;
 
+        double get_weight();
+
 
     public:
 
@@ -339,7 +341,7 @@ class Graph
 
         void fonctionnel();
 
-        void PredSucc();
+        int PredSucc(int s1, int s2);
 
 
         void charger(std::string graphName);

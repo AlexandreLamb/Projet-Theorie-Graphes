@@ -114,6 +114,11 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
 
 }
 
+/// accesseurs
+double Edge::get_weight()
+{
+    return m_weight;
+}
 
 /// Gestion du Edge avant l'appel à l'interface
 void Edge::pre_update()
@@ -258,9 +263,9 @@ void Graph::fonctionnel()
     float K=0;
     int indx=0;
     bool play = false; // savoir quand c'est play ou non
-    bool pause =false;
     bool mode_flux=false; // savoir si bouton mode flux est actif
     int nb=0;
+    int a = 0;
 
     mode_flux = true; // savoir si appuyer sur bouton mode flux
 
@@ -289,14 +294,7 @@ void Graph::fonctionnel()
                       std::cout << "l'index du sommet est: "<< indx <<std::endl;
 
                       /// on cherche arete de ce sommet à ce pred
-                        /// on parours les aretes
-                            std::cout << "le nombre d'arete est "<< indx <<std::endl;
-                            for(int j=0; j< m_edges.size(); j++)
-                            {
-                                std::cout << "rentree "<< indx <<std::endl;
-                            }
-
-
+                        a=PredSucc(k, i);
                       ///coeff=
                      /// K=K+(coeff*nb);
                     }
@@ -304,7 +302,7 @@ void Graph::fonctionnel()
                 }
 
             }
-            while(pause);
+            while(!play);
         }
 
 
@@ -477,7 +475,7 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_vertices[id_vert2].m_in.push_back(idx);
 
 }
-std::map<int, Edge>::iterator it;
+
 /// methode qui rencoit l'indice de l'arete qui relie les deux sommets en parametre
 int Graph::PredSucc(int sfrom, int sto)
 {
@@ -487,16 +485,17 @@ int Graph::PredSucc(int sfrom, int sto)
     double poids=0;
 
     /// parcourt la map d'arete
-    for (std::map<int,Edge>::iterator it=m_edges.begin(); it!=m_edges.end(); ++it)
+    for(auto &elt : m_edges)
     {
-        poids=it->second.m_weight;
-        std::cout << poids << std::end;
+        /// accede à m-from et m_to
+       s1= elt.second.m_from;
+       s2= elt.second.m_to;
 
-       // s1=it.v_from;
-
-        //s2=it.v_to;.
-
-
+       /// si les sommets s1 et s2 sont les meme que les sommets en parametres on retourne la valeur de l'arete (coeff)
+       if((s1==sfrom && s2==sto) || (s1==sto && s2==sfrom) )
+       {
+           poids= elt.second.m_weight;
+           return poids;
+       }
     }
-
 }
