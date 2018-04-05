@@ -46,7 +46,7 @@ VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, in
     m_top_box.add_child(m_tools_button);
     m_tools_button.add_child(m_tools_text);
 
-    m_tools_button.set_pos(0,0);
+    m_tools_button.set_pos(90,0);
     m_tools_text.set_pos(4,3);
 
     m_tools_text.set_message("Option");
@@ -56,6 +56,12 @@ VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, in
 
 
 
+}
+
+void Vertex::Cacher_option() {
+
+    m_interface->m_top_box.remove_child(m_interface->m_tools_box);
+    m_interface->m_top_box.set_border(2);
 }
 
 void Vertex::Afficher_option(){
@@ -118,6 +124,11 @@ void Vertex::Toggle_Sommet(){
             //Cacher_Sommet();
 
         }
+    }
+
+    if(grman::mouse_click && m_interface->m_button_edit.is_mouse_over()){
+        Cacher_option();
+
     }
 
 }
@@ -256,6 +267,8 @@ void Edge::Afficher_Edges(Vertex& from , Vertex& to){
     m_interface->m_top_edge.attach_to(to.m_interface->m_top_box);
     m_interface-> m_top_edge.reset_arrow_with_bullet();
 
+    m_interface->m_top_edge.add_child(m_interface->m_box_edge);
+
 }
 
 
@@ -316,8 +329,12 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
 
     m_tool_box.add_child(m_savebutton);
 
+    m_tool_box.add_child(m_tool_text);
+    m_tool_text.set_message("Options");
+    m_tool_text.set_pos(10,20);
+
     m_savebutton.set_dim(45,30);
-    m_savebutton.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Up);
+    m_savebutton.set_pos(10,40);
 
     m_savebutton.set_bg_color(ROUGE);
     m_savebutton.add_child(m_savebutton_text);
@@ -325,10 +342,14 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_savebutton_text.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Center);
 
     m_tool_box.add_child(m_afficher_sommet);
+    m_afficher_sommet.add_child(m_afficher_sommet_text);
 
-    m_afficher_sommet.set_dim(35,20);
+    m_afficher_sommet.set_dim(45,30);
     m_afficher_sommet.set_bg_color(ROUGE);
-    m_afficher_sommet.set_pos(10,50);
+    m_afficher_sommet.set_pos(10,120);
+
+    m_afficher_sommet_text.set_message("show");
+    m_afficher_sommet_text.set_gravity_xy(grman::GravityX::Center,grman::GravityY::Center);
 
     m_tool_box.add_child(m_retour);
     m_retour.set_dim(50,50);
@@ -567,6 +588,9 @@ int Graph::menugraph()
         }
 
 
+    }
+    if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over()){
+        sauvgarder("graph1");
     }
 
     if(grman::mouse_click && m_interface->m_retour.is_mouse_over())

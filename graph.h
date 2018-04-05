@@ -195,6 +195,8 @@ class Vertex
         void Afficher_Somet();
 
         void Cacher_Arretes();
+
+        void Cacher_option();
 };
 
 
@@ -310,8 +312,10 @@ class GraphInterface
         grman::WidgetButton m_savebutton;
         grman::WidgetText m_savebutton_text;
 
+        grman::WidgetText m_tool_text;
 
         grman::WidgetButton m_afficher_sommet;
+        grman::WidgetText m_afficher_sommet_text;
 
         grman::WidgetButton m_retour;
         grman::WidgetImage m_retour_img;

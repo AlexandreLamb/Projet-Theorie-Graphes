@@ -1,7 +1,7 @@
 6
 6
-54.2857 136 296 requin
-28.5714 324 65 thon
+54.2857 46 413 requin
+0 279 77 thon
 85.7143 549 146 maquerau
 40 375 346 petit_poisson
 0 673 252 langoustine
