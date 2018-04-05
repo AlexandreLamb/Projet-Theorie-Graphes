@@ -38,6 +38,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Linker>
+			<Add library="alleg44.dll" />
+			<Add library="loadpng" />
+			<Add library="png16.dll" />
+			<Add library="jpgalleg" />
+		</Linker>
 		<Unit filename="graph.cpp" />
 		<Unit filename="graph.h" />
 		<Unit filename="grman/coords.cpp" />

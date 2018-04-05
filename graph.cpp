@@ -67,6 +67,16 @@ void Vertex::post_update()
     m_value = m_interface->m_slider_value.get_value();
 }
 
+void Vertex::set_idx_V(int id)
+{
+    m_indx_V=id;
+}
+
+int Vertex::get_idx_V()
+{
+    return m_indx_V;
+}
+
 
 
 /***************************************************
@@ -127,6 +137,14 @@ void Edge::post_update()
     m_weight = m_interface->m_slider_weight.get_value();
 }
 
+void Edge::set_idx_E(int id)
+{
+    m_indx_E=id;
+}
+int Edge::get_idx_E()
+{
+    return m_indx_E;
+}
 
 
 /***************************************************
@@ -162,7 +180,6 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
 
 
 }
-
 
 /// Méthode spéciale qui construit un graphe arbitraire (démo)
 /// Cette méthode est à enlever et remplacer par un système
@@ -242,6 +259,9 @@ void Graph::fonctionnel()
     bool play = false; // savoir quand c'est play ou non
     bool pause =false;
     bool mode_flux=false; // savoir si bouton mode flux est actif
+    int nb=0;
+
+    mode_flux = true; // savoir si appuyer sur bouton mode flux
 
     if(mode_flux){
 
@@ -255,11 +275,29 @@ void Graph::fonctionnel()
                 /// on parcourt sommets et on calcul leur K
                 for(int k=0; k<ordre; k++)
                 {
-                    int nb=m_vertices[k].m_out.size();
+                    /// on recupere le nombre de ses predecesseurs
+                    nb=m_vertices[k].m_out.size();
 
+                    std::cout << "nb de pred est: "<< nb <<std::endl;
+
+                    /// pour tous ces pred on cherche l'arete qui le relie avec el sommet
                     for(int i=0; i<nb; i++)
                     {
+                        std::cout << "rentree "<< indx <<std::endl;
                       indx=m_vertices[k].m_out[i];
+                      std::cout << "l'index du sommet est: "<< indx <<std::endl;
+
+                      /// on cherche arete de ce sommet à ce pred
+                        /// on parours les aretes
+                            std::cout << "le nombre d'arete est "<< indx <<std::endl;
+                            for(int j=0; j< m_edges.size(); j++)
+                            {
+                                std::cout << "rentree "<< indx <<std::endl;
+                            }
+
+
+                      ///coeff=
+                     /// K=K+(coeff*nb);
                     }
 
                 }
@@ -318,12 +356,11 @@ void Graph::charger(std::string graphName){
         }
         for(int j=0 ; j < nbrEdge ; j++){
 
+            /// montee en memoire des attributs pour interface
             fichier >> vertexIn;
             fichier >> vertexOut;
             fichier >> poidEdge;
             add_interfaced_edge(j,vertexIn,vertexOut,poidEdge);
-
-
         }
 
 
@@ -409,6 +446,11 @@ void Graph::add_interfaced_vertex(int idx, double value, int x, int y, std::stri
     m_interface->m_main_box.add_child(vi->m_top_box);
     // On peut ajouter directement des vertices dans la map avec la notation crochet :
     m_vertices[idx] = Vertex(value, vi);
+
+    /// on sauvegarde les indices
+    m_vertices[idx].set_idx(idx);
+
+
 }
 
 /// Aide à l'ajout d'arcs interfacés
@@ -432,5 +474,31 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_edges[idx] = Edge(weight, ei);
     m_edges[idx].m_from=id_vert1;
     m_edges[idx].m_to=id_vert2;
+
+    m_vertices[id_vert1].m_in.push_back(idx);
+    m_vertices[id_vert2].m_in.push_back(idx);
+
 }
 
+/// methode qui rencoit l'indice de l'arete qui relie les deux sommets en parametre
+int Graph::PredSucc(int sfrom, int sto)
+{
+    int s1=0;
+    int s2=0;
+
+    double poids=0;
+
+    /// parcourt la map d'arete
+    for (std::map<int,Edge>::iterator it=m_edges.begin(); it!=m_edges.end(); ++it)
+    {
+        poids=it->second.m_weight;
+        std::cout << poids << std::end;
+
+       // s1=it.v_from;
+
+        //s2=it.v_to;.
+
+
+    }
+
+}

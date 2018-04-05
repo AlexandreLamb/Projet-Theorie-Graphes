@@ -143,8 +143,11 @@ class Vertex
         /// Nombre de la population
         float m_value;
 
-        ///Variable K qui nous permet de calculer la populataion a t+1
+        /// Variable K qui nous permet de calculer la populataion a t+1
         float K;
+
+        /// indice du sommet pour savoir ou il est dans la map
+        int m_indx_V;
 
 
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
@@ -168,6 +171,8 @@ class Vertex
         /// Voir l'implémentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
+        void set_idx_V(int id);
+        int get_idx_V();
 };
 
 
@@ -226,10 +231,14 @@ class Edge
         /// Variable coefficient qui permet de savoir combien sont mangé
         double m_weight;
 
+        /// indice du sommet pour savoir ou il est dans la map
+
+        int m_indx_E;
+
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<EdgeInterface> m_interface = nullptr;
 
-std::vector<int> v_from;
+        std::vector<int> v_from;
 
         std::vector<int> v_to;
 
@@ -246,6 +255,8 @@ std::vector<int> v_from;
         /// Voir l'implémentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
+        void set_idx_E(int id);
+        int get_idx_E();
 };
 
 
@@ -277,9 +288,6 @@ class GraphInterface
         grman::WidgetText m_savebutton_text;
 
 
-
-
-
         // A compléter éventuellement par des widgets de décoration ou
         // d'édition (boutons ajouter/enlever ...)
 
@@ -300,6 +308,8 @@ class Graph
 
         /// La liste des sommets
         std::map<int, Vertex> m_vertices;
+
+        /// Matrice adjacence pour avoir le numero arete a partir des deuw sommets
 
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<GraphInterface> m_interface = nullptr;
@@ -329,13 +339,14 @@ class Graph
 
         void fonctionnel();
 
+        void PredSucc();
+
+
         void charger(std::string graphName);
         void sauvgarder(std::string graphName);
         void addVertex();
         void supprimerVertex();
         void menugraph();
-
-
 
         /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
         void update();

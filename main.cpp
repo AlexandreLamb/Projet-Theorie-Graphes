@@ -17,7 +17,8 @@ int main()
 
     //Tools_bar t;
     g.make_graph_1();
-    g.fonctionnel();
+    //g.fonctionnel();
+    g.PredSucc();
 
     /// Vous gardez la main sur la "boucle de jeu"
     /// ( contrairement à des frameworks plus avancés )
