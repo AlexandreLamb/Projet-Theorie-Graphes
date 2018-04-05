@@ -578,9 +578,9 @@ int Graph::menugraph()
 
     if(grman::mouse_click && m_interface->m_afficher_sommet.is_mouse_over())
     {
-<<<<<<< HEAD
-        sauvgarder(m_nomgraph);
-=======
+
+
+
         for ( auto &elmt : m_vertices ){
             elmt.second.IsHide=false;
            elmt.second.Afficher_Somet();
@@ -594,8 +594,9 @@ int Graph::menugraph()
 
     }
     if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over()){
-        sauvgarder("graph1");
->>>>>>> 438e8e80f7b331a9e263d2bf34deea34abff5ae8
+
+       sauvgarder(m_nomgraph);
+
     }
 
     if(grman::mouse_click && m_interface->m_retour.is_mouse_over())
