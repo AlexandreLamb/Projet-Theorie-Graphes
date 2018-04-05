@@ -269,8 +269,16 @@ class GraphInterface
 
         /// Dans cette boite seront ajoutés des boutons de contrôle etc...
         grman::WidgetBox m_tool_box;
+
         grman::WidgetButton m_savebutton;
         grman::WidgetText m_savebutton_text;
+
+        grman::WidgetButton m_retour;
+        grman::WidgetImage m_retour_img;
+
+
+
+
 
 
 
@@ -302,6 +310,7 @@ class Graph
 
         int ordre;
         int nbrEdge;
+        std::string m_nomgraph;
 
 
 
@@ -327,12 +336,14 @@ class Graph
         void sauvgarder(std::string graphName);
         void addVertex();
         void supprimerVertex();
-        void menugraph();
+        int menugraph();
 
 
 
         /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
         void update();
+
+        void destroy_graph();
 };
 
 

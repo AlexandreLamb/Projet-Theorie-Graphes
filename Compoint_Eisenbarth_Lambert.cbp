@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add library="alleg44.dll" />
@@ -28,6 +29,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -47,7 +49,9 @@
 		<Unit filename="grman/grman_couleurs.h" />
 		<Unit filename="grman/widget.cpp" />
 		<Unit filename="grman/widget.h" />
+		<Unit filename="include/Menu.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Menu.cpp" />
 		<Unit filename="tools_bar.cpp" />
 		<Unit filename="tools_bar.h" />
 		<Extensions>
