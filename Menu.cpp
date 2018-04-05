@@ -10,6 +10,7 @@ MenuInterface::MenuInterface(int x,int y,int w, int h)
     m_graph1.set_dim(275,183);
     m_graph1.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Up);
     m_graph1.add_child(m_imggraph1);
+
     m_graph1.add_child(m_graph1_text);
     m_graph1_text.set_message("Les dents de la mer");
     m_graph1_text.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Down);
