@@ -68,6 +68,16 @@ void Vertex::post_update()
 }
 
 
+ void Vertex::set_marque(bool x)
+ {
+     m_ismarqued=x;
+ }
+
+bool Vertex:: get_marque()
+{
+    return m_ismarqued;
+}
+
 
 /***************************************************
                     EDGE

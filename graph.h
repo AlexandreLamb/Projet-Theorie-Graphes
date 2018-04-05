@@ -150,7 +150,9 @@ class Vertex
         // La ligne précédente est en gros équivalent à la ligne suivante :
         // VertexInterface * m_interface = nullptr;
 
+       ///marquage
 
+        bool  m_ismarqued;
 
     public:
 
@@ -164,6 +166,11 @@ class Vertex
         /// Voir l'implémentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
+
+        ///marquage accseceur
+
+        void set_marque(bool x);
+        bool get_marque();
 };
 
 
