@@ -372,6 +372,20 @@ void Graph::destroy_graph()
 
 
 }
+
+/// Recherche d'une composante fortement connexe
+
+void Graph:: Cmp_fort_connexe_serach(Vertex &s)
+{
+
+    std::vector<Vertex> c1; // comosante connexe partant de s
+    std::vector<Vertex> c2; // composante connexe arrivant à s
+
+
+}
+
+
+
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
 void Graph::update()
 {

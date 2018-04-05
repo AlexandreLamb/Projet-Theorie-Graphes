@@ -345,6 +345,8 @@ class Graph
         void supprimerVertex();
         int menugraph();
 
+        void Cmp_fort_connexe_serach(Vertex &s);
+
 
 
         /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
