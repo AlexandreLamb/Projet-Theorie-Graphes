@@ -91,6 +91,7 @@ class VertexInterface
     friend class Vertex;
     friend class EdgeInterface;
     friend class Graph;
+    friend class Edge;
 
     private :
 
@@ -116,6 +117,22 @@ class VertexInterface
         // Une boite pour le label précédent
         grman::WidgetText m_box_label_idx;
 
+        grman::WidgetBox m_tools_box;
+
+        grman::WidgetButton m_button_cacher;
+
+        grman::WidgetButton m_button_edit;
+
+        grman::WidgetButton m_tools_button;
+
+        grman::WidgetText m_tools_label;
+
+        grman::WidgetText m_label_cacher;
+
+        grman::WidgetText m_label_edit;
+
+        grman::WidgetText m_tools_text;
+
     public :
 
         // Le constructeur met en place les éléments de l'interface
@@ -140,8 +157,12 @@ class Vertex
         /// liste des indices des arcs partant du sommet : accès aux successeurs
         std::vector<int> m_out;
 
-        /// un exemple de donnée associée à l'arc, on peut en ajouter d'autres...
-        double m_value;
+        /// Nombre de la population
+        float m_value;
+
+        ///Variable K qui nous permet de calculer la populataion a t+1
+        float K;
+
 
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<VertexInterface> m_interface = nullptr;
@@ -150,7 +171,7 @@ class Vertex
         // La ligne précédente est en gros équivalent à la ligne suivante :
         // VertexInterface * m_interface = nullptr;
 
-
+        bool IsHide=false;
 
     public:
 
@@ -164,6 +185,18 @@ class Vertex
         /// Voir l'implémentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
+
+        void Afficher_option();
+
+        void Toggle_Sommet();
+
+        void Cacher_Sommet();
+
+        void Afficher_Somet();
+
+        void Cacher_Arretes();
+
+        void Cacher_option();
 };
 
 
@@ -178,6 +211,7 @@ class EdgeInterface
     // directement aux attributs (y compris privés)
     friend class Edge;
     friend class Graph;
+
 
     private :
 
@@ -219,11 +253,12 @@ class Edge
         /// indice du sommet d'arrivée de l'arc
         int m_to;
 
-        /// un exemple de donnée associée à l'arc, on peut en ajouter d'autres...
+        /// Variable coefficient qui permet de savoir combien sont mangé
         double m_weight;
 
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<EdgeInterface> m_interface = nullptr;
+
 
 std::vector<int> v_from;
 
@@ -242,6 +277,10 @@ std::vector<int> v_from;
         /// Voir l'implémentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
+
+        void hide_edge_in(Vertex& v);
+        void hide_edge_out(Vertex& v);
+        void Afficher_Edges(Vertex& from , Vertex& to);
 };
 
 
@@ -272,6 +311,11 @@ class GraphInterface
 
         grman::WidgetButton m_savebutton;
         grman::WidgetText m_savebutton_text;
+
+        grman::WidgetText m_tool_text;
+
+        grman::WidgetButton m_afficher_sommet;
+        grman::WidgetText m_afficher_sommet_text;
 
         grman::WidgetButton m_retour;
         grman::WidgetImage m_retour_img;
@@ -312,7 +356,8 @@ class Graph
         int nbrEdge;
         std::string m_nomgraph;
 
-
+std::vector<int> Sommet_suite_in;
+std::vector<int> Sommet_suite_out;
 
     public:
 
@@ -331,6 +376,8 @@ class Graph
         void make_example();
 
         void make_graph_1();
+
+        void fonctionnel();
 
         void charger(std::string graphName);
         void sauvgarder(std::string graphName);

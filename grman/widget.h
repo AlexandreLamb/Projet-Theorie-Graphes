@@ -88,6 +88,8 @@ class Widget
         Widget *get_child(int i) { return m_children.at(i); }
         void add_child(Widget &elt) { elt.set_parent(this); m_children.push_back(&elt); elt.reframe(); }
         void remove_child(Widget &elt) { m_children.erase( std::remove( m_children.begin(), m_children.end(), &elt ), m_children.end() ); }
+
+
         void reframe();
 
         /// Gestion géométrie
@@ -439,6 +441,9 @@ class WidgetEdge : public Widget
 
         void attach_from(Widget& from) { m_attach[0] = &from; }
         void attach_to(Widget& to) { m_attach[1] = &to; }
+
+        void detach_from() { m_attach[0] = nullptr; }
+        void detach_to() { m_attach[1] = nullptr; }
 
         void reset_no_items() { m_items.clear(); }
         void reset_arrow() { m_items = { {ArrowItemType::Arrow, 1.0} }; }
