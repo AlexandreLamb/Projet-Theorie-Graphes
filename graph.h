@@ -153,6 +153,8 @@ class Vertex
        ///marquage
 
         bool m_ismarqued=false;
+        bool m_ismarqued_connexeout=false;
+        bool m_ismarqued_connexein=false;
         bool m_isin_cmpconnexeout=false;
         bool m_isin_cmpconnexein=false;
 
@@ -185,6 +187,11 @@ class Vertex
         bool get_connexeout();
         void set_connexein(bool x);
         bool get_connexein();
+        void set_marque_connexeout(bool x);
+        bool get_marque_connexeout();
+        void set_marque_connexein(bool x);
+        bool get_marque_connexein();
+
 
 
         int get_idx();
@@ -367,8 +374,10 @@ class Graph
 
 
         void Reset_marquage_vertex();
+        void Reset_marquage_connexe_inout();
 
-        void Cmp_fort_connexe_serach(Vertex s);
+        std::vector<Vertex*> Cmp_fort_connexe_serach(Vertex s);
+        void search_all_cmpfc();
 
 
 

@@ -15,7 +15,7 @@ VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, in
 
     // Le slider de réglage de valeur
     m_top_box.add_child( m_slider_value );
-    m_slider_value.set_range(0.0 , 100.0); // Valeurs arbitraires, à adapter...
+    m_slider_value.set_range(0.0, 100.0);  // Valeurs arbitraires, à adapter...
     m_slider_value.set_dim(20,80);
     m_slider_value.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
 
@@ -68,10 +68,10 @@ void Vertex::post_update()
 }
 
 
- void Vertex::set_marque(bool x)
- {
-     m_ismarqued=x;
- }
+void Vertex::set_marque(bool x)
+{
+    m_ismarqued=x;
+}
 
 bool Vertex:: get_marque()
 {
@@ -111,49 +111,71 @@ void Vertex::set_idx(int x)
 }
 
 
+void Vertex:: set_marque_connexeout(bool x)
+{
+    m_ismarqued_connexeout=x;
+}
+bool Vertex::get_marque_connexeout()
+    {
+       return m_ismarqued_connexeout;
+    }
+void Vertex:: set_marque_connexein(bool x)
+{
+    m_ismarqued_connexein=x;
+}
+bool Vertex:: get_marque_connexein()
+{
+    return m_ismarqued_connexein;
+}
+
+
+
+
+
+
 bool Vertex::islinked(Vertex x, int param)
 {
     bool linked;
-     /// est liée pour les sommets partant de this
+    /// est liée pour les sommets partant de this
     if(param==1)
     {
 
-        for(int i=0; i<m_out.size();i++)
+        for(int i=0; i<m_out.size(); i++)
         {
-         for(int j=0; j<x.m_in.size();j++)
-        {
-           if(m_out[i]==x.m_in[j])
-           {
-               linked=true;
-           }
+            for(int j=0; j<x.m_in.size(); j++)
+            {
+                if(m_out[i]==x.m_in[j])
+                {
+                    linked=true;
+                }
 
 
-           else
-            linked= false;
-        }
+                else
+                    linked= false;
+            }
         }
     }
     /// est liée pour les sommets arrivant sur this
     if(param==0)
     {
 
-        for(int i=0; i<m_out.size();i++)
+        for(int i=0; i<m_out.size(); i++)
         {
-         for(int j=0; j<x.m_in.size();j++)
-        {
-           if(m_out[i]==x.m_in[j])
-           {
-              linked=true;
+            for(int j=0; j<x.m_in.size(); j++)
+            {
+                if(m_out[i]==x.m_in[j])
+                {
+                    linked=true;
 
-           }
+                }
 
-           else
-            linked= false;
-        }
+                else
+                    linked= false;
+            }
         }
     }
 
-       return linked;
+    return linked;
 }
 /***************************************************
                     EDGE
@@ -179,7 +201,7 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
 
     // Le slider de réglage de valeur
     m_box_edge.add_child( m_slider_weight );
-    m_slider_weight.set_range(0.0 , 100.0); // Valeurs arbitraires, à adapter...
+    m_slider_weight.set_range(0.0, 100.0);  // Valeurs arbitraires, à adapter...
     m_slider_weight.set_dim(16,40);
     m_slider_weight.set_gravity_y(grman::GravityY::Up);
 
@@ -299,33 +321,35 @@ void Graph::make_example()
 }
 
 
-void Graph::make_graph_1(){
+void Graph::make_graph_1()
+{
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
     Graph::charger("graph1");
     m_nomgraph ="graph1";
 
 
-   /* add_interfaced_vertex(0,50.0,100,100,"requin.jpg");
-    add_interfaced_vertex(1, 60.0, 100, 200, "thon.jpg");
-    add_interfaced_vertex(2, 60.0, 100, 300, "maquerau.jpg");
-    add_interfaced_vertex(3, 60.0, 100, 400, "petit_poisson.jpg");
-    add_interfaced_vertex(4, 60.0, 100, 500, "langoustine.jpg");
-    add_interfaced_vertex(5, 60.0, 100, 350, "orga_uni.jpg");
+    /* add_interfaced_vertex(0,50.0,100,100,"requin.jpg");
+     add_interfaced_vertex(1, 60.0, 100, 200, "thon.jpg");
+     add_interfaced_vertex(2, 60.0, 100, 300, "maquerau.jpg");
+     add_interfaced_vertex(3, 60.0, 100, 400, "petit_poisson.jpg");
+     add_interfaced_vertex(4, 60.0, 100, 500, "langoustine.jpg");
+     add_interfaced_vertex(5, 60.0, 100, 350, "orga_uni.jpg");
 
 
 
-    add_interfaced_edge(0, 0, 1, 50.0);
-    add_interfaced_edge(1, 1, 2, 20.0);
-    add_interfaced_edge(2, 1, 3, 20.0);
-    add_interfaced_edge(3, 2, 4, 20.0);
-    add_interfaced_edge(4, 3, 4, 20.0);
-    add_interfaced_edge(5, 4, 5, 20.0);
-*/
+     add_interfaced_edge(0, 0, 1, 50.0);
+     add_interfaced_edge(1, 1, 2, 20.0);
+     add_interfaced_edge(2, 1, 3, 20.0);
+     add_interfaced_edge(3, 2, 4, 20.0);
+     add_interfaced_edge(4, 3, 4, 20.0);
+     add_interfaced_edge(5, 4, 5, 20.0);
+    */
 
 }
 
-void Graph::addVertex(){
+void Graph::addVertex()
+{
     int indxVertex,posX, posY, indxEdge, vertexIn, vertexOut;
     double poidEdge,poidVertex;
 
@@ -334,13 +358,15 @@ void Graph::addVertex(){
 
 }
 
-void Graph::supprimerVertex(){
+void Graph::supprimerVertex()
+{
 
     std::map<int,Vertex>::iterator it;
 
 }
 
-void Graph::charger(std::string graphName){
+void Graph::charger(std::string graphName)
+{
 
     std::ifstream fichier (graphName+".txt",std::ios::in);
     int indxVertex,posX, posY, indxEdge, vertexIn, vertexOut;
@@ -348,22 +374,25 @@ void Graph::charger(std::string graphName){
     std::string picName;
 
 
-    if (fichier){
+    if (fichier)
+    {
 
         fichier >> Graph::ordre;
 
         fichier >> Graph::nbrEdge;
         std::cout<< nbrEdge;
-        for(int i=0 ; i < ordre ; i++){
+        for(int i=0 ; i < ordre ; i++)
+        {
 
-        fichier >> poidVertex;
-        fichier >> posX;
-        fichier >> posY;
-        fichier >> picName;
+            fichier >> poidVertex;
+            fichier >> posX;
+            fichier >> posY;
+            fichier >> picName;
 
-        add_interfaced_vertex(i,poidVertex,posX,posY,picName+".jpg");
+            add_interfaced_vertex(i,poidVertex,posX,posY,picName+".jpg");
         }
-        for(int j=0 ; j < nbrEdge ; j++){
+        for(int j=0 ; j < nbrEdge ; j++)
+        {
 
             fichier >> vertexIn;
             fichier >> vertexOut;
@@ -374,28 +403,32 @@ void Graph::charger(std::string graphName){
         }
 
 
-    fichier.close();
+        fichier.close();
     }
 
 }
 
-void Graph::sauvgarder(std::string graphName){
+void Graph::sauvgarder(std::string graphName)
+{
 
     std::ofstream fichier(graphName+".txt",std::ios::out | std::ios::trunc);
     std::string picName;
-        if(fichier){
-            fichier << Graph::ordre <<std::endl;
-            fichier << Graph::nbrEdge<<std::endl;
+    if(fichier)
+    {
+        fichier << Graph::ordre <<std::endl;
+        fichier << Graph::nbrEdge<<std::endl;
 
-            for(auto &elt : m_vertices){
-         fichier << elt.second.m_value<<" ";
-         fichier <<elt.second.m_interface->m_top_box.get_frame_pos().x<<" ";
-         fichier <<elt.second.m_interface->m_top_box.get_frame_pos().y<<" ";
-        picName=elt.second.m_interface->m_img.get_pic_name();
-        picName.erase(picName.size()-4,4);
-         fichier <<picName<<std::endl;
-    }
-        for(auto &elt : m_edges){
+        for(auto &elt : m_vertices)
+        {
+            fichier << elt.second.m_value<<" ";
+            fichier <<elt.second.m_interface->m_top_box.get_frame_pos().x<<" ";
+            fichier <<elt.second.m_interface->m_top_box.get_frame_pos().y<<" ";
+            picName=elt.second.m_interface->m_img.get_pic_name();
+            picName.erase(picName.size()-4,4);
+            fichier <<picName<<std::endl;
+        }
+        for(auto &elt : m_edges)
+        {
 
             fichier << elt.second.m_from<<" ";
             fichier << elt.second.m_to<<" ";
@@ -404,7 +437,7 @@ void Graph::sauvgarder(std::string graphName){
         }
         fichier.close();
         std::cout<<"Sauvgarde done";
-        }
+    }
 
 }
 
@@ -419,10 +452,14 @@ int Graph::menugraph()
         return 1;
     }
 
-     if(grman::mouse_click && m_vertices[1].m_interface->m_top_box.is_mouse_over())
-     {
-         Cmp_fort_connexe_serach(m_vertices[0]);
-     }
+    if(grman::mouse_unclick&1 && m_vertices[1].m_interface->m_top_box.is_mouse_over())
+    {
+
+
+       search_all_cmpfc();
+
+
+    }
     return 0;
 
 }
@@ -431,7 +468,7 @@ int Graph::menugraph()
 void Graph::destroy_graph()
 {
 
-    for(std::map<int,Vertex>::iterator it= m_vertices.begin(); it!=m_vertices.end();it++)
+    for(std::map<int,Vertex>::iterator it= m_vertices.begin(); it!=m_vertices.end(); it++)
     {
         m_interface->m_main_box.remove_child(it->second.m_interface->m_top_box);
 
@@ -439,7 +476,7 @@ void Graph::destroy_graph()
 
     m_vertices.clear();
 
-    for(std::map<int,Edge>::iterator et= m_edges.begin(); et!=m_edges.end();et++)
+    for(std::map<int,Edge>::iterator et= m_edges.begin(); et!=m_edges.end(); et++)
     {
         m_interface->m_main_box.remove_child(et->second.m_interface->m_top_edge);
 
@@ -457,32 +494,35 @@ void Graph::destroy_graph()
 
 void Graph::Reset_marquage_vertex()
 {
-    for(std::map<int,Vertex>::iterator it=m_vertices.begin(); it!=m_vertices.end();it++)
+    for(std::map<int,Vertex>::iterator it=m_vertices.begin(); it!=m_vertices.end(); it++)
     {
         it->second.set_marque(0);
     }
 }
 
 
-
+ void Graph :: Reset_marquage_connexe_inout()
+ {
+     for(std::map<int,Vertex>::iterator it=m_vertices.begin(); it!=m_vertices.end(); it++)
+    {
+        it->second.set_marque_connexeout(0);
+        it->second.set_marque_connexein(0);
+    }
+ }
 
 
 
 /// Recherche d'une composante fortement connexe
 
 
-void Graph:: Cmp_fort_connexe_serach(Vertex s)
+std::vector<Vertex*> Graph:: Cmp_fort_connexe_serach(Vertex s)
 {
-    Reset_marquage_vertex();
-    std::vector<Vertex*> c1; // comosante connexe partant de s
-    std::vector<Vertex*> c2; // composante connexe arrivant à s
+
+
     std::vector<Vertex*> c ; // la composante fortement connexe
 
-    Vertex x;
-    Vertex y;
     bool add=true;
-    c1.push_back(new Vertex(s));
-    c2.push_back(new Vertex(s));
+
 
     m_vertices[s.get_idx()].set_connexeout(true);
     m_vertices[s.get_idx()].set_connexein(true);
@@ -490,17 +530,17 @@ void Graph:: Cmp_fort_connexe_serach(Vertex s)
     while(add)
     {
         add=0;
-        for(int i=0; i<ordre;i++)
+        for(int i=0; i<ordre; i++)
         {
-            if(!m_vertices[i].get_marque() && m_vertices[i].get_connexeout())
+            if(!m_vertices[i].get_marque_connexeout() && m_vertices[i].get_connexeout())
             {
-                m_vertices[i].set_marque(true);
+                m_vertices[i].set_marque_connexeout(true);
 
-                for(int k=0; k<ordre;k++)
+                for(int k=0; k<ordre; k++)
                 {
-                    if(m_vertices[i].islinked(m_vertices[k],1) && !m_vertices[k].get_marque())
+                    if(m_vertices[i].islinked(m_vertices[k],1) && !m_vertices[k].get_marque_connexeout())
                     {
-                       // c1.push_back(new Vertex(m_vertices[k]));
+
                         m_vertices[k].set_connexeout(true);
                         add=1;
                     }
@@ -509,47 +549,96 @@ void Graph:: Cmp_fort_connexe_serach(Vertex s)
         }
     }
 
-    Reset_marquage_vertex();
-     add=true;
-     while(add)
-     {   add=0;
-          for(int i=0; i<ordre;i++)
-        {
-            if(!m_vertices[i].get_marque() && m_vertices[i].get_connexein())
-            {
-                m_vertices[i].set_marque(true);
 
-                for(int k=0; k<ordre;k++)
+    add=true;
+    while(add)
+    {
+        add=0;
+        for(int i=0; i<ordre; i++)
+        {
+            if(!m_vertices[i].get_marque_connexein() && m_vertices[i].get_connexein() )
+            {
+                m_vertices[i].set_marque_connexein(true);
+
+                for(int k=0; k<ordre; k++)
                 {
-                    if(m_vertices[i].islinked(m_vertices[k],0) && !m_vertices[k].get_marque())
+                    if(m_vertices[i].islinked(m_vertices[k],0) && !m_vertices[k].get_marque_connexein())
                     {
-                     //   c2.push_back(new Vertex(m_vertices[k]));
+
                         m_vertices[k].set_connexein(true);
                         add=1;//std::cout << m_vertices[k].get_idx();
                     }
                 }
             }
         }
-     }
+    }
 
-   for (int z=0 ; z<ordre; z++)
-   {
-       if(m_vertices[z].get_connexein() & m_vertices[z].get_connexeout())
-       {
-           c.push_back(new Vertex(m_vertices[z]));
+    for (int z=0 ; z<ordre; z++)
+    {
+        if(m_vertices[z].get_connexein() && m_vertices[z].get_connexeout() && !m_vertices[z].get_marque())
+        {
+            c.push_back(new Vertex(m_vertices[z]));
+            m_vertices[z].set_marque(true);
 
-       }
-   }
 
-  for(int i=0; i<c.size();i++)
-  {
-      std::cout << c[i]->get_idx();
+        }
+    }
 
-  }
+   /* for(int i=0; i<c.size(); i++)
+    {
+          std::cout << c[i]->get_idx();
 
+    }
+    std::cout << std::endl;*/
+
+    return c;
 }
 
+void Graph::search_all_cmpfc()
+{
+   // Reset_marquage_vertex();
+   // Reset_marquage_connexe_inout();
+    std::vector<std::vector<Vertex*>> tabcmpfc;
 
+
+    bool* marquage= new bool [m_vertices.size()];
+    for (int i =0; i<m_vertices.size(); i++)
+    {
+        marquage[i]=false;
+    }
+
+    for(int i=0; i<ordre; i++)
+    {
+        if(!marquage[i])
+        {
+            tabcmpfc.push_back( Cmp_fort_connexe_serach(m_vertices[i]));
+            marquage[i]=true;
+
+            for(int k=0; k<tabcmpfc.back().size(); k++)
+            {
+                /*if(tabcmpfc.back()[k]->get_connexein() && tabcmpfc.back()[k]->get_connexeout() && !marquage[k])
+                {
+                    marquage[k]=true;
+
+                }*/
+
+                marquage[tabcmpfc.back()[k]->get_idx()] = true;
+
+            }
+        }
+
+    }
+
+
+    for(int i=0; i<tabcmpfc.size(); i++)
+    {
+        for(int k=0; k<tabcmpfc[i].size(); k++)
+        {
+            std::cout << tabcmpfc[i][k]->get_idx();
+        }
+        std::cout << std::endl;
+    }
+}
 
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
 void Graph::update()
