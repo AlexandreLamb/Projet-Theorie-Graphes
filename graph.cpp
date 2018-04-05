@@ -1,5 +1,6 @@
 #include "graph.h"
 #include <string>
+#include <map>
 
 /***************************************************
                     VERTEX
@@ -447,9 +448,6 @@ void Graph::add_interfaced_vertex(int idx, double value, int x, int y, std::stri
     // On peut ajouter directement des vertices dans la map avec la notation crochet :
     m_vertices[idx] = Vertex(value, vi);
 
-    /// on sauvegarde les indices
-    m_vertices[idx].set_idx(idx);
-
 
 }
 
@@ -479,7 +477,7 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_vertices[id_vert2].m_in.push_back(idx);
 
 }
-
+std::map<int, Edge>::iterator it;
 /// methode qui rencoit l'indice de l'arete qui relie les deux sommets en parametre
 int Graph::PredSucc(int sfrom, int sto)
 {
