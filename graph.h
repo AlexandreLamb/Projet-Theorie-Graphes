@@ -144,7 +144,7 @@ class Vertex
         float m_value;
 
         /// Variable K qui nous permet de calculer la populataion a t+1
-        float K;
+        float m_K;
 
         /// indice du sommet pour savoir ou il est dans la map
         int m_indx_V;
@@ -263,7 +263,6 @@ class Edge
 
 
 
-
 /***************************************************
                     GRAPH
 ****************************************************/
@@ -341,7 +340,7 @@ class Graph
 
         void fonctionnel();
 
-        int PredSucc(int s1, int s2);
+        double PredSucc(int s1, int s2);
 
 
         void charger(std::string graphName);

@@ -252,20 +252,15 @@ void Graph::make_graph_1(){
 ///zoe : sous prgramme qui gère partie fonctinnel sans affichage
 void Graph::fonctionnel()
 {
-    /// affichage du nombre de la population
-    for(int i= 0; i<ordre; i++)
-    {
-        std::cout << "la population est de" <<m_vertices[i].m_value <<std::endl;
-        std::cout << "son coeff est de" <<m_edges[i].m_weight <<std::endl;
-    }
-
     /// variables
     float K=0;
-    int indx=0;
+    int id_arc=0;
+    int id_sto=0;
+    int N=0;
     bool play = false; // savoir quand c'est play ou non
     bool mode_flux=false; // savoir si bouton mode flux est actif
+    double coeff=0.00;
     int nb=0;
-    int a = 0;
 
     mode_flux = true; // savoir si appuyer sur bouton mode flux
 
@@ -276,43 +271,47 @@ void Graph::fonctionnel()
 
         if(play)
         {
+                      std::cout << " " <<nb <<std::endl;
+                      std::cout << " ----- TEST FLUX -----" <<nb <<std::endl;
+                      std::cout << " " <<nb <<std::endl;
             do
             {
                 /// on parcourt sommets et on calcul leur K
                 for(int k=0; k<ordre; k++)
                 {
-                    /// on recupere le nombre de ses predecesseurs
-                    nb=m_vertices[k].m_out.size();
+                    K=0;
+                    /// on recupere le nombre de ses predecesseurs = le nombre d'arc
+                    nb=m_vertices[k].m_in.size();
 
-                    std::cout << "nb de pred est: "<< nb <<std::endl;
-
-                    /// pour tous ces pred on cherche l'arete qui le relie avec el sommet
+                    /// pour tous ces pred on cherche le sommet predecesseur relié a cette arete
                     for(int i=0; i<nb; i++)
                     {
-                        std::cout << "rentree "<< indx <<std::endl;
-                      indx=m_vertices[k].m_out[i];
-                      std::cout << "l'index du sommet est: "<< indx <<std::endl;
+                        /// on recupere l'index d'un arc du pred
+                        id_arc=m_vertices[k].m_in[i];
 
-                      /// on cherche arete de ce sommet à ce pred
-                        a=PredSucc(k, i);
-                      ///coeff=
-                     /// K=K+(coeff*nb);
+                       /// on recupère le coeff de cette arete
+                        coeff=m_edges[id_arc].m_weight;
+
+                        /// on recupere le sommet m_to qu'elle relie au sommet [k]
+                        id_sto= m_edges[id_arc].m_to;
+
+                        ///on recupere le nombre de pop dans sommet to
+                        N=m_vertices[id_sto].m_value;
+
+                        /// on calcul K
+                        K=K+(coeff*m_vertices[id_sto].m_value);
+
+                        std::cout << "S" << k  <<" mange "<< coeff << "S"<< id_sto << " du nb de "<<N <<std::endl;
                     }
 
+                    ///montee en memoire
+                    m_vertices[k].m_K=K;
+                    std::cout << " le K est: " << K << std::endl;
                 }
-
             }
             while(!play);
         }
-
-
     }
-
-
-
-
-
-
 }
 
 void Graph::addVertex()
@@ -343,7 +342,7 @@ void Graph::charger(std::string graphName){
         fichier >> Graph::ordre;
 
         fichier >> Graph::nbrEdge;
-        std::cout<< nbrEdge;
+
         for(int i=0 ; i < ordre ; i++){
 
         fichier >> poidVertex;
@@ -471,18 +470,24 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_edges[idx].m_from=id_vert1;
     m_edges[idx].m_to=id_vert2;
 
-    m_vertices[id_vert1].m_in.push_back(idx);
-    m_vertices[id_vert2].m_in.push_back(idx);
+    if((idx!=id_vert1) ||(idx!=id_vert2) )
+    {
+        m_vertices[id_vert1].m_in.push_back(idx);
+        m_vertices[id_vert2].m_out.push_back(idx);
+
+    }
 
 }
 
 /// methode qui rencoit l'indice de l'arete qui relie les deux sommets en parametre
-int Graph::PredSucc(int sfrom, int sto)
+double Graph::PredSucc(int sfrom, int sto)
 {
     int s1=0;
     int s2=0;
 
     double poids=0;
+
+
 
     /// parcourt la map d'arete
     for(auto &elt : m_edges)
@@ -492,9 +497,10 @@ int Graph::PredSucc(int sfrom, int sto)
        s2= elt.second.m_to;
 
        /// si les sommets s1 et s2 sont les meme que les sommets en parametres on retourne la valeur de l'arete (coeff)
-       if((s1==sfrom && s2==sto) || (s1==sto && s2==sfrom) )
+       if((s1==sfrom && s2==sto))
        {
            poids= elt.second.m_weight;
+
            return poids;
        }
     }
