@@ -311,7 +311,10 @@ class GraphInterface
         grman::WidgetImage m_retour_img;
 
 
-
+        grman::WidgetButton m_cmp_fconnexe;
+        grman::WidgetText m_cmp_fconnexe_text1;
+        grman::WidgetText m_cmp_fconnexe_text2;
+        grman::WidgetText m_cmp_fconnexe_text3;
 
 
 

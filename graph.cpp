@@ -278,6 +278,21 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_retour_img.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Down);
 
 
+    m_tool_box.add_child(m_cmp_fconnexe);
+    m_cmp_fconnexe.set_dim(70 ,30);
+    m_cmp_fconnexe.set_gravity_x(grman::GravityX::Center);
+    m_cmp_fconnexe.set_posy(40);
+    m_cmp_fconnexe.set_bg_color(ROUGE);
+    m_cmp_fconnexe.add_child(m_cmp_fconnexe_text1);
+    m_cmp_fconnexe.add_child(m_cmp_fconnexe_text2);
+    m_cmp_fconnexe.add_child(m_cmp_fconnexe_text3);
+    m_cmp_fconnexe_text1.set_message("cmp");
+    m_cmp_fconnexe_text2.set_message("fortement");
+    m_cmp_fconnexe_text3.set_message("connexe");
+    m_cmp_fconnexe_text1.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Up);
+    m_cmp_fconnexe_text2.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Center);
+    m_cmp_fconnexe_text3.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Down);
+
     m_tool_box.set_bg_color(BLANCBLEU);
 
 
@@ -452,7 +467,7 @@ int Graph::menugraph()
         return 1;
     }
 
-    if(grman::mouse_unclick&1 && m_vertices[1].m_interface->m_top_box.is_mouse_over())
+    if(grman::mouse_unclick&1 && m_interface->m_cmp_fconnexe.is_mouse_over())
     {
 
 
