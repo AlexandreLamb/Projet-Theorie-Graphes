@@ -373,13 +373,32 @@ void Graph::destroy_graph()
 
 }
 
+/// permet de démarquer tout les vertex
+
+void Graph::Reset_marquage_vertex()
+{
+    for(std::map<int,Vertex>::iterator it=m_vertices.begin(); it!=m_vertices.end();it++)
+    {
+        it->second.set_marque(0);
+    }
+}
+
+
 /// Recherche d'une composante fortement connexe
 
-void Graph:: Cmp_fort_connexe_serach(Vertex &s)
+void Graph:: Cmp_fort_connexe_serach(Vertex s)
 {
 
-    std::vector<Vertex> c1; // comosante connexe partant de s
-    std::vector<Vertex> c2; // composante connexe arrivant à s
+    std::vector<Vertex*> c1; // comosante connexe partant de s
+    std::vector<Vertex*> c2; // composante connexe arrivant à s
+    std::vector<Vertex*> c ; // la composante fortement connexe
+
+    Vertex x;
+    Vertex y;
+
+    bool add=true;
+
+
 
 
 }

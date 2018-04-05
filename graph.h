@@ -345,7 +345,10 @@ class Graph
         void supprimerVertex();
         int menugraph();
 
-        void Cmp_fort_connexe_serach(Vertex &s);
+
+        void Reset_marquage_vertex();
+        void Cmp_fort_connexe_serach(Vertex s);
+
 
 
 
