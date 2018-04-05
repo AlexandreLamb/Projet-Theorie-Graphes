@@ -78,7 +78,43 @@ bool Vertex:: get_marque()
     return m_ismarqued;
 }
 
+void Vertex::set_connexe(bool x)
+{
+    m_isin_cmpconnexe=x;
+}
 
+bool Vertex :: get_connexe()
+{
+    return m_isin_cmpconnexe;
+}
+
+int Vertex::get_idx()
+{
+    return m_idx;
+}
+
+void Vertex::set_idx(int x)
+{
+    m_idx=x;
+}
+
+
+bool Vertex::islinked(Vertex x)
+{
+    bool islinked;
+    for(int i=0; i<m_out.size();i++)
+    {
+         for(int j=0; j<x.m_in.size();j++)
+        {
+           if(m_out[i]==x.m_in[j])
+            islinked=true;
+
+           else
+            islinked= false;
+        }
+    }
+       return islinked;
+}
 /***************************************************
                     EDGE
 ****************************************************/
@@ -384,7 +420,12 @@ void Graph::Reset_marquage_vertex()
 }
 
 
+
+
+
+
 /// Recherche d'une composante fortement connexe
+
 
 void Graph:: Cmp_fort_connexe_serach(Vertex s)
 {
@@ -395,8 +436,29 @@ void Graph:: Cmp_fort_connexe_serach(Vertex s)
 
     Vertex x;
     Vertex y;
-
     bool add=true;
+    c1.push_back(new Vertex(s));
+    c2.push_back(new Vertex(s));
+
+    m_vertices[s.get_idx()].set_connexe(true);
+
+    while(add)
+    {
+        add=0;
+        for(int i=0; i<ordre;i++)
+        {
+            if(!m_vertices[i].get_marque() && m_vertices[i].get_connexe())
+            {
+                m_vertices[i].set_marque(true);
+
+               /* for(int k=0; k<ordre;k++)
+                {
+                    if(!m_vertices[i].)
+                }*/
+            }
+        }
+    }
+
 
 
 
@@ -444,6 +506,8 @@ void Graph::add_interfaced_vertex(int idx, double value, int x, int y, std::stri
     m_interface->m_main_box.add_child(vi->m_top_box);
     // On peut ajouter directement des vertices dans la map avec la notation crochet :
     m_vertices[idx] = Vertex(value, vi);
+
+    m_vertices[idx].set_idx(idx);
 }
 
 /// Aide à l'ajout d'arcs interfacés

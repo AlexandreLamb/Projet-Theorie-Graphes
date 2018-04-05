@@ -153,6 +153,12 @@ class Vertex
        ///marquage
 
         bool  m_ismarqued;
+        bool m_isin_cmpconnexe;
+
+      ///indice du vertex dans la map de graph
+        int m_idx;
+
+
 
     public:
 
@@ -171,6 +177,14 @@ class Vertex
 
         void set_marque(bool x);
         bool get_marque();
+        void set_connexe(bool x);
+        bool get_connexe();
+
+
+        int get_idx();
+        void set_idx(int x);
+
+        bool islinked(Vertex x);
 };
 
 
@@ -347,6 +361,7 @@ class Graph
 
 
         void Reset_marquage_vertex();
+
         void Cmp_fort_connexe_serach(Vertex s);
 
 
