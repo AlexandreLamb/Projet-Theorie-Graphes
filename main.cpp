@@ -13,10 +13,23 @@ int main()
 
     /// Un exemple de graphe
     Graph g;
-
+    int a;
 
     //Tools_bar t;
     g.make_graph_1();
+    a= g.findEdge(0,1);
+    std::cout<<" a : "<<a <<std::endl;
+    a= g.findEdge(1,2);
+    std::cout<<" a : "<<a <<std::endl;
+    a= g.findEdge(1,3);
+    std::cout<<" a : "<<a <<std::endl;
+    a= g.findEdge(3,4);
+    std::cout<<" a : "<<a <<std::endl;
+    a= g.findEdge(1,4);
+    std::cout<<" a : "<<a <<std::endl;
+    a= g.findEdge(1,5);
+    std::cout<<" a : "<<a <<std::endl;
+
     g.fonctionnel();
 
     /// Vous gardez la main sur la "boucle de jeu"

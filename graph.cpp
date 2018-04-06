@@ -200,14 +200,14 @@ void Graph::make_example()
 
     /// Les sommets doivent être définis avant les arcs
     // Ajouter le sommet d'indice 0 de valeur 30 en x=200 et y=100 avec l'image clown1.jpg etc...
-    add_interfaced_vertex(0, 29, 0, 0, "clown2.jpg");
-    add_interfaced_vertex(1, 60.0, 400, 100, "clown2.jpg");
-    add_interfaced_vertex(2,  50.0, 200, 300, "clown3.jpg");
-    add_interfaced_vertex(3,  0.0, 400, 300, "clown4.jpg");
-    add_interfaced_vertex(4,  100.0, 600, 300, "clown5.jpg");
-    add_interfaced_vertex(5,  0.0, 100, 500, "bad_clowns_xx3xx.jpg", 0);
-    add_interfaced_vertex(6,  0.0, 300, 500, "bad_clowns_xx3xx.jpg", 1);
-    add_interfaced_vertex(7,  0.0, 500, 500, "bad_clowns_xx3xx.jpg", 2);
+    add_interfaced_vertex(0, 29, 2, 0, 0, "clown2.jpg");
+    add_interfaced_vertex(1, 60.0, 2, 400, 100, "clown2.jpg");
+    add_interfaced_vertex(2,  50.0, 4, 200, 300, "clown3.jpg");
+    add_interfaced_vertex(3,  0.0, 6, 400, 300, "clown4.jpg");
+    add_interfaced_vertex(4,  100.0, 8, 600, 300, "clown5.jpg");
+    add_interfaced_vertex(5,  0.0, 14, 100, 500, "bad_clowns_xx3xx.jpg", 0);
+    add_interfaced_vertex(6,  0.0, 20, 300, 500, "bad_clowns_xx3xx.jpg", 1);
+    add_interfaced_vertex(7,  0.0, 40, 500, 500, "bad_clowns_xx3xx.jpg", 2);
 
     /// Les arcs doivent être définis entre des sommets qui existent !
     // AJouter l'arc d'indice 0, allant du sommet 1 au sommet 2 de poids 50 etc...
@@ -301,24 +301,33 @@ void Graph::fonctionnel()
                         /// on calcul K
                         K=K+(coeff*m_vertices[id_sto].m_value);
 
-                        std::cout << "S" << k  <<" mange "<< coeff << "S"<< id_sto << " du nb de "<<N <<std::endl;
+                        //::cout << "S" << k  <<" mange "<< coeff << "S"<< id_sto << " du nb de "<<N <<std::endl;
                     }
 
                     ///montee en memoire
                     m_vertices[k].m_K=K;
                     std::cout << " le K est: " << K << std::endl;
                 }
+
+                /// on parcourt le graphe et on update le nb de pop
+                for(int i=0; i<ordre;i++)
+                {
+                    m_vertices[i].m_value= (m_vertices[i].m_value)+ (m_vertices[i].m_r)*(m_vertices[i].m_value)*(1-(m_vertices[i].m_value/K));
+                    std::cout<<" S" <<i <<" -> " <<  m_vertices[i].m_value;
+                }
+
             }
-            while(!play);
+            while(play);
         }
     }
 }
+
+
 
 void Graph::addVertex()
 {
 
     int indxVertex,posX, posY, indxEdge, vertexIn, vertexOut;
-
     double poidEdge,poidVertex;
 
 }
@@ -332,7 +341,7 @@ void Graph::supprimerVertex(){
 void Graph::charger(std::string graphName){
 
     std::ifstream fichier (graphName+".txt",std::ios::in);
-    int indxVertex,posX, posY, indxEdge, vertexIn, vertexOut;
+    int indxVertex, r, posX, posY, indxEdge, vertexIn, vertexOut;
     double poidEdge,poidVertex;
     std::string picName;
 
@@ -348,9 +357,10 @@ void Graph::charger(std::string graphName){
         fichier >> poidVertex;
         fichier >> posX;
         fichier >> posY;
+        fichier >> r;
         fichier >> picName;
 
-        add_interfaced_vertex(i,poidVertex,posX,posY,picName+".jpg");
+        add_interfaced_vertex(i,poidVertex, r, posX,posY,picName+".jpg");
         }
         for(int j=0 ; j < nbrEdge ; j++){
 
@@ -379,6 +389,7 @@ void Graph::sauvgarder(std::string graphName){
          fichier << elt.second.m_value<<" ";
          fichier <<elt.second.m_interface->m_top_box.get_frame_pos().x<<" ";
          fichier <<elt.second.m_interface->m_top_box.get_frame_pos().y<<" ";
+         fichier << elt.second.m_r<<" ";
         picName=elt.second.m_interface->m_img.get_pic_name();
         picName.erase(picName.size()-4,4);
          fichier <<picName<<std::endl;
@@ -431,7 +442,7 @@ void Graph::update()
 }
 
 /// Aide à l'ajout de sommets interfacés
-void Graph::add_interfaced_vertex(int idx, double value, int x, int y, std::string pic_name, int pic_idx )
+void Graph::add_interfaced_vertex(int idx, double value, int r, int x, int y, std::string pic_name, int pic_idx )
 {
     if ( m_vertices.find(idx)!=m_vertices.end() )
     {
@@ -444,6 +455,7 @@ void Graph::add_interfaced_vertex(int idx, double value, int x, int y, std::stri
     m_interface->m_main_box.add_child(vi->m_top_box);
     // On peut ajouter directement des vertices dans la map avec la notation crochet :
     m_vertices[idx] = Vertex(value, vi);
+    m_vertices[idx].m_r=r;
 
 
 }
@@ -480,14 +492,11 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
 }
 
 /// methode qui rencoit l'indice de l'arete qui relie les deux sommets en parametre
-double Graph::PredSucc(int sfrom, int sto)
+int Graph::findEdge(int sfrom, int sto)
 {
     int s1=0;
     int s2=0;
-
-    double poids=0;
-
-
+    int idx=0;
 
     /// parcourt la map d'arete
     for(auto &elt : m_edges)
@@ -499,9 +508,9 @@ double Graph::PredSucc(int sfrom, int sto)
        /// si les sommets s1 et s2 sont les meme que les sommets en parametres on retourne la valeur de l'arete (coeff)
        if((s1==sfrom && s2==sto))
        {
-           poids= elt.second.m_weight;
+           idx= elt.first;
 
-           return poids;
+           return idx;
        }
     }
 }

@@ -146,6 +146,9 @@ class Vertex
         /// Variable K qui nous permet de calculer la populataion a t+1
         float m_K;
 
+        /// Variable r rythme de croissance de la pop
+        int m_r;
+
         /// indice du sommet pour savoir ou il est dans la map
         int m_indx_V;
 
@@ -327,7 +330,7 @@ class Graph
         Graph (GraphInterface *interface=nullptr) :
             m_interface(interface)  {  }
 
-        void add_interfaced_vertex(int idx, double value, int x, int y, std::string pic_name="", int pic_idx=0 );
+        void add_interfaced_vertex(int idx, double value, int r, int x, int y, std::string pic_name="", int pic_idx=0 );
         void add_interfaced_edge(int idx, int vert1, int vert2, double weight=0);
 
         /// Méthode spéciale qui construit un graphe arbitraire (démo)
@@ -340,7 +343,8 @@ class Graph
 
         void fonctionnel();
 
-        double PredSucc(int s1, int s2);
+        int findEdge(int s1, int s2);
+       // double PredSucc(int s1, int s2);
 
 
         void charger(std::string graphName);
