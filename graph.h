@@ -160,17 +160,25 @@ class Vertex
         /// Nombre de la population
         float m_value;
 
+        /// Nombre de la population à t+1
+        float m_valuePlus1;
+
+
         /// Variable K qui nous permet de calculer la populataion a t+1
-        double m_K;
+        float m_K;
 
         /// Varible r qui est le rythme d ecroissance
         int m_r;
+
 
         /// indice du sommet pour savoir ou il est dans la map
         int m_indx_V;
 
         /// vector des predecesseurs
         std::vector<int> m_pred;
+
+        /// vector des successeurs
+        std::vector<int> m_succ;
 
 
         std::string m_name;
@@ -427,6 +435,8 @@ std::vector<int> Sommet_suite_out;
          int findEdge(int s1, int s2);
 
         void remplirPred();
+
+        void remplirSucc();
 
         void calculK();
 

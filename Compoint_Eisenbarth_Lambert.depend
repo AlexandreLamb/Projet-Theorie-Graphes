@@ -331,3 +331,82 @@
 1523010456 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\menu.cpp
 	"Menu.h"
 
+1523041606 source:c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\graph.cpp
+	"graph.h"
+	<string>
+	<map>
+
+1523042182 c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\graph.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"fstream"
+	"tools_bar.h"
+	"grman/grman.h"
+
+1523031721 c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\tools_bar.h
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+
+1523031721 c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\grman\grman.h
+	<allegro.h>
+	<string>
+	"grman_couleurs.h"
+	"coords.h"
+	"widget.h"
+
+1523031721 c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\grman\grman_couleurs.h
+
+1523031721 c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\grman\coords.h
+	<cmath>
+
+1523031721 c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\grman\widget.h
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+
+1523031721 source:c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\grman\coords.cpp
+	"coords.h"
+
+1523031721 source:c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\grman\grman.cpp
+	<cmath>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<string>
+	<iostream>
+	<regex>
+	"grman.h"
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+
+1523031721 source:c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\grman\widget.cpp
+	"widget.h"
+
+1523031721 source:c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+	"Menu.h"
+	"tools_bar.h"
+
+1523031721 c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\menu.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
+
+1523031721 source:c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\tools_bar.cpp
+	"tools_bar.h"
+
+1523031721 source:c:\users\add\desktop\zowcode\projetinfo\projetbis\projet-theorie-graphes\menu.cpp
+	"Menu.h"
+

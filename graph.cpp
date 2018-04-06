@@ -540,14 +540,11 @@ int** Graph::allouer_k_uplet(){
 void Graph::fonctionnel()
 {
     /// variables
-    float K=0;
-    int id_arc=0;
-    int id_sto=0;
+
     int N=0;
     bool play = false; // savoir quand c'est play ou non
     bool mode_flux=false; // savoir si bouton mode flux est actif
-    double coeff=0.00;
-    int nb=0;
+    double coeff=0;
 
     mode_flux = true; // savoir si appuyer sur bouton mode flux
 
@@ -558,21 +555,53 @@ void Graph::fonctionnel()
 
         if(play)
         {
-                      std::cout << " " <<nb <<std::endl;
-                      std::cout << " ----- TEST FLUX -----" <<nb <<std::endl;
-                      std::cout << " " <<nb <<std::endl;
+                      std::cout << " " <<std::endl;
+                      std::cout << " ----- TEST FLUX -----"  <<std::endl;
+                      std::cout << " " <<std::endl;
             do
             {
+
                 /// remplit pour chaque sommet vecteur de pred
                 remplirPred();
+                /*/ TEST PREDECESSEURS QUI EST MANGE PAR QUI
+                for(int i=0; i<ordre;i++)
+                {  std::cout << "S"<<i <<" "<<m_vertices[i].m_name<<" ";
+                    std::cout << "a "<<m_vertices[i].m_pred.size() <<" predecesseurs, il est mange par: ";
+                    for(int j=0; j<m_vertices[i].m_pred.size(); j++) { std::cout << " S"<<m_vertices[i].m_pred[j] <<" "<<m_vertices[m_vertices[i].m_pred[j]].m_name<<" ";}
+                    std::cout << " "<<std::endl;
+                }
+                /*/
+
+                /// remplit pour chaque sommet vecteur de pred
+                remplirSucc();
+                /*/
+                for(int i=0; i<ordre;i++)
+                {  std::cout << "S"<<i <<" "<<m_vertices[i].m_name<<" ";
+                    std::cout << "a "<<m_vertices[i].m_succ.size() <<" successeurs, il mange: ";
+                    for(int j=0; j<m_vertices[i].m_succ.size(); j++) { std::cout << " S"<<m_vertices[i].m_succ[j] <<" "<<m_vertices[m_vertices[i].m_succ[j]].m_name<<" ";}
+                    std::cout << " "<<std::endl;
+                }
+                /*/
 
                 /// on calcul et met à jour le K de chaque sommet
                 calculK();
 
-                /// on calcul et met à jour le N de chaque sommet
+                for(int i=0; i<ordre;i++)
+                {  std::cout << "S"<<i <<" : "<<m_vertices[i].m_name<<" K = ";
+                    for(int j=0; j<m_vertices[i].m_succ.size(); j++)
+                    {
+                        coeff=findEdgeWeight(i,m_vertices[i].m_succ[j]);
+                    std::cout << " "<<m_vertices[m_vertices[i].m_succ[j]].m_value <<"  "<<m_vertices[m_vertices[i].m_succ[j]].m_name<<" * "<<coeff<<" + ";
+                    }
+                    std::cout << "K= "<< m_vertices[i].m_K<<std::endl;
+                }
+
+                /// on calcul et met à jour le N de chaque somme
                 calculN();
 
-               //on parcourt sommets et on calcul leur K
+
+
+               /*on parcourt sommets et on calcul leur K
                 for(int k=0; k<ordre; k++)
                 {
                     K=0;
@@ -608,6 +637,7 @@ void Graph::fonctionnel()
                      std::cout << " le K est: " << K << " nombre de S" << k <<" est : " << m_vertices[k].m_value <<std::endl;
 
                 }
+                */
             }
             while(!play);
         }
@@ -620,66 +650,73 @@ void Graph::calculN()
     int N=0;
     int K=0;
     int nb;
+    int id_pred;
+    float Npred;
+    float coeff=0;
 
     /// parcours des sommets
     for(int k=0; k<ordre; k++)
     {
         K=m_vertices[k].m_K;
+
+        if(m_vertices[k].m_valuePlus1!=0)
+        {
+            m_vertices[k].m_value=m_vertices[k].m_valuePlus1;
+        }
+
         N= (m_vertices[k].m_value) + (m_vertices[k].m_r)*(m_vertices[k].m_value)*(1-(m_vertices[k].m_value)/K);
 
         /// on recupere le nombre de ses predecesseurs
         nb=m_vertices[k].m_pred.size();
 
-        for(int i=0; i<nb; i++)
+        if(nb!=0)
         {
-           // N=N-
+            for(int i=0; i<nb; i++)
+            {
+                id_pred=m_vertices[k].m_pred[i];
 
-                        //id_sto= m_edges[id_arc].m_to;
+                coeff=findEdgeWeight(k, id_pred);
 
-                        ///on recupere le nombre de pop dans sommet to
-                       // N=m_vertices[id_sto].m_value;
+                Npred=m_vertices[id_pred].m_value;
 
-                        /// on calcul K
-                       // K=K+(coeff*m_vertices[id_sto].m_value);
+                N=N-(coeff*Npred);
+            }
+            /// actualisation nb pop
+
+             m_vertices[k].m_valuePlus1=N;
+        }
+        else{m_vertices[k].m_valuePlus1=m_vertices[k].m_value; }
 
 
-
-                     //   std::cout << "S" << k  <<" les "<<m_vertices[k].m_name<<" mange "<< coeff << " S"<< id_sto << " les  "<<m_vertices[id_sto].m_name << " qui sont " <<m_vertices[id_sto].m_value<<std::endl;
-                    }
-
-
-                    /// actualisation nb pop
-                    m_vertices[k].m_value=( m_vertices[k].m_value)+( m_vertices[k].m_r)*(1-( m_vertices[k].m_value)/K);
-                     std::cout << " le K est: " << K << " nombre de S" << k <<" est : " << m_vertices[k].m_value <<std::endl;
-
-                }
+    }
 }
+
 /// methode qui calcul et remplit le K des sommets
 void Graph::calculK()
 {
      int nb=0;
-     int id_pred=0, id_arc=0;
-     int N=0;
-     double coeff=0;
-     double K=0.00;
+     int id_succ=0, id_arc=0;
+     float N=0;
+     float coeff=0;
+     float K=0;
 
     /// parcours sommet
     for(int k=0; k<ordre; k++)
     {
         /// on recupere le nombre de ses predecesseurs = le nombre d'arc
-        nb=m_vertices[k].m_pred.size();
+        nb=m_vertices[k].m_succ.size();
 
-        /// pour tous ces pred on cherche le sommet predecesseur relié a cette arete
+        /// pour tous ces succ on cherche le sommet predecesseur relié a cette arete
         for(int i=0; i<nb; i++)
         {
-            /// on recupere l'indice du pred
-            id_pred=m_vertices[k].m_pred[i];
+            /// on recupere l'indice du succ
+            id_succ=m_vertices[k].m_succ[i];
 
             /// on recupere son coeff = poids
-            coeff=findEdgeWeight(k,id_pred);
+            coeff=findEdgeWeight(k,id_succ);
 
-            ///on recupere le nombre de pop du pred
-            N=m_vertices[id_pred].m_value;
+            ///on recupere le nombre de pop du succ
+            N=m_vertices[id_succ].m_value;
 
             /// on calcul K
             K=K+(coeff*N);
@@ -693,28 +730,52 @@ void Graph::calculK()
 /// methode qui remplit le vecteur des pred de tous les sommets
 void Graph::remplirPred()
 {
-    int id_arc, id_sto, nb;
-   /// on parcourt sommets et on calcul leur K
+    int id_arc, id_sfrom, nb;
+   /// on parcourt sommets
     for(int k=0; k<ordre; k++)
     {
         /// on recupere le nombre de ses predecesseurs = le nombre d'arc
-        nb=m_vertices[k].m_in.size();
+        nb=m_vertices[k].m_out.size();
 
         /// pour tous ces pred on cherche le sommet predecesseur relié a cette arete
         for(int i=0; i<nb; i++)
         {
             /// on recupere l'index d'un arc du pred
-            id_arc=m_vertices[k].m_in[i];
+            id_arc=m_vertices[k].m_out[i];
 
             /// on recupere le sommet m_to qu'elle relie au sommet [k]
+            id_sfrom= m_edges[id_arc].m_from;
+            ///montee en memoire
+            m_vertices[k].m_pred.push_back(id_sfrom);
+
+        }
+    }
+}
+
+/// methode qui remplit le vecteur des succ de tous les sommets
+void Graph::remplirSucc()
+{
+    int id_arc, id_sto, nb;
+   /// on parcourt sommets
+    for(int k=0; k<ordre; k++)
+    {
+        /// on recupere le nombre de ses succ = le nombre d'arc
+        nb=m_vertices[k].m_in.size();
+
+        /// pour tous ces succ on cherche le sommet succ relié a cette arete
+        for(int i=0; i<nb; i++)
+        {
+            /// on recupere l'index d'un arc du succ
+            id_arc=m_vertices[k].m_in[i];
+
+            /// on recupere le sommet m_from qu'elle relie au sommet [k]
             id_sto= m_edges[id_arc].m_to;
 
             ///montee en memoire
-            m_vertices[k].m_pred.push_back(id_sto);
+            m_vertices[k].m_succ.push_back(id_sto);
+
         }
-
     }
-
 }
 
 /// methode qui renvoit le poids de l'arete des deux sommets en parametre
@@ -736,6 +797,7 @@ double Graph::findEdgeWeight(int sfrom, int sto)
        if(s1==sfrom && s2==sto)
        {
            poids= elt.second.m_weight;
+
 
            return poids;
        }
@@ -994,7 +1056,6 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
         m_vertices[id_vert2].m_out.push_back(idx);
 
     }
-
 }
 
 /// methode qui renvoit indice de l'arete entre deux sommets en parametre
