@@ -160,8 +160,11 @@ class Vertex
         /// Nombre de la population
         float m_value;
 
-        ///Variable K qui nous permet de calculer la populataion a t+1
-        float K;
+        /// Variable K qui nous permet de calculer la populataion a t+1
+        float m_K;
+
+        /// indice du sommet pour savoir ou il est dans la map
+        int m_indx_V;
 
 
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
@@ -186,6 +189,7 @@ class Vertex
         void pre_update();
         void post_update();
 
+
         void Afficher_option();
 
         void Toggle_Sommet();
@@ -197,6 +201,10 @@ class Vertex
         void Cacher_Arretes();
 
         void Cacher_option();
+
+        void set_idx_V(int id);
+        int get_idx_V();
+
 };
 
 
@@ -256,13 +264,21 @@ class Edge
         /// Variable coefficient qui permet de savoir combien sont mangé
         double m_weight;
 
+        /// indice du sommet pour savoir ou il est dans la map
+
+        int m_indx_E;
+
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<EdgeInterface> m_interface = nullptr;
 
 
-std::vector<int> v_from;
+
+        std::vector<int> v_from;
+
 
         std::vector<int> v_to;
+
+        double get_weight();
 
 
     public:
@@ -278,11 +294,15 @@ std::vector<int> v_from;
         void pre_update();
         void post_update();
 
+
         void hide_edge_in(Vertex& v);
         void hide_edge_out(Vertex& v);
         void Afficher_Edges(Vertex& from , Vertex& to);
-};
 
+        void set_idx_E(int id);
+        int get_idx_E();
+
+};
 
 
 
@@ -331,9 +351,6 @@ class GraphInterface
 
 
 
-
-
-
         // A compléter éventuellement par des widgets de décoration ou
         // d'édition (boutons ajouter/enlever ...)
 
@@ -354,6 +371,8 @@ class Graph
 
         /// La liste des sommets
         std::map<int, Vertex> m_vertices;
+
+        /// Matrice adjacence pour avoir le numero arete a partir des deuw sommets
 
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<GraphInterface> m_interface = nullptr;
@@ -393,13 +412,14 @@ std::vector<int> Sommet_suite_out;
 
         void fonctionnel();
 
+        double PredSucc(int s1, int s2);
+
+
         void charger(std::string graphName);
         void sauvgarder(std::string graphName);
         void addVertex();
         void supprimerVertex();
         int menugraph();
-
-
 
         /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
         void update();

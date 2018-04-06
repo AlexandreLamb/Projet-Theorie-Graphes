@@ -1,5 +1,6 @@
 #include "graph.h"
 #include <string>
+#include <map>
 
 /***************************************************
                     VERTEX
@@ -212,6 +213,16 @@ void Vertex::post_update()
 
 }
 
+void Vertex::set_idx_V(int id)
+{
+    m_indx_V=id;
+}
+
+int Vertex::get_idx_V()
+{
+    return m_indx_V;
+}
+
 
 
 /***************************************************
@@ -248,6 +259,7 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
 
 }
 
+
 void Edge::hide_edge_in(Vertex& v){
 
 m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
@@ -269,6 +281,13 @@ void Edge::Afficher_Edges(Vertex& from , Vertex& to){
 
     m_interface->m_top_edge.add_child(m_interface->m_box_edge);
 
+}
+
+
+/// accesseurs
+double Edge::get_weight()
+{
+    return m_weight;
 }
 
 
@@ -297,6 +316,14 @@ void Edge::post_update()
     //hide_edge();
 }
 
+void Edge::set_idx_E(int id)
+{
+    m_indx_E=id;
+}
+int Edge::get_idx_E()
+{
+    return m_indx_E;
+}
 
 
 /***************************************************
@@ -377,7 +404,6 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
 
 
 }
-
 
 /// Méthode spéciale qui construit un graphe arbitraire (démo)
 /// Cette méthode est à enlever et remplacer par un système
@@ -513,19 +539,17 @@ int** Graph::allouer_k_uplet(){
 ///zoe : sous prgramme qui gère partie fonctinnel sans affichage
 void Graph::fonctionnel()
 {
-    /// affichage du nombre de la population
-    for(int i= 0; i<ordre; i++)
-    {
-        std::cout << "la population est de" <<m_vertices[i].m_value <<std::endl;
-        std::cout << "son coeff est de" <<m_edges[i].m_weight <<std::endl;
-    }
-
     /// variables
     float K=0;
-    int indx=0;
+    int id_arc=0;
+    int id_sto=0;
+    int N=0;
     bool play = false; // savoir quand c'est play ou non
-    bool pause =false;
     bool mode_flux=false; // savoir si bouton mode flux est actif
+    double coeff=0.00;
+    int nb=0;
+
+    mode_flux = true; // savoir si appuyer sur bouton mode flux
 
     if(mode_flux){
 
@@ -534,32 +558,47 @@ void Graph::fonctionnel()
 
         if(play)
         {
+                      std::cout << " " <<nb <<std::endl;
+                      std::cout << " ----- TEST FLUX -----" <<nb <<std::endl;
+                      std::cout << " " <<nb <<std::endl;
             do
             {
                 /// on parcourt sommets et on calcul leur K
                 for(int k=0; k<ordre; k++)
                 {
-                    int nb=m_vertices[k].m_out.size();
+                    K=0;
+                    /// on recupere le nombre de ses predecesseurs = le nombre d'arc
+                    nb=m_vertices[k].m_in.size();
 
+                    /// pour tous ces pred on cherche le sommet predecesseur relié a cette arete
                     for(int i=0; i<nb; i++)
                     {
-                      indx=m_vertices[k].m_out[i];
+                        /// on recupere l'index d'un arc du pred
+                        id_arc=m_vertices[k].m_in[i];
+
+                       /// on recupère le coeff de cette arete
+                        coeff=m_edges[id_arc].m_weight;
+
+                        /// on recupere le sommet m_to qu'elle relie au sommet [k]
+                        id_sto= m_edges[id_arc].m_to;
+
+                        ///on recupere le nombre de pop dans sommet to
+                        N=m_vertices[id_sto].m_value;
+
+                        /// on calcul K
+                        K=K+(coeff*m_vertices[id_sto].m_value);
+
+                        std::cout << "S" << k  <<" mange "<< coeff << "S"<< id_sto << " du nb de "<<N <<std::endl;
                     }
 
+                    ///montee en memoire
+                    m_vertices[k].m_K=K;
+                    std::cout << " le K est: " << K << std::endl;
                 }
-
             }
-            while(pause);
+            while(!play);
         }
-
-
     }
-
-
-
-
-
-
 }
 
 void Graph::addVertex()
@@ -613,7 +652,7 @@ void Graph::charger(std::string graphName){
         fichier >> Graph::ordre;
 
         fichier >> Graph::nbrEdge;
-        std::cout<< nbrEdge;
+
         for(int i=0 ; i < ordre ; i++){
 
         fichier >> poidVertex;
@@ -625,12 +664,11 @@ void Graph::charger(std::string graphName){
         }
         for(int j=0 ; j < nbrEdge ; j++){
 
+            /// montee en memoire des attributs pour interface
             fichier >> vertexIn;
             fichier >> vertexOut;
             fichier >> poidEdge;
             add_interfaced_edge(j,vertexIn,vertexOut,poidEdge);
-
-
         }
 
 
@@ -775,6 +813,7 @@ void Graph::add_interfaced_vertex(int idx, double value, int x, int y, std::stri
     // On peut ajouter directement des vertices dans la map avec la notation crochet :
     m_vertices[idx] = Vertex(value, vi);
 
+
 }
 
 /// Aide à l'ajout d'arcs interfacés
@@ -798,11 +837,55 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_edges[idx] = Edge(weight, ei);
     m_edges[idx].m_from=id_vert1;
     m_edges[idx].m_to=id_vert2;
-    m_vertices[id_vert1].m_in.push_back(idx);
-    m_vertices[id_vert2].m_out.push_back(idx);
+
+    //m_vertices[id_vert1].m_in.push_back(idx);
+    //m_vertices[id_vert2].m_out.push_back(idx);
+
+
     std::cout<<"les sommet "<<id_vert1<<" et "<<id_vert2<<" sont relié par l'arrete " <<idx <<std::endl;
     Sommet_suite_in.push_back(id_vert1);
     Sommet_suite_out.push_back(id_vert2);
 
+/*****************************************
+    je laisse pour l'instant c'est 2 ligne
+    et mets les deux du haut en commentaire
+    juste que je verifie que ca pose pas de
+    problmes quand je les utilise
+
+/******************************************/
+    if((idx!=id_vert1) ||(idx!=id_vert2) )
+    {
+        m_vertices[id_vert1].m_in.push_back(idx);
+        m_vertices[id_vert2].m_out.push_back(idx);
+
+    }
+
+
 }
 
+/// methode qui rencoit l'indice de l'arete qui relie les deux sommets en parametre
+double Graph::PredSucc(int sfrom, int sto)
+{
+    int s1=0;
+    int s2=0;
+
+    double poids=0;
+
+
+
+    /// parcourt la map d'arete
+    for(auto &elt : m_edges)
+    {
+        /// accede à m-from et m_to
+       s1= elt.second.m_from;
+       s2= elt.second.m_to;
+
+       /// si les sommets s1 et s2 sont les meme que les sommets en parametres on retourne la valeur de l'arete (coeff)
+       if((s1==sfrom && s2==sto))
+       {
+           poids= elt.second.m_weight;
+
+           return poids;
+       }
+    }
+}

@@ -1,19 +1,19 @@
 14
 17
-2 5 320 aigle
-2 20 128 girafe
-2 264 130 lion
-2 186 370 zebre
-2 195 13 hyene
-2 359 16 guepard
-2 569 169 lievre
-2 550 16 insectes
-2 356 343 gazelle
-2 573 521 verre
-2 11 582 buffle
-2 151 581 acacia
-2 328 586 herbe
-2 573 500 bacterie
+2 1 1 aigle
+2 1 1 girafe
+2 1 1 lion
+2 1 1 zebre
+2 1 1 hyene
+2 1 1 guepard
+2 1 1 lievre
+2 1 1 insectes
+2 1 1 gazelle
+2 1 1 verre
+2 1 1 buffle
+2 1 1 acacia
+2 1 1 herbe
+2 1 1 bacterie
 1 11 2
 0 10 2
 2 1 2
@@ -28,6 +28,6 @@
 7 5 2
 7 6 2
 4 12 2
-4 3 0
+4 3 2
 4 10 2
-4 10 2
+13 10 2

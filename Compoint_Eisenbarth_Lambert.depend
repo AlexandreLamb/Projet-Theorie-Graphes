@@ -215,11 +215,12 @@
 1522786765 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\grman\widget.cpp
 	"widget.h"
 
-1522853509 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\graph.cpp
+1522970810 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\graph.cpp
 	"graph.h"
 	<string>
+	<map>
 
-1522857163 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\graph.h
+1522952941 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\graph.h
 	<vector>
 	<map>
 	<string>
@@ -272,7 +273,7 @@
 1522849665 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\widget.cpp
 	"widget.h"
 
-1522853625 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\main.cpp
+1522945723 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\main.cpp
 	"grman/grman.h"
 	<iostream>
 	"graph.h"
