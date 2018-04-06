@@ -377,7 +377,8 @@ class Graph
 
 
         void Reset_marquage_vertex();
-        void Reset_marquage_connexe_inout();
+        void Reset_marquage_marqued_connexeinout();
+        void Reset_marquage_isincompf_connexeinout();
 
         std::vector<Vertex*> Cmp_fort_connexe_serach(Vertex s);
         void search_all_cmpfc();

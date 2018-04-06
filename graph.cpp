@@ -470,8 +470,12 @@ int Graph::menugraph()
     if(grman::mouse_unclick&1 && m_interface->m_cmp_fconnexe.is_mouse_over())
     {
 
+       if(m_interface->m_cmp_fconnexe.get_value())
+       {
+           search_all_cmpfc();
+       }
 
-       search_all_cmpfc();
+       m_interface->m_cmp_fconnexe.set_value(!m_interface->m_cmp_fconnexe.get_value());
 
 
     }
@@ -516,7 +520,7 @@ void Graph::Reset_marquage_vertex()
 }
 
 
- void Graph :: Reset_marquage_connexe_inout()
+ void Graph :: Reset_marquage_marqued_connexeinout()
  {
      for(std::map<int,Vertex>::iterator it=m_vertices.begin(); it!=m_vertices.end(); it++)
     {
@@ -525,7 +529,14 @@ void Graph::Reset_marquage_vertex()
     }
  }
 
-
+void Graph:: Reset_marquage_isincompf_connexeinout()
+{
+      for(std::map<int,Vertex>::iterator it=m_vertices.begin(); it!=m_vertices.end(); it++)
+    {
+        it->second.set_connexein(0);
+        it->second.set_connexeout(0);
+    }
+}
 
 /// Recherche d'une composante fortement connexe
 
@@ -611,8 +622,9 @@ std::vector<Vertex*> Graph:: Cmp_fort_connexe_serach(Vertex s)
 
 void Graph::search_all_cmpfc()
 {
-   // Reset_marquage_vertex();
-   // Reset_marquage_connexe_inout();
+    Reset_marquage_vertex();
+    Reset_marquage_marqued_connexeinout();
+    Reset_marquage_isincompf_connexeinout();
     std::vector<std::vector<Vertex*>> tabcmpfc;
 
 
