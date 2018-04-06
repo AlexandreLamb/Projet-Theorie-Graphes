@@ -328,6 +328,10 @@ class GraphInterface
         grman::WidgetText m_cmp_fconnexe_text1;
         grman::WidgetText m_cmp_fconnexe_text2;
         grman::WidgetText m_cmp_fconnexe_text3;
+        //bouton pour afficher le graphe réduit
+        grman::WidgetButton m_afficher_graphreduit;
+        grman::WidgetText m_afficher_graphreduit_text1;
+        grman::WidgetText m_afficher_graphreduit_text2;
         //bouton pour désactiver l'affichage des cmpconnexe
         grman::WidgetButton m_cmp_fconnexe_off;
         grman::WidgetText m_cmp_fconnexe_off_text1;

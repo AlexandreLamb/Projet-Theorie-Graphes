@@ -551,28 +551,50 @@ int Graph::menugraph()
 
             search_all_cmpfc();
             visuelle_forte_connexite(1);
-            Afficher_graphReduit(1);
+
 
             //l'interface est initialisé ici car on veur qu'il disparaisse.
+
+            m_interface->m_tool_box.add_child(m_interface->m_afficher_graphreduit);
+            m_interface->m_afficher_graphreduit.set_dim(70,30);
+            m_interface->m_afficher_graphreduit.set_gravity_x(grman::GravityX::Center);
+            m_interface->m_afficher_graphreduit.set_posy(74);
+            m_interface->m_afficher_graphreduit.set_bg_color(ROUGECLAIR);
+            m_interface->m_afficher_graphreduit.add_child(m_interface->m_afficher_graphreduit_text1);
+            m_interface->m_afficher_graphreduit.add_child(m_interface->m_afficher_graphreduit_text2);
+            m_interface->m_afficher_graphreduit_text1.set_gravity_xy(grman::GravityX::Center,grman::GravityY::Up);
+            m_interface->m_afficher_graphreduit_text2.set_gravity_xy(grman::GravityX::Center,grman::GravityY::Center);
+            m_interface->m_afficher_graphreduit_text1.set_message("Graph");
+            m_interface->m_afficher_graphreduit_text2.set_message("réduit");
+            m_interface->m_afficher_graphreduit_text1.set_posy(m_interface->m_afficher_graphreduit_text1.get_posy()+4);
+            m_interface->m_afficher_graphreduit_text2.set_posy(m_interface->m_afficher_graphreduit_text2.get_posy()+4);
+
+
             m_interface->m_tool_box.add_child(m_interface->m_cmp_fconnexe_off);
             m_interface-> m_cmp_fconnexe_off.set_dim(70,30);
             m_interface-> m_cmp_fconnexe_off.set_gravity_x(grman::GravityX::Center);
-            m_interface-> m_cmp_fconnexe_off.set_posy(74);
-            m_interface-> m_cmp_fconnexe_off.set_bg_color(ROUGE);
+            m_interface-> m_cmp_fconnexe_off.set_posy(110);
+            m_interface-> m_cmp_fconnexe_off.set_bg_color(ROUGECLAIR);
             m_interface-> m_cmp_fconnexe_off.add_child(m_interface->m_cmp_fconnexe_off_text1);
             m_interface-> m_cmp_fconnexe_off_text1.set_message("Off");
             m_interface->m_tool_box.add_child(m_interface->m_nb_cmpfc);
             m_interface->m_nb_cmpfc.set_dim(70,30);
-            m_interface->m_nb_cmpfc.set_posy(114);
+            m_interface->m_nb_cmpfc.set_posy(150);
             m_interface->m_nb_cmpfc.set_message("nb cmp:" + std::to_string(m_tabcmpfc.size()));
 
 
 
 
+
         }
+m_interface->m_cmp_fconnexe.set_value(!m_interface->m_cmp_fconnexe.get_value());
 
     }
-    m_interface->m_cmp_fconnexe.set_value(!m_interface->m_cmp_fconnexe.get_value());
+
+    if(grman::mouse_unclick&1 && m_interface->m_afficher_graphreduit.is_mouse_over())
+    {
+         Afficher_graphReduit(1);
+    }
 
     if(grman::mouse_unclick&1 && m_interface->m_cmp_fconnexe_off.is_mouse_over())
     {
@@ -580,6 +602,7 @@ int Graph::menugraph()
         Afficher_graphReduit(0);
         m_interface->m_tool_box.remove_child(m_interface->m_cmp_fconnexe_off);
         m_interface->m_tool_box.remove_child(m_interface->m_nb_cmpfc);
+        m_interface->m_tool_box.remove_child(m_interface->m_afficher_graphreduit);
 
     }
 
