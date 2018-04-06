@@ -409,7 +409,7 @@ std::vector<int> Sommet_suite_out;
         Graph (GraphInterface *interface=nullptr) :
             m_interface(interface)  {  }
 
-        void add_interfaced_vertex(int idx, double value,  int x, int y, int r, std::string pic_name="", int pic_idx=0 );
+        void add_interfaced_vertex(int idx, float value,  int x, int y, int r, std::string pic_name="", int pic_idx=0 );
         void add_interfaced_edge(int idx, int vert1, int vert2, double weight=0);
 
         /// Méthode spéciale qui construit un graphe arbitraire (démo)

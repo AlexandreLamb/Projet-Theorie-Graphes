@@ -541,7 +541,7 @@ void Graph::fonctionnel()
 {
     /// variables
 
-    int N=0;
+    float N=0;
     bool play = false; // savoir quand c'est play ou non
     bool mode_flux=false; // savoir si bouton mode flux est actif
     double coeff=0;
@@ -586,8 +586,9 @@ void Graph::fonctionnel()
                 /// on calcul et met à jour le K de chaque sommet
                 calculK();
 
+                /*/
                 for(int i=0; i<ordre;i++)
-                {  std::cout << "S"<<i <<" : "<<m_vertices[i].m_name<<" K = ";
+                {
                     for(int j=0; j<m_vertices[i].m_succ.size(); j++)
                     {
                         coeff=findEdgeWeight(i,m_vertices[i].m_succ[j]);
@@ -595,49 +596,24 @@ void Graph::fonctionnel()
                     }
                     std::cout << "K= "<< m_vertices[i].m_K<<std::endl;
                 }
+                /*/
 
                 /// on calcul et met à jour le N de chaque somme
                 calculN();
-
-
-
-               /*on parcourt sommets et on calcul leur K
-                for(int k=0; k<ordre; k++)
+/*/
+                for(int i=0; i<ordre;i++)
                 {
-                    K=0;
-                    /// on recupere le nombre de ses predecesseurs = le nombre d'arc
-                    nb=m_vertices[k].m_in.size();
-
-                    /// pour tous ces pred on cherche le sommet predecesseur relié a cette arete
-                    for(int i=0; i<nb; i++)
+                    for(int j=0; j<m_vertices[i].m_succ.size(); j++)
                     {
-                        /// on recupere l'index d'un arc du pred
-                        id_arc=m_vertices[k].m_in[i];
-
-                       /// on recupère le coeff de cette arete
-                        coeff=m_edges[id_arc].m_weight;
-
-                        /// on recupere le sommet m_to qu'elle relie au sommet [k]
-                        id_sto= m_edges[id_arc].m_to;
-
-                        ///on recupere le nombre de pop dans sommet to
-                        N=m_vertices[id_sto].m_value;
-
-                        /// on calcul K
-                        K=K+(coeff*m_vertices[id_sto].m_value);
-
-
-
-                        std::cout << "S" << k  <<" les "<<m_vertices[k].m_name<<" mange "<< coeff << " S"<< id_sto << " les  "<<m_vertices[id_sto].m_name << " qui sont " <<m_vertices[id_sto].m_value<<std::endl;
+                      std::cout <<"N = "<<(m_vertices[i].m_value) <<"+ "<<(m_vertices[i].m_r)<<" * " <<(m_vertices[i].m_value)<<" * (1-( " ;
+                     std::cout << m_vertices[i].m_value<<" / "<<m_vertices[i].m_K <<")"<<std::endl;
                     }
-
-
-                    /// actualisation nb pop
-                    m_vertices[k].m_value=( m_vertices[k].m_value)+( m_vertices[k].m_r)*(1-( m_vertices[k].m_value)/K);
-                     std::cout << " le K est: " << K << " nombre de S" << k <<" est : " << m_vertices[k].m_value <<std::endl;
-
+                    std::cout << "N = "<< m_vertices[i].m_value<<std::endl;
+                    std::cout << "N+1 = "<< m_vertices[i].m_valuePlus1<<std::endl;
+                    std::cout << " "<<std::endl;
                 }
-                */
+/*/
+
             }
             while(!play);
         }
@@ -658,17 +634,18 @@ void Graph::calculN()
     for(int k=0; k<ordre; k++)
     {
         K=m_vertices[k].m_K;
+        std::cout <<"K = "<< m_vertices[k].m_K <<std::endl;
 
-        if(m_vertices[k].m_valuePlus1!=0)
-        {
-            m_vertices[k].m_value=m_vertices[k].m_valuePlus1;
-        }
+        //m_vertices[k].m_value=m_vertices[k].m_valuePlus1;
+        std::cout <<"N = "<< m_vertices[k].m_value <<std::endl;
 
+        std::cout<< "N+1.1 = ("<< m_vertices[k].m_value << ") + ("<<m_vertices[k].m_r << ") * (" <<m_vertices[k].m_value<<") * (1-(" <<m_vertices[k].m_value<<" / "<<K <<std::endl;
         N= (m_vertices[k].m_value) + (m_vertices[k].m_r)*(m_vertices[k].m_value)*(1-(m_vertices[k].m_value)/K);
+        std::cout<< "N+1.1 = "<< N<<std::endl;
 
         /// on recupere le nombre de ses predecesseurs
         nb=m_vertices[k].m_pred.size();
-
+        std::cout<< "N+1 = "<<m_vertices[k].m_value <<std::endl;
         if(nb!=0)
         {
             for(int i=0; i<nb; i++)
@@ -680,10 +657,12 @@ void Graph::calculN()
                 Npred=m_vertices[id_pred].m_value;
 
                 N=N-(coeff*Npred);
+                std::cout<< "- ( "<<coeff<<" * "<<Npred<< " ) " ;
+                 m_vertices[k].m_valuePlus1=N;
             }
             /// actualisation nb pop
+              std::cout<< "N+1 = "<< m_vertices[k].m_valuePlus1<<std::endl;
 
-             m_vertices[k].m_valuePlus1=N;
         }
         else{m_vertices[k].m_valuePlus1=m_vertices[k].m_value; }
 
@@ -703,6 +682,7 @@ void Graph::calculK()
     /// parcours sommet
     for(int k=0; k<ordre; k++)
     {
+        K=0;
         /// on recupere le nombre de ses predecesseurs = le nombre d'arc
         nb=m_vertices[k].m_succ.size();
 
@@ -718,12 +698,15 @@ void Graph::calculK()
             ///on recupere le nombre de pop du succ
             N=m_vertices[id_succ].m_value;
 
+
             /// on calcul K
             K=K+(coeff*N);
+
 
         }
         /// sauvegarde dans attributs
         m_vertices[k].m_K=K;
+       // std::cout << "K= "<< m_vertices[k].m_K<<std::endl;
     }
 }
 
@@ -843,7 +826,7 @@ void Graph::charger(std::string graphName){
 
     std::ifstream fichier (graphName+".txt",std::ios::in);
     int indxVertex,posX, posY, r,indxEdge, vertexIn, vertexOut;
-    double poidEdge,poidVertex;
+    float poidEdge,poidVertex;
     std::string picName;
     bool bo=false;
 
@@ -996,7 +979,7 @@ void Graph::update()
 }
 
 /// Aide à l'ajout de sommets interfacés
-void Graph::add_interfaced_vertex(int idx, double value, int r, int x, int y, std::string pic_name, int pic_idx )
+void Graph::add_interfaced_vertex(int idx, float value, int r, int x, int y, std::string pic_name, int pic_idx )
 {
     if ( m_vertices.find(idx)!=m_vertices.end() )
     {
