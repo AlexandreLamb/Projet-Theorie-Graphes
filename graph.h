@@ -317,6 +317,10 @@ class GraphInterface
         grman::WidgetText m_cmp_fconnexe_text1;
         grman::WidgetText m_cmp_fconnexe_text2;
         grman::WidgetText m_cmp_fconnexe_text3;
+        //bouton pour désactiver l'affichage des cmpconnexe
+        grman::WidgetButton m_cmp_fconnexe_off;
+        grman::WidgetText m_cmp_fconnexe_off_text1;
+        grman::WidgetText m_nb_cmpfc;
 
 
 
@@ -352,6 +356,7 @@ class Graph
         std::string m_nomgraph;
 
         std::vector<std::vector<Vertex*>> m_tabcmpfc;
+
 
         bool m_quitter=0;
 

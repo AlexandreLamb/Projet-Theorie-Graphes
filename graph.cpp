@@ -116,9 +116,9 @@ void Vertex:: set_marque_connexeout(bool x)
     m_ismarqued_connexeout=x;
 }
 bool Vertex::get_marque_connexeout()
-    {
-       return m_ismarqued_connexeout;
-    }
+{
+    return m_ismarqued_connexeout;
+}
 void Vertex:: set_marque_connexein(bool x)
 {
     m_ismarqued_connexein=x;
@@ -279,7 +279,7 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
 
 
     m_tool_box.add_child(m_cmp_fconnexe);
-    m_cmp_fconnexe.set_dim(70 ,30);
+    m_cmp_fconnexe.set_dim(70,30);
     m_cmp_fconnexe.set_gravity_x(grman::GravityX::Center);
     m_cmp_fconnexe.set_posy(40);
     m_cmp_fconnexe.set_bg_color(ROUGE);
@@ -292,6 +292,7 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_cmp_fconnexe_text1.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Up);
     m_cmp_fconnexe_text2.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Center);
     m_cmp_fconnexe_text3.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Down);
+    //
 
     m_tool_box.set_bg_color(BLANCBLEU);
 
@@ -460,43 +461,67 @@ int Graph::menugraph()
 {
     if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over())
     {
-        sauvgarder(m_nomgraph);
+        sauvgarder(m_nomgraph) ;
+        visuelle_forte_connexite(0);
+
     }
     if(grman::mouse_click && m_interface->m_retour.is_mouse_over())
     {
         m_quitter= 1;
 
     }
-
+   ///partie qui gère l'affichege des composantes fortement connexe
     if(grman::mouse_unclick&1 && m_interface->m_cmp_fconnexe.is_mouse_over())
     {
 
-       if(m_interface->m_cmp_fconnexe.get_value())
-       {
-           search_all_cmpfc();
-           visuelle_forte_connexite(1);
-            std::cout<<"a";
-       }
+        if(m_interface->m_cmp_fconnexe.get_value())
+        {
 
-       m_interface->m_cmp_fconnexe.set_value(!m_interface->m_cmp_fconnexe.get_value());
-       // visuelle_forte_connexite(0);
+            search_all_cmpfc();
+            visuelle_forte_connexite(1);
+
+            m_interface->m_tool_box.add_child(m_interface->m_cmp_fconnexe_off);
+            m_interface-> m_cmp_fconnexe_off.set_dim(70,30);
+            m_interface-> m_cmp_fconnexe_off.set_gravity_x(grman::GravityX::Center);
+            m_interface-> m_cmp_fconnexe_off.set_posy(74);
+            m_interface-> m_cmp_fconnexe_off.set_bg_color(ROUGE);
+            m_interface-> m_cmp_fconnexe_off.add_child(m_interface->m_cmp_fconnexe_off_text1);
+            m_interface-> m_cmp_fconnexe_off_text1.set_message("Off");
+             m_interface->m_tool_box.add_child(m_interface->m_nb_cmpfc);
+             m_interface->m_nb_cmpfc.set_dim(70,30);
+             m_interface->m_nb_cmpfc.set_posy(114);
+             m_interface->m_nb_cmpfc.set_message("nb cmp:" + std::to_string(m_tabcmpfc.size()));
 
 
+
+
+        }
 
     }
+    m_interface->m_cmp_fconnexe.set_value(!m_interface->m_cmp_fconnexe.get_value());
+
+    if(grman::mouse_unclick&1 && m_interface->m_cmp_fconnexe_off.is_mouse_over())
+    {
+        visuelle_forte_connexite(0);
+        m_interface->m_tool_box.remove_child(m_interface->m_cmp_fconnexe_off);
+        m_interface->m_tool_box.remove_child(m_interface->m_nb_cmpfc);
+
+    }
+
+
     return 0;
 
 }
 
- int Graph::get_quitter()
- {
-     return m_quitter;
- }
+int Graph::get_quitter()
+{
+    return m_quitter;
+}
 
- void Graph::set_quitter(bool x)
- {
-     m_quitter=x;
- }
+void Graph::set_quitter(bool x)
+{
+    m_quitter=x;
+}
 
 void Graph::destroy_graph()
 {
@@ -534,18 +559,18 @@ void Graph::Reset_marquage_vertex()
 }
 
 
- void Graph :: Reset_marquage_marqued_connexeinout()
- {
-     for(std::map<int,Vertex>::iterator it=m_vertices.begin(); it!=m_vertices.end(); it++)
+void Graph :: Reset_marquage_marqued_connexeinout()
+{
+    for(std::map<int,Vertex>::iterator it=m_vertices.begin(); it!=m_vertices.end(); it++)
     {
         it->second.set_marque_connexeout(0);
         it->second.set_marque_connexein(0);
     }
- }
+}
 
 void Graph:: Reset_marquage_isincompf_connexeinout()
 {
-      for(std::map<int,Vertex>::iterator it=m_vertices.begin(); it!=m_vertices.end(); it++)
+    for(std::map<int,Vertex>::iterator it=m_vertices.begin(); it!=m_vertices.end(); it++)
     {
         it->second.set_connexein(0);
         it->second.set_connexeout(0);
@@ -624,21 +649,22 @@ std::vector<Vertex*> Graph:: Cmp_fort_connexe_serach(Vertex s)
         }
     }
 
-   /* for(int i=0; i<c.size(); i++)
-    {
-          std::cout << c[i]->get_idx();
+    /* for(int i=0; i<c.size(); i++)
+     {
+           std::cout << c[i]->get_idx();
 
-    }
-    std::cout << std::endl;*/
+     }
+     std::cout << std::endl;*/
 
     return c;
 }
 
- std::vector<std::vector<Vertex*>> Graph::search_all_cmpfc()
+std::vector<std::vector<Vertex*>> Graph::search_all_cmpfc()
 {
     Reset_marquage_vertex();
     Reset_marquage_marqued_connexeinout();
     Reset_marquage_isincompf_connexeinout();
+    m_tabcmpfc.clear();
 
 
 
@@ -687,38 +713,38 @@ std::vector<Vertex*> Graph:: Cmp_fort_connexe_serach(Vertex s)
 void Graph:: visuelle_forte_connexite(bool activate)
 {
     int color;
-  if(activate)
-  {
-
-    for(int i=0; i<m_tabcmpfc.size(); i++)
-    {
-        color= COULEURALEATOIRECLAIR;
-
-        for(int k=0; k<m_tabcmpfc[i].size(); k++)
-        {
-            m_tabcmpfc[i][k]->m_interface->m_top_box.set_border_color(color);
-            m_tabcmpfc[i][k]->m_interface->m_top_box.m_isincmpf=true;
-
-        }
-
-    }
-  }
-
-  else
-  {
-      for(int i=0; i<m_tabcmpfc.size(); i++)
+    if(activate)
     {
 
-        for(int k=0; k<m_tabcmpfc[i].size(); k++)
+        for(int i=0; i<m_tabcmpfc.size(); i++)
         {
-            color=m_interface->m_top_box.get_border_color();
-            m_tabcmpfc[i][k]->m_interface->m_top_box.set_border_color(color);
-            m_tabcmpfc[i][k]->m_interface->m_top_box.m_isincmpf=false;
+            color= COULEURALEATOIRECLAIR;
+
+            for(int k=0; k<m_tabcmpfc[i].size(); k++)
+            {
+                m_tabcmpfc[i][k]->m_interface->m_top_box.set_border_color(color);
+                m_tabcmpfc[i][k]->m_interface->m_top_box.m_isincmpf=true;
+
+            }
 
         }
-
     }
-  }
+
+    else
+    {
+        for(int i=0; i<m_tabcmpfc.size(); i++)
+        {
+
+            for(int k=0; k<m_tabcmpfc[i].size(); k++)
+            {
+                //color=m_interface->m_top_box.get_border_color();
+                //  m_tabcmpfc[i][k]->m_interface->m_top_box.set_border_color(color);
+                m_tabcmpfc[i][k]->m_interface->m_top_box.m_isincmpf=false;
+
+            }
+
+        }
+    }
 
 
 
@@ -742,9 +768,9 @@ void Graph::update()
 
     for (auto &elt : m_edges)
         elt.second.pre_update();
-
-    m_interface->m_top_box.update();
     menugraph();
+    m_interface->m_top_box.update();
+
 
     for (auto &elt : m_vertices)
         elt.second.post_update();

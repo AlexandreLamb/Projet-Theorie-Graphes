@@ -1,8 +1,8 @@
 6
 8
 54.2857 774 526 requin
-28.5714 494 264 thon
-85.7143 221 175 maquerau
+28.5714 9 287 thon
+85.7143 138 142 maquerau
 40 604 15 petit_poisson
 0 105 626 langoustine
 57.1429 666 269 orga
