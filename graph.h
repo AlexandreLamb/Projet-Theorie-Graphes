@@ -93,6 +93,7 @@ class VertexInterface
     friend class Vertex;
     friend class EdgeInterface;
     friend class Graph;
+    friend class Edge;
 
     private :
 
@@ -200,6 +201,9 @@ class Vertex
         void set_idx(int x);
 
         bool islinked(Vertex x,int param);
+
+        void Cacher_Sommet();
+        void Afficher_Somet();
 };
 
 
@@ -238,6 +242,8 @@ class EdgeInterface
         // Le constructeur met en place les éléments de l'interface
         // voir l'implémentation dans le .cpp
         EdgeInterface(Vertex& from, Vertex& to);
+
+
 };
 
 
@@ -278,6 +284,11 @@ std::vector<int> v_from;
         /// Voir l'implémentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
+
+        ///afficher masquer les arretes
+        void Afficher_Edges(Vertex& from , Vertex& to);
+        void hide_edge_out();
+        void hide_edge_in();
 };
 
 
@@ -324,11 +335,12 @@ class GraphInterface
 
 
 
+        std::vector<grman::WidgetBox*> m_tab_cmp_GraphReduit;
+        std::vector<grman::WidgetEdge*> m_tab_edge_GraphReduit;
+        std::vector<grman::WidgetText*> m_tab_texte_GraphReduit;
 
 
 
-        // A compléter éventuellement par des widgets de décoration ou
-        // d'édition (boutons ajouter/enlever ...)
 
     public :
 
@@ -377,7 +389,6 @@ class Graph
         /// Cette méthode est à enlever et remplacer par un système
         /// de chargement de fichiers par exemple.
         void make_example();
-
         void make_graph_1();
 
         void charger(std::string graphName);
@@ -391,6 +402,10 @@ class Graph
         void Reset_marquage_marqued_connexeinout();
         void Reset_marquage_isincompf_connexeinout();
 
+        ///methode qui renvoit l'indice de l'arete qui relie les deux sommets en parametre
+        int findEdge(int sfrom, int sto);
+
+
       /// Fonctions de recherche de forte connexité
         std::vector<Vertex*> Cmp_fort_connexe_serach(Vertex s);
          std::vector<std::vector<Vertex*>> search_all_cmpfc();
@@ -398,8 +413,9 @@ class Graph
     /// Mise en valeurs visuel de la forte connexité
 
         void visuelle_forte_connexite(bool activate);
-      //  void visuelle_forte_cmp_mode(bool x);
+        void Afficher_graphReduit(bool activate);
 
+    ///permet de revenir au menu
       int get_quitter();
       void set_quitter(bool x);
 

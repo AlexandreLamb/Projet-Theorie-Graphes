@@ -177,6 +177,52 @@ bool Vertex::islinked(Vertex x, int param)
 
     return linked;
 }
+
+void Vertex::Cacher_Sommet()
+{
+
+    m_interface->m_top_box.remove_child(m_interface->m_img);
+//    m_interface->m_top_box.remove_child(m_interface->m_tools_box);
+    m_interface->m_top_box.remove_child(m_interface->m_slider_value);
+    m_interface->m_top_box.remove_child(m_interface->m_box_label_idx);
+    m_interface->m_top_box.remove_child(m_interface->m_label_value);
+    // m_interface->m_top_box.remove_child(m_interface->m_tools_button);
+    m_interface->m_top_box.set_dim(0,0);
+
+
+}
+
+
+void Vertex::Afficher_Somet()
+{
+    m_interface->m_top_box.add_child( m_interface->m_img );
+
+    m_interface->m_top_box.add_child(m_interface->m_slider_value);
+
+    m_interface->m_top_box.add_child(m_interface->m_label_value);
+
+
+
+
+    //   m_interface->m_top_box.add_child(m_interface->m_tools_box);
+
+    m_interface->m_top_box.add_child(m_interface-> m_box_label_idx );
+
+    m_interface->m_box_label_idx.set_pos(115,90);
+    m_interface->m_img.set_pos(30,0);
+    m_interface->m_top_box.set_dim(130, 100);
+
+    m_interface->m_top_box.set_border(2);
+
+    /* m_interface->m_top_box.add_child(m_interface->m_tools_button);
+
+         m_interface->m_top_box.remove_child(m_interface->m_tools_box);
+         m_interface->m_tools_box.remove_child(m_interface->m_tools_label);
+        m_interface-> m_tools_box.remove_child(m_interface->m_button_cacher);
+        m_interface-> m_tools_box.remove_child(m_interface->m_label_cacher);
+      m_interface-> m_tools_box.remove_child(m_interface->m_button_edit);
+        m_interface-> m_tools_box.remove_child(m_interface->m_label_edit);*/
+}
 /***************************************************
                     EDGE
 ****************************************************/
@@ -236,6 +282,32 @@ void Edge::post_update()
 }
 
 
+/// afficher ou masquer des arretes
+
+void Edge::hide_edge_out()
+{
+
+    m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
+    m_interface->m_top_edge.detach_to();
+
+}
+
+void Edge::hide_edge_in()
+{
+
+    m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
+    m_interface->m_top_edge.detach_from();
+}
+void Edge::Afficher_Edges(Vertex& from, Vertex& to)
+{
+
+    m_interface->m_top_edge.attach_from(from.m_interface->m_top_box);
+    m_interface->m_top_edge.attach_to(to.m_interface->m_top_box);
+    m_interface-> m_top_edge.reset_arrow_with_bullet();
+
+    m_interface->m_top_edge.add_child(m_interface->m_box_edge);
+
+}
 
 /***************************************************
                     GRAPH
@@ -470,7 +542,7 @@ int Graph::menugraph()
         m_quitter= 1;
 
     }
-   ///partie qui gère l'affichege des composantes fortement connexe
+    ///partie qui gère l'affichege des composantes fortement connexe
     if(grman::mouse_unclick&1 && m_interface->m_cmp_fconnexe.is_mouse_over())
     {
 
@@ -479,7 +551,9 @@ int Graph::menugraph()
 
             search_all_cmpfc();
             visuelle_forte_connexite(1);
+            Afficher_graphReduit(1);
 
+            //l'interface est initialisé ici car on veur qu'il disparaisse.
             m_interface->m_tool_box.add_child(m_interface->m_cmp_fconnexe_off);
             m_interface-> m_cmp_fconnexe_off.set_dim(70,30);
             m_interface-> m_cmp_fconnexe_off.set_gravity_x(grman::GravityX::Center);
@@ -487,10 +561,10 @@ int Graph::menugraph()
             m_interface-> m_cmp_fconnexe_off.set_bg_color(ROUGE);
             m_interface-> m_cmp_fconnexe_off.add_child(m_interface->m_cmp_fconnexe_off_text1);
             m_interface-> m_cmp_fconnexe_off_text1.set_message("Off");
-             m_interface->m_tool_box.add_child(m_interface->m_nb_cmpfc);
-             m_interface->m_nb_cmpfc.set_dim(70,30);
-             m_interface->m_nb_cmpfc.set_posy(114);
-             m_interface->m_nb_cmpfc.set_message("nb cmp:" + std::to_string(m_tabcmpfc.size()));
+            m_interface->m_tool_box.add_child(m_interface->m_nb_cmpfc);
+            m_interface->m_nb_cmpfc.set_dim(70,30);
+            m_interface->m_nb_cmpfc.set_posy(114);
+            m_interface->m_nb_cmpfc.set_message("nb cmp:" + std::to_string(m_tabcmpfc.size()));
 
 
 
@@ -503,6 +577,7 @@ int Graph::menugraph()
     if(grman::mouse_unclick&1 && m_interface->m_cmp_fconnexe_off.is_mouse_over())
     {
         visuelle_forte_connexite(0);
+        Afficher_graphReduit(0);
         m_interface->m_tool_box.remove_child(m_interface->m_cmp_fconnexe_off);
         m_interface->m_tool_box.remove_child(m_interface->m_nb_cmpfc);
 
@@ -577,6 +652,35 @@ void Graph:: Reset_marquage_isincompf_connexeinout()
     }
 }
 
+
+/// methode qui renvoit l'indice de l'arete qui relie les deux sommets en parametre
+int Graph::findEdge(int sfrom, int sto)
+{
+    int s1=0;
+    int s2=0;
+
+    int idx=0;
+
+    /// parcourt la map d'arete
+    for(auto &elt : m_edges)
+    {
+        /// accede à m-from et m_to
+        s1= elt.second.m_from;
+        s2= elt.second.m_to;
+
+        /// si les sommets s1 et s2 sont les meme que les sommets en parametres on retourne la valeur de l'arete (coeff)
+        if((s1==sfrom && s2==sto))
+        {
+            idx= elt.first;
+
+            return idx;
+        }
+    }
+}
+
+
+
+
 /// Recherche d'une composante fortement connexe
 
 
@@ -648,13 +752,6 @@ std::vector<Vertex*> Graph:: Cmp_fort_connexe_serach(Vertex s)
 
         }
     }
-
-    /* for(int i=0; i<c.size(); i++)
-     {
-           std::cout << c[i]->get_idx();
-
-     }
-     std::cout << std::endl;*/
 
     return c;
 }
@@ -737,8 +834,7 @@ void Graph:: visuelle_forte_connexite(bool activate)
 
             for(int k=0; k<m_tabcmpfc[i].size(); k++)
             {
-                //color=m_interface->m_top_box.get_border_color();
-                //  m_tabcmpfc[i][k]->m_interface->m_top_box.set_border_color(color);
+
                 m_tabcmpfc[i][k]->m_interface->m_top_box.m_isincmpf=false;
 
             }
@@ -753,8 +849,161 @@ void Graph:: visuelle_forte_connexite(bool activate)
 
 
 
+void Graph::Afficher_graphReduit(bool activate)
+{
+
+    if(activate)
+    {
+        for(int k=0; k<m_tabcmpfc.size(); k++)
+        {
+            m_interface->m_tab_cmp_GraphReduit.push_back(new grman::WidgetBox);
+            m_interface->m_tab_texte_GraphReduit.push_back(new grman::WidgetText);
+
+            if(k<m_tabcmpfc.size()-1)
+            {
+                m_interface->m_tab_edge_GraphReduit.push_back(new grman::WidgetEdge);
+            }
 
 
+
+        }
+
+
+
+
+
+        for(int i=0; i<m_interface->m_tab_cmp_GraphReduit.size(); i++)
+        {
+
+            m_interface->m_main_box.add_child(*m_interface->m_tab_cmp_GraphReduit[i]);
+            m_interface->m_tab_cmp_GraphReduit[i]->set_pos(m_tabcmpfc[i][0]->m_interface->m_top_box.get_posx(),m_tabcmpfc[i][0]->m_interface->m_top_box.get_posy());
+            m_interface->m_tab_cmp_GraphReduit[i]->set_dim(130,100);
+            m_interface->m_tab_cmp_GraphReduit[i]->set_bg_color(ROUGESOMBRE);
+            m_interface->m_tab_cmp_GraphReduit[i]->add_child(*m_interface->m_tab_texte_GraphReduit[i]);
+            m_interface->m_tab_texte_GraphReduit[i]->set_gravity_xy(grman::GravityX::Center,grman::GravityY::Center);
+            m_interface->m_tab_texte_GraphReduit[i]->set_message("cmpfconexe n°" + std::to_string(i));
+
+
+            if(i< m_interface->m_tab_edge_GraphReduit.size()-1)
+            {
+                m_interface->m_main_box.add_child(*m_interface->m_tab_edge_GraphReduit[i]);
+                m_interface->m_tab_edge_GraphReduit[i]->attach_from(m_tabcmpfc[i][0]->m_interface->m_top_box);
+                m_interface->m_tab_edge_GraphReduit[i]->attach_to(m_tabcmpfc[i+1][0]->m_interface->m_top_box);
+                m_interface->m_tab_edge_GraphReduit[i]->reset_arrow_with_bullet();
+
+            }
+
+
+
+
+
+
+
+
+            /* for(int k=0; k<m_tabcmpfc[i].size(); k++)
+             {
+                 if(i<m_tabcmpfc[i].size()-1)
+                 {
+                     if (m_tabcmpfc[i][k]->islinked(*m_tabcmpfc[i+1][k],1))
+                     {
+                         m_interface->m_main_box.add_child(*m_interface->m_tab_cmp_GraphReduit[i]);
+                         m_interface->m_tab_cmp_GraphReduit[i]->set_pos(m_tabcmpfc[i][k]->m_interface->m_top_box.get_posx(),m_tabcmpfc[i][k]->m_interface->m_top_box.get_posy());
+                         m_interface->m_tab_cmp_GraphReduit[i]->set_dim(130,100);
+                         m_interface->m_tab_cmp_GraphReduit[i]->set_bg_color(ROUGESOMBRE);
+                         break;
+                     }
+
+
+                 }
+
+
+                /* else
+                 {
+                     if (m_tabcmpfc[i][k]->islinked(*m_tabcmpfc[0][k],1))
+                     {
+                         m_interface->m_main_box.add_child(*m_interface->m_tab_cmp_GraphReduit[i]);
+                         m_interface->m_tab_cmp_GraphReduit[i]->set_pos(m_tabcmpfc[i][k]->m_interface->m_top_box.get_posx(),m_tabcmpfc[i][k]->m_interface->m_top_box.get_posy());
+                         m_interface->m_tab_cmp_GraphReduit[i]->set_dim(130,100);
+                         m_interface->m_tab_cmp_GraphReduit[i]->set_bg_color(ROUGESOMBRE);
+                         break;
+                     }
+
+
+                 }*/
+
+
+
+
+
+        }
+
+
+        for(int i=0; i<m_tabcmpfc.size(); i++)
+        {
+            for(int k=0; k<m_tabcmpfc[i].size(); k++)
+            {
+
+                {
+                    m_tabcmpfc[i][k]->Cacher_Sommet();
+                    for(int z=0; z<m_tabcmpfc[i][k]->m_in.size(); z++)
+                    {
+                        m_edges[m_tabcmpfc[i][k]->m_in[z]].hide_edge_in();
+                    }
+                    for(int z=0; z<m_tabcmpfc[i][k]->m_out.size(); z++)
+                    {
+                        m_edges[m_tabcmpfc[i][k]->m_out[z]].hide_edge_out();
+                    }
+
+
+                }
+
+            }
+        }
+    }
+
+
+    else
+    {
+
+        for(int i=0; i<m_vertices.size(); i++)
+        {
+           m_vertices[i].Afficher_Somet();
+        }
+
+        for(int l=0; l<m_edges.size(); l++)
+        {
+             m_edges[l].Afficher_Edges(m_vertices[m_edges[l].m_from],m_vertices[m_edges[l].m_to]);
+        }
+
+
+
+        for(int k=0; k<m_interface->m_tab_cmp_GraphReduit.size(); k++)
+        {
+
+            m_interface->m_main_box.remove_child(*m_interface->m_tab_cmp_GraphReduit[k]);
+
+            delete m_interface->m_tab_cmp_GraphReduit[k];
+            delete m_interface->m_tab_texte_GraphReduit[k];
+
+            if(k<m_interface->m_tab_cmp_GraphReduit.size()-1)
+            {
+
+              m_interface->m_main_box.remove_child(*m_interface->m_tab_edge_GraphReduit[k]);
+            delete m_interface->m_tab_edge_GraphReduit[k];
+            }
+
+
+
+        }
+            m_interface->m_tab_cmp_GraphReduit.clear();
+            m_interface->m_tab_texte_GraphReduit.clear();
+            m_interface->m_tab_edge_GraphReduit.clear();
+    }
+
+
+
+
+}
 
 
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
