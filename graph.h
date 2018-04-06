@@ -80,6 +80,8 @@
 
 #include "grman/grman.h"
 
+
+
 /***************************************************
                     VERTEX
 ****************************************************/
@@ -349,6 +351,10 @@ class Graph
         int nbrEdge;
         std::string m_nomgraph;
 
+        std::vector<std::vector<Vertex*>> m_tabcmpfc;
+
+        bool m_quitter=0;
+
 
 
     public:
@@ -375,20 +381,25 @@ class Graph
         void supprimerVertex();
         int menugraph();
 
-
+        /// Reset des difféntes marquage nécessaire pout la forte connexité
         void Reset_marquage_vertex();
         void Reset_marquage_marqued_connexeinout();
         void Reset_marquage_isincompf_connexeinout();
 
+      /// Fonctions de recherche de forte connexité
         std::vector<Vertex*> Cmp_fort_connexe_serach(Vertex s);
-        void search_all_cmpfc();
+         std::vector<std::vector<Vertex*>> search_all_cmpfc();
 
+    /// Mise en valeurs visuel de la forte connexité
 
+        void visuelle_forte_connexite(bool activate);
+      //  void visuelle_forte_cmp_mode(bool x);
 
+      int get_quitter();
+      void set_quitter(bool x);
 
         /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
         void update();
-
         void destroy_graph();
 };
 

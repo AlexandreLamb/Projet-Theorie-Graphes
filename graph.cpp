@@ -464,7 +464,8 @@ int Graph::menugraph()
     }
     if(grman::mouse_click && m_interface->m_retour.is_mouse_over())
     {
-        return 1;
+        m_quitter= 1;
+
     }
 
     if(grman::mouse_unclick&1 && m_interface->m_cmp_fconnexe.is_mouse_over())
@@ -473,9 +474,13 @@ int Graph::menugraph()
        if(m_interface->m_cmp_fconnexe.get_value())
        {
            search_all_cmpfc();
+           visuelle_forte_connexite(1);
+            std::cout<<"a";
        }
 
        m_interface->m_cmp_fconnexe.set_value(!m_interface->m_cmp_fconnexe.get_value());
+       // visuelle_forte_connexite(0);
+
 
 
     }
@@ -483,6 +488,15 @@ int Graph::menugraph()
 
 }
 
+ int Graph::get_quitter()
+ {
+     return m_quitter;
+ }
+
+ void Graph::set_quitter(bool x)
+ {
+     m_quitter=x;
+ }
 
 void Graph::destroy_graph()
 {
@@ -620,12 +634,12 @@ std::vector<Vertex*> Graph:: Cmp_fort_connexe_serach(Vertex s)
     return c;
 }
 
-void Graph::search_all_cmpfc()
+ std::vector<std::vector<Vertex*>> Graph::search_all_cmpfc()
 {
     Reset_marquage_vertex();
     Reset_marquage_marqued_connexeinout();
     Reset_marquage_isincompf_connexeinout();
-    std::vector<std::vector<Vertex*>> tabcmpfc;
+
 
 
     bool* marquage= new bool [m_vertices.size()];
@@ -638,18 +652,14 @@ void Graph::search_all_cmpfc()
     {
         if(!marquage[i])
         {
-            tabcmpfc.push_back( Cmp_fort_connexe_serach(m_vertices[i]));
+            m_tabcmpfc.push_back( Cmp_fort_connexe_serach(m_vertices[i]));
             marquage[i]=true;
 
-            for(int k=0; k<tabcmpfc.back().size(); k++)
+            for(int k=0; k<m_tabcmpfc.back().size(); k++)
             {
-                /*if(tabcmpfc.back()[k]->get_connexein() && tabcmpfc.back()[k]->get_connexeout() && !marquage[k])
-                {
-                    marquage[k]=true;
 
-                }*/
 
-                marquage[tabcmpfc.back()[k]->get_idx()] = true;
+                marquage[m_tabcmpfc.back()[k]->get_idx()] = true;
 
             }
         }
@@ -657,15 +667,69 @@ void Graph::search_all_cmpfc()
     }
 
 
-    for(int i=0; i<tabcmpfc.size(); i++)
+    for(int i=0; i<m_tabcmpfc.size(); i++)
     {
-        for(int k=0; k<tabcmpfc[i].size(); k++)
+        for(int k=0; k<m_tabcmpfc[i].size(); k++)
         {
-            std::cout << tabcmpfc[i][k]->get_idx();
+            std::cout << m_tabcmpfc[i][k]->get_idx();
         }
         std::cout << std::endl;
     }
+
+    return m_tabcmpfc;
 }
+
+
+
+
+
+
+void Graph:: visuelle_forte_connexite(bool activate)
+{
+    int color;
+  if(activate)
+  {
+
+    for(int i=0; i<m_tabcmpfc.size(); i++)
+    {
+        color= COULEURALEATOIRECLAIR;
+
+        for(int k=0; k<m_tabcmpfc[i].size(); k++)
+        {
+            m_tabcmpfc[i][k]->m_interface->m_top_box.set_border_color(color);
+            m_tabcmpfc[i][k]->m_interface->m_top_box.m_isincmpf=true;
+
+        }
+
+    }
+  }
+
+  else
+  {
+      for(int i=0; i<m_tabcmpfc.size(); i++)
+    {
+
+        for(int k=0; k<m_tabcmpfc[i].size(); k++)
+        {
+            color=m_interface->m_top_box.get_border_color();
+            m_tabcmpfc[i][k]->m_interface->m_top_box.set_border_color(color);
+            m_tabcmpfc[i][k]->m_interface->m_top_box.m_isincmpf=false;
+
+        }
+
+    }
+  }
+
+
+
+
+}
+
+
+
+
+
+
 
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
 void Graph::update()

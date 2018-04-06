@@ -151,7 +151,11 @@ void Widget::reframe()
 
 void Widget::draw_border()
 {
-    rect_around(m_view_wb, get_border_color(), m_border);
+
+
+  rect_around(m_view_wb, get_border_color(), m_border);
+
+
 }
 
 
@@ -342,6 +346,21 @@ void WidgetBox::interact_focus()
     selectwidget();
 
 }
+
+
+void WidgetBox::draw_border()
+{
+
+  if(m_isincmpf)
+  {
+      rect_around(m_view_wb, get_border_color(1), m_border);
+  }
+
+  else
+   rect_around(m_view_wb, get_border_color(), m_border);
+
+}
+
 
 
 void WidgetBox::selectwidget()

@@ -4,6 +4,8 @@
 #include "graph.h"
 #include "Menu.h"
 #include "tools_bar.h"
+
+
 int main()
 {
     /// A appeler en 1er avant d'instancier des objets graphiques etc...
@@ -25,13 +27,14 @@ int main()
         {
         case 1:
              g.make_graph_1();
-             while(!key[KEY_ESC] &&    g.menugraph()!=1)
+             while(!key[KEY_ESC] && g.get_quitter()!=1)
              {
               g.update();
               grman::mettre_a_jour();
              }
-             g.destroy_graph();
 
+             g.destroy_graph();
+             g.set_quitter(0);
 
             break;
 
