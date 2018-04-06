@@ -15,16 +15,18 @@ int main()
     /// Un exemple de graphe
     Menu m;
     Graph g;
-    m.demarermenu();
+
+   m.demarermenu();
 
     while (!key[KEY_SPACE])
     {
         m.update();
 
-        switch(m.choixgraph())
+      switch(m.choixgraph())
         {
         case 1:
              g.make_graph_1();
+             g.fonctionnel();
                 g.allouer_k_uplet();
                         //g.find_K_connex();
              while(!key[KEY_ESC] &&    g.menugraph()!=1)
@@ -52,10 +54,8 @@ int main()
 
         default:
             grman::mettre_a_jour();
-
         }
     }
-
 
     grman::fermer_allegro();
 

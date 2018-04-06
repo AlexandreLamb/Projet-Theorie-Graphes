@@ -161,10 +161,19 @@ class Vertex
         float m_value;
 
         /// Variable K qui nous permet de calculer la populataion a t+1
-        float m_K;
+        double m_K;
+
+        /// Varible r qui est le rythme d ecroissance
+        int m_r;
 
         /// indice du sommet pour savoir ou il est dans la map
         int m_indx_V;
+
+        /// vector des predecesseurs
+        std::vector<int> m_pred;
+
+
+        std::string m_name;
 
 
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
@@ -180,8 +189,8 @@ class Vertex
 
         /// Les constructeurs sont à compléter selon vos besoin...
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
-        Vertex (double value=0, VertexInterface *interface=nullptr) :
-            m_value(value), m_interface(interface)  {  }
+        Vertex (double value=0, int r=0, std::string name=" ", VertexInterface *interface=nullptr) :
+            m_value(value), m_r(r), m_name(name), m_interface(interface)  {  }
 
         /// Vertex étant géré par Graph ce sera la méthode update de graph qui appellera
         /// le pre_update et post_update de Vertex (pas directement la boucle de jeu)
@@ -201,6 +210,7 @@ class Vertex
         void Cacher_Arretes();
 
         void Cacher_option();
+
 
         void set_idx_V(int id);
         int get_idx_V();
@@ -391,7 +401,7 @@ std::vector<int> Sommet_suite_out;
         Graph (GraphInterface *interface=nullptr) :
             m_interface(interface)  {  }
 
-        void add_interfaced_vertex(int idx, double value, int x, int y, std::string pic_name="", int pic_idx=0 );
+        void add_interfaced_vertex(int idx, double value,  int x, int y, int r, std::string pic_name="", int pic_idx=0 );
         void add_interfaced_edge(int idx, int vert1, int vert2, double weight=0);
 
         /// Méthode spéciale qui construit un graphe arbitraire (démo)
@@ -412,7 +422,15 @@ std::vector<int> Sommet_suite_out;
 
         void fonctionnel();
 
-        double PredSucc(int s1, int s2);
+        double findEdgeWeight(int s1, int s2);
+
+         int findEdge(int s1, int s2);
+
+        void remplirPred();
+
+        void calculK();
+
+        void calculN();
 
 
         void charger(std::string graphName);

@@ -215,12 +215,12 @@
 1522786765 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\grman\widget.cpp
 	"widget.h"
 
-1522970810 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\graph.cpp
+1523028278 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\graph.cpp
 	"graph.h"
 	<string>
 	<map>
 
-1522952941 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\graph.h
+1523024836 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\graph.h
 	<vector>
 	<map>
 	<string>
@@ -229,23 +229,26 @@
 	"tools_bar.h"
 	"grman/grman.h"
 
-1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\tools_bar.h
+1522849666 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\tools_bar.h
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
 
 1522835539 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\tools_bar.h
 
-1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\grman.h
+1522849666 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\grman.h
 	<allegro.h>
 	<string>
 	"grman_couleurs.h"
 	"coords.h"
 	"widget.h"
 
-1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\grman_couleurs.h
+1522849666 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\grman_couleurs.h
 
-1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\coords.h
+1522849666 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\coords.h
 	<cmath>
 
-1522849665 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\widget.h
+1523010456 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\widget.h
 	"grman.h"
 	<iostream>
 	<string>
@@ -253,10 +256,10 @@
 	<algorithm>
 	<allegro.h>
 
-1522849665 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\coords.cpp
+1522849666 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\coords.cpp
 	"coords.h"
 
-1522849665 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\grman.cpp
+1523010456 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\grman.cpp
 	<cmath>
 	<unordered_map>
 	<unordered_set>
@@ -270,16 +273,17 @@
 	<loadpng.h>
 	<jpgalleg.h>
 
-1522849665 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\widget.cpp
+1522849666 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\grman\widget.cpp
 	"widget.h"
 
-1522945723 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\main.cpp
+1523018048 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\main.cpp
 	"grman/grman.h"
 	<iostream>
 	"graph.h"
+	"Menu.h"
 	"tools_bar.h"
 
-1522849665 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\tools_bar.cpp
+1522849666 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\tools_bar.cpp
 	"tools_bar.h"
 
 1522849665 .h"
@@ -315,5 +319,15 @@
 	"grman/grman.h"
 
 1522942017 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\menu.cpp
+	"Menu.h"
+
+1523010456 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\menu.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
+
+1523010456 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\menu.cpp
 	"Menu.h"
 
