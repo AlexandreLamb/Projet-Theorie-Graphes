@@ -141,12 +141,12 @@ bool Vertex::islinked(Vertex x, int param)
     {
 
         for(int i=0; i<m_out.size(); i++)
-        {
+       {
             for(int j=0; j<x.m_in.size(); j++)
             {
                 if(m_out[i]==x.m_in[j])
                 {
-                    linked=true;
+                    return true;
                 }
 
 
@@ -159,13 +159,13 @@ bool Vertex::islinked(Vertex x, int param)
     if(param==0)
     {
 
-        for(int i=0; i<m_out.size(); i++)
+        for(int i=0; i<m_in.size(); i++)
         {
-            for(int j=0; j<x.m_in.size(); j++)
+            for(int j=0; j<x.m_out.size(); j++)
             {
-                if(m_out[i]==x.m_in[j])
+                if(m_in[i]==x.m_out[j])
                 {
-                    linked=true;
+                    return true;
 
                 }
 
@@ -419,9 +419,10 @@ void Graph::make_graph_1()
     Graph::charger("graph1");
     m_nomgraph ="graph1";
 
+    //affichage de l'ordre du graph dans la main box
     m_interface->m_ordre_graph.set_message("ordre graph: " + std::to_string(ordre));
 
-    /* add_interfaced_vertex(0,50.0,100,100,"requin.jpg");
+    /*add_interfaced_vertex(0,50.0,100,100,"requin.jpg");
      add_interfaced_vertex(1, 60.0, 100, 200, "thon.jpg");
      add_interfaced_vertex(2, 60.0, 100, 300, "maquerau.jpg");
      add_interfaced_vertex(3, 60.0, 100, 400, "petit_poisson.jpg");
@@ -702,6 +703,10 @@ int Graph::findEdge(int sfrom, int sto)
 
             return idx;
         }
+        else
+        {
+            return INFINI;
+        }
     }
 }
 
@@ -723,6 +728,17 @@ std::vector<Vertex*> Graph:: Cmp_fort_connexe_serach(Vertex s)
     m_vertices[s.get_idx()].set_connexeout(true);
     m_vertices[s.get_idx()].set_connexein(true);
 
+    for(int i=0; i<m_vertices[1].m_in.size();i++)
+    {
+        //std::cout << m_vertices[1].m_out[i];
+
+
+
+
+    }
+
+
+
     while(add)
     {
         add=0;
@@ -734,16 +750,19 @@ std::vector<Vertex*> Graph:: Cmp_fort_connexe_serach(Vertex s)
 
                 for(int k=0; k<ordre; k++)
                 {
-                    if(m_vertices[i].islinked(m_vertices[k],1) && !m_vertices[k].get_marque_connexeout())
+                    if(m_vertices[i].islinked(m_vertices[k],1)&& !m_vertices[k].get_marque_connexeout())
                     {
 
                         m_vertices[k].set_connexeout(true);
                         add=1;
+
+
                     }
                 }
             }
         }
     }
+
 
 
     add=true;
@@ -762,7 +781,8 @@ std::vector<Vertex*> Graph:: Cmp_fort_connexe_serach(Vertex s)
                     {
 
                         m_vertices[k].set_connexein(true);
-                        add=1;//std::cout << m_vertices[k].get_idx();
+                        add=1;
+
                     }
                 }
             }
@@ -777,9 +797,10 @@ std::vector<Vertex*> Graph:: Cmp_fort_connexe_serach(Vertex s)
             m_vertices[z].set_marque(true);
 
 
+
         }
     }
-
+//std::cout << c.size();
     return c;
 }
 
@@ -847,12 +868,57 @@ void Graph:: visuelle_forte_connexite(bool activate)
             for(int k=0; k<m_tabcmpfc[i].size(); k++)
             {
                 m_tabcmpfc[i][k]->m_interface->m_top_box.set_border_color(color);
-                m_tabcmpfc[i][k]->m_interface->m_top_box.m_isincmpf=true;
+                m_tabcmpfc[i][k]->m_interface->m_top_box.m_isincmpf=true;  // paramètre qui permet de sélectioner quel get_color_bg() utiliser.
+
+               /* if(k<m_tabcmpfc[i].size()-1)
+                {
+                   // if(findEdge(m_tabcmpfc[i][k]->get_idx(),m_tabcmpfc[i][k+1]->get_idx())< INFINI)
+                    {
+                      std::cout << findEdge(m_tabcmpfc[i][k]->get_idx(),m_tabcmpfc[i][k+1]->get_idx());
+                     m_edges[findEdge(m_tabcmpfc[i][k]->get_idx(),m_tabcmpfc[i][k+1]->get_idx())].m_interface->m_top_edge.set_colorEdge(color);
+                     m_edges[findEdge(m_tabcmpfc[i][k]->get_idx(),m_tabcmpfc[i][k+1]->get_idx())].m_interface->m_box_edge.set_bg_color(color);
+
+                    }
+                 //   else
+                    {
+                    // m_edges[findEdge(m_tabcmpfc[i][k+1]->get_idx(),m_tabcmpfc[i][k]->get_idx())].m_interface->m_top_edge.set_colorEdge(color);
+                    // m_edges[findEdge(m_tabcmpfc[i][k+1]->get_idx(),m_tabcmpfc[i][k]->get_idx())].m_interface->m_box_edge.set_bg_color(color);
+
+                    }
+
+
+                    // std::cout<< findEdge(m_tabcmpfc[i][k]->get_idx(),m_tabcmpfc[i][k+1]->get_idx());
+                }
+
+
+
+
 
             }
+                  // on sort de la boucle pour la dernière arrete afin de ne pas faire de dépassement mémoire
+
+                    /*if(findEdge(m_tabcmpfc[i][m_tabcmpfc[i].size()-1]->get_idx(),m_tabcmpfc[i][0]->get_idx())!=INFINI)
+                    {
+                     m_edges[findEdge(m_tabcmpfc[i][m_tabcmpfc[i].size()-1]->get_idx(),m_tabcmpfc[i][0]->get_idx())].m_interface->m_top_edge.set_colorEdge(color);
+                     m_edges[findEdge(m_tabcmpfc[i][m_tabcmpfc[i].size()-1]->get_idx(),m_tabcmpfc[i][0]->get_idx())].m_interface->m_box_edge.set_bg_color(color);
+                    }
+                    else
+                    {
+                     m_edges[findEdge(m_tabcmpfc[i][0]->get_idx(),m_tabcmpfc[i][m_tabcmpfc[i].size()-1]->get_idx())].m_interface->m_top_edge.set_colorEdge(color);
+                     m_edges[findEdge(m_tabcmpfc[i][0]->get_idx(),m_tabcmpfc[i][m_tabcmpfc[i].size()-1]->get_idx())].m_interface->m_box_edge.set_bg_color(color);
+                    }*/
+                    //  std::cout<< findEdge(2,0);*/
+
 
         }
+
+
+
+
+
+
     }
+}
 
     else
     {
@@ -911,7 +977,7 @@ void Graph::Afficher_graphReduit(bool activate)
             m_interface->m_tab_texte_GraphReduit[i]->set_message("cmpfconexe n°" + std::to_string(i));
 
 
-            if(i< m_interface->m_tab_edge_GraphReduit.size()-1)
+            if(i< m_interface->m_tab_edge_GraphReduit.size())
             {
                 m_interface->m_main_box.add_child(*m_interface->m_tab_edge_GraphReduit[i]);
                 m_interface->m_tab_edge_GraphReduit[i]->attach_from(m_tabcmpfc[i][0]->m_interface->m_top_box);
@@ -1097,7 +1163,7 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_edges[idx] = Edge(weight, ei);
     m_edges[idx].m_from=id_vert1;
     m_edges[idx].m_to=id_vert2;
-    m_vertices[id_vert1].m_in.push_back(idx);
-    m_vertices[id_vert2].m_out.push_back(idx);
+    m_vertices[id_vert1].m_out.push_back(idx);
+    m_vertices[id_vert2].m_in.push_back(idx);
 }
 

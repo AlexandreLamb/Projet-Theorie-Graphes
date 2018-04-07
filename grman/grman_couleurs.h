@@ -7,6 +7,9 @@ namespace grman
 /// Les couleurs proposées. Il est possible d'en ajouter en respectant la syntaxe.
 /// Faire une recherche "couleur html" dans google image pour d'autres valeurs.
 
+#define INFINI 4000000
+
+
 #define NOIR 0x000000
 
 #define GRIS 0x808080

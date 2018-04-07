@@ -411,7 +411,7 @@ void WidgetEdge::draw()
     p[1] = m_attach[1]->get_abs_frame().intersect(-vec_dir);
 
     // Dessin du lien cadre à cadre
-    thick_line(page, p[0].x, p[0].y, p[1].x, p[1].y, m_thickness, m_color);
+    thick_line(page, p[0].x, p[0].y, p[1].x, p[1].y, m_thickness,m_color);
 
     // Calcul du nouveau vecteur cadre à cadre
     vec_dir = p[1] - p[0];
@@ -457,5 +457,18 @@ void WidgetEdge::draw()
 }
 
 
+void WidgetEdge::set_colorEdge(int color)
+ {
+    m_color=color;
+
+ }
+int WidgetEdge::get_colorEdge(int color)
+{
+    return m_color;
 
 }
+
+}
+
+
+
