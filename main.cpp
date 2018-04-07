@@ -25,7 +25,8 @@ int main()
         {
         case 1:
              g.make_graph_1();
-            g.IsConnex();
+
+
              while(!key[KEY_ESC] &&    g.menugraph()!=1)
              {
 

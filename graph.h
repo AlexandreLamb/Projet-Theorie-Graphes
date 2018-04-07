@@ -133,6 +133,7 @@ class VertexInterface
 
         grman::WidgetText m_tools_text;
 
+
     public :
 
         // Le constructeur met en place les éléments de l'interface
@@ -350,7 +351,11 @@ class GraphInterface
         grman::WidgetButton m_button_play;
         grman::WidgetText m_text_play;
 
+        grman::WidgetButton m_button_K_co;
+        grman::WidgetText m_label_K_co;
 
+
+        grman::WidgetButton m_temp;
 
 
 
@@ -382,6 +387,7 @@ class Graph
         std::shared_ptr<GraphInterface> m_interface = nullptr;
 
         int ordre;
+        int p=0;
         int nbrEdge;
         std::string m_nomgraph;
 
@@ -426,6 +432,7 @@ std::vector<int> Sommet_suite_out;
         void charger(std::string graphName);
         void sauvgarder(std::string graphName);
         void addVertex();
+        void Temporise();
         void supprimerVertex();
         int menugraph();
 

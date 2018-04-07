@@ -1,19 +1,19 @@
 14
 17
 2 1 1 aigle
-2 1 1 girafe
+2 1 1 giraffe
 2 1 1 lion
-2 1 1 zebre
-2 1 1 hyene
+2 1 1 zebra
+2 1 1 hyena
 2 1 1 guepard
-2 1 1 lievre
-2 1 1 insectes
-2 1 1 gazelle
+2 1 1 hare
+2 1 1 worm
+2 1 1 antelope
 2 1 1 verre
-2 1 1 buffle
+2 1 1 buffalo
 2 1 1 acacia
 2 1 1 herbe
-2 1 1 bacterie
+2 1 1 bacteria
 1 11 2
 0 10 2
 2 1 2
