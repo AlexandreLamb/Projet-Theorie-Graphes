@@ -177,7 +177,6 @@ class Vertex
         /// vector des successeurs
         std::vector<int> m_succ;
 
-
         std::string m_name;
 
 

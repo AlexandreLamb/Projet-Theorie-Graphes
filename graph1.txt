@@ -1,14 +1,14 @@
 6
 6
-6 233 7 13 requin
-10 250 298 23 thon
-14 332 100 31 maquerau
-20 60 602 45 petit_poisson
-60 452 598 56 langoustine
-7 526 327 5 orga
-0 1 9
-1 2 18
-1 3 25
-3 4 12
-1 4 15
-1 5 20
+32 233 7 2 requin
+160 250 298 10 thon
+8000 332 100 70 maquerau
+320 60 602 35 petit_poisson
+9600 452 598 160 langoustine
+80000 526 327 100 orga
+0 1 40
+1 2 3
+1 3 30
+3 4 4
+1 4 3
+1 5 30

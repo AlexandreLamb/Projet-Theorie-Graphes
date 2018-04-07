@@ -558,8 +558,6 @@ void Graph::fonctionnel()
                       std::cout << " " <<std::endl;
                       std::cout << " ----- TEST FLUX -----"  <<std::endl;
                       std::cout << " " <<std::endl;
-            do
-            {
 
                 /// remplit pour chaque sommet vecteur de pred
                 remplirPred();
@@ -571,8 +569,7 @@ void Graph::fonctionnel()
                     std::cout << " "<<std::endl;
                 }
                 /*/
-
-                /// remplit pour chaque sommet vecteur de pred
+                  /// remplit pour chaque sommet vecteur de pred
                 remplirSucc();
                 /*/
                 for(int i=0; i<ordre;i++)
@@ -583,20 +580,30 @@ void Graph::fonctionnel()
                 }
                 /*/
 
+
+
+
+            do
+            {
+                for (int j=0; j<10; j++)
+                {
+
+                    std::cout << "  ---- Boucle " <<j <<" ----" <<std::endl;
+
                 /// on calcul et met à jour le K de chaque sommet
                 calculK();
 
-                /*/
+
                 for(int i=0; i<ordre;i++)
                 {
                     for(int j=0; j<m_vertices[i].m_succ.size(); j++)
                     {
                         coeff=findEdgeWeight(i,m_vertices[i].m_succ[j]);
-                    std::cout << " "<<m_vertices[m_vertices[i].m_succ[j]].m_value <<"  "<<m_vertices[m_vertices[i].m_succ[j]].m_name<<" * "<<coeff<<" + ";
+                    // std::cout << " "<<m_vertices[m_vertices[i].m_succ[j]].m_value <<"  "<<m_vertices[m_vertices[i].m_succ[j]].m_name<<" * "<<coeff<<" + ";
                     }
                     std::cout << "K= "<< m_vertices[i].m_K<<std::endl;
                 }
-                /*/
+
 
                 /// on calcul et met à jour le N de chaque somme
                 calculN();
@@ -612,7 +619,10 @@ void Graph::fonctionnel()
                     std::cout << "N+1 = "<< m_vertices[i].m_valuePlus1<<std::endl;
                     std::cout << " "<<std::endl;
                 }
+
 /*/
+                std::cout << " "<<std::endl;
+                }
 
             }
             while(!play);
@@ -646,17 +656,18 @@ void Graph::calculN()
 
         if(K!=0) // si K=0 pas de succ don on peut pas se reproduire et manger
         {
-            std::cout << "N+1.1 = N + r * N * (1 - ( N / K )) "<<std::endl;
-            std::cout<< "N+1.1 = ("<< N_save << ") + ("<<m_vertices[k].m_r << ") * (" <<N_save<<") * (1-(" <<N_save<<" / "<<K << ") = "<<std::endl;
+            //std::cout << "N+1.1 = N + r * N * (1 - ( N / K )) "<<std::endl;
+            //std::cout<< "N+1.1 = ("<< N_save << ") + ("<<m_vertices[k].m_r << ") * (" <<N_save<<") * (1-(" <<N_save<<" / "<<K << ") = "<<std::endl;
             N= (N_save) + (m_vertices[k].m_r)*(N_save)*(1-(N_save)/K);
 
         }
-        else {std::cout<< " K=0 -> N+1.1 = N = "<< N <<std::endl; }
+        else {//std::cout<< " K=0 -> N+1.1 = N = "<< N <<std::endl;
 
+        }
 
         /// on recupere le nombre de ses predecesseurs
         nb=m_vertices[k].m_pred.size();
-        std::cout<< "N+1 = N ";
+        //std::cout<< "N+1 = N ";
         if(nb!=0) // si nb=0 pas de predecesseurs
         {
             for(int i=0; i<nb; i++)
@@ -669,24 +680,28 @@ void Graph::calculN()
                 Npred=m_vertices[id_pred].m_value;
 
                 N=N-(coeff*Npred);
-                std::cout<< "- ( "<<coeff<<" * "<<Npred<< " ) " ;
+               // std::cout<< "- ( "<<coeff<<" * "<<Npred<< " ) " ;
+                if(N<=0) /// pas de pop negative possible
+                {
+                    N=0;
+                }
 
             }
 
-            std::cout<< " = " << N<<std::endl;
-            /// sauvegarde des valeurs de N et Nplus 1 dans des vecteurs
+            //std::cout<< " = " << N<<std::endl;
+            /// sauvegarde des valeurs de N dans des vecteurs
             liste_N.push_back(N);
-            std::cout<< " = " <<std::endl;
+            //std::cout<< " " <<std::endl;
 
         }
         else
         {
-            std::cout<< " = " << N;
-            std::cout<< "  car pas de pred  "<<std::endl;
+           // std::cout<< " = " << N;
+           // std::cout<< "  car pas de pred  "<<std::endl;
             liste_N.push_back(N);
 
          }
-        std::cout<< " " <<std::endl;
+       // std::cout<< " " <<std::endl;
     }
 
 
@@ -694,8 +709,7 @@ void Graph::calculN()
     for(int k=0; k<ordre; k++)
     {
         m_vertices[k].m_value=liste_N[k];
-        std::cout <<"N+1 = "<< m_vertices[k].m_value<<std::endl;
-
+        std::cout << m_vertices[k].m_name<<" N = "<< m_vertices[k].m_value<<std::endl;
     }
 
 }
