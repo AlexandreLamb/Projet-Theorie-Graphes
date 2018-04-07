@@ -539,7 +539,7 @@ int Graph::menugraph()
     if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over())
     {
         sauvgarder(m_nomgraph) ;
-        visuelle_forte_connexite(0);
+
 
     }
     if(grman::mouse_click && m_interface->m_retour.is_mouse_over())
@@ -591,20 +591,32 @@ int Graph::menugraph()
 
 
 
+
+
+
         }
-m_interface->m_cmp_fconnexe.set_value(!m_interface->m_cmp_fconnexe.get_value());
+
+      m_interface->m_cmp_fconnexe.set_value(!m_interface->m_cmp_fconnexe.get_value());
+
 
     }
 
     if(grman::mouse_unclick&1 && m_interface->m_afficher_graphreduit.is_mouse_over())
     {
-         Afficher_graphReduit(1);
+         if(m_interface->m_afficher_graphreduit.get_value())
+         {
+             std::cout<<"test";
+             Afficher_graphReduit(1);
+
+         }
+
     }
 
     if(grman::mouse_unclick&1 && m_interface->m_cmp_fconnexe_off.is_mouse_over())
     {
         visuelle_forte_connexite(0);
         Afficher_graphReduit(0);
+         m_interface->m_afficher_graphreduit.set_value(1);
         m_interface->m_tool_box.remove_child(m_interface->m_cmp_fconnexe_off);
         m_interface->m_tool_box.remove_child(m_interface->m_nb_cmpfc);
         m_interface->m_tool_box.remove_child(m_interface->m_afficher_graphreduit);
