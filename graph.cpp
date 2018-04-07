@@ -325,6 +325,9 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_main_box.set_dim(908,730);
     m_main_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
     m_main_box.set_bg_color(BLANCJAUNE);
+    m_main_box.add_child(m_ordre_graph);
+    m_ordre_graph.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
+
 
     m_top_box.add_child(m_tool_box);
     m_tool_box.set_dim(80,730);
@@ -416,6 +419,7 @@ void Graph::make_graph_1()
     Graph::charger("graph1");
     m_nomgraph ="graph1";
 
+    m_interface->m_ordre_graph.set_message("ordre graph: " + std::to_string(ordre));
 
     /* add_interfaced_vertex(0,50.0,100,100,"requin.jpg");
      add_interfaced_vertex(1, 60.0, 100, 200, "thon.jpg");

@@ -337,6 +337,8 @@ class GraphInterface
         grman::WidgetText m_cmp_fconnexe_off_text1;
         grman::WidgetText m_nb_cmpfc;
 
+        grman::WidgetText m_ordre_graph;
+
 
 
         std::vector<grman::WidgetBox*> m_tab_cmp_GraphReduit;
