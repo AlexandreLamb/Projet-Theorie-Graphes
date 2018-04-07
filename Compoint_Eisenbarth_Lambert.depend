@@ -94,11 +94,19 @@
 	<iostream>
 	"graph.h"
 
+<<<<<<< HEAD
 1522924685 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\graph.cpp
 	"graph.h"
 	<string>
 
 1522924286 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\graph.h
+=======
+1523112037 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\graph.cpp
+	"graph.h"
+	<string>
+
+1523089351 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\graph.h
+>>>>>>> Forte-connexitÃ©/flo
 	<vector>
 	<map>
 	<string>
@@ -107,19 +115,23 @@
 	"tools_bar.h"
 	"grman/grman.h"
 
-1522792113 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\grman.h
+1523022012 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\grman.h
 	<allegro.h>
 	<string>
 	"grman_couleurs.h"
 	"coords.h"
 	"widget.h"
 
-1522792113 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\grman_couleurs.h
+1523094923 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\grman_couleurs.h
 
 1522792113 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\coords.h
 	<cmath>
 
+<<<<<<< HEAD
 1522924286 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\widget.h
+=======
+1523090307 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\widget.h
+>>>>>>> Forte-connexitÃ©/flo
 	"grman.h"
 	<iostream>
 	<string>
@@ -144,10 +156,17 @@
 	<loadpng.h>
 	<jpgalleg.h>
 
+<<<<<<< HEAD
 1522916660 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\widget.cpp
 	"widget.h"
 
 1522924286 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\main.cpp
+=======
+1523091779 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\grman\widget.cpp
+	"widget.h"
+
+1523023619 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\main.cpp
+>>>>>>> Forte-connexitÃ©/flo
 	"grman/grman.h"
 	<iostream>
 	"graph.h"
@@ -302,6 +321,7 @@
 	"Menu.h"
 
 1522923785 c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\menu.h
+<<<<<<< HEAD
 	<vector>
 	<map>
 	<string>
@@ -322,12 +342,18 @@
 	"Menu.h"
 
 1523010456 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\menu.h
+=======
+>>>>>>> Forte-connexitÃ©/flo
 	<vector>
 	<map>
 	<string>
 	<memory>
 	"grman/grman.h"
 
+<<<<<<< HEAD
 1523010456 source:c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\menu.cpp
+=======
+1523023097 source:c:\users\floo\onedrive\ece_paris\ing2\informatique\théorie des graphes\projet_théorie_des_graphes\projet-theorie-graphes\projet-theorie-graphes\menu.cpp
+>>>>>>> Forte-connexitÃ©/flo
 	"Menu.h"
 

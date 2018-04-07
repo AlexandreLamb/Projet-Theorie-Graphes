@@ -60,6 +60,7 @@ class Widget
         GravityY m_gravity_y = GravityY::Center;
 
         int m_bg_color = -1;
+        int m_bcolor=-1;
 
         int m_border_color = GRISSOMBRE;
         int m_border_color_over = VIOLETSOMBRE;
@@ -195,7 +196,9 @@ class Widget
 
         /// Les accesseurs de "styles" sont à compléter...
         void set_bg_color(int bgc) { m_bg_color = bgc; }
-        int get_border_color() { return is_gui_focus() ? m_border_color_focus : is_gui_over() ? m_border_color_over : m_border_color; }
+        void set_border_color(int bcolor) { m_bcolor = bcolor; }
+        int get_border_color(int param=0) { if(param==0)return is_gui_focus() ? m_border_color_focus : is_gui_over() ? m_border_color_over : m_border_color;
+                                              if (param==1) return m_bcolor; }
 
         Widget(const Widget&) = delete;
         Widget & operator=(const Widget&) = delete;
@@ -374,9 +377,12 @@ class WidgetBox : public Widget
 
         virtual void interact_focus();
         virtual bool captures_focus() { return true; }
+        virtual void draw_border();
         void set_moveable(bool moveable=true) { m_moveable = moveable; }
         bool get_isselected();
         void selectwidget();
+        bool m_isincmpf=false;
+
 };
 
 
@@ -458,6 +464,9 @@ class WidgetEdge : public Widget
 
         void set_children_position(double rel_pos) { m_children_position = rel_pos; }
         void set_children_lateral(double abs_lat) { m_children_lateral = abs_lat; }
+
+        void set_colorEdge(int color);
+        int get_colorEdge(int color);
 };
 
 

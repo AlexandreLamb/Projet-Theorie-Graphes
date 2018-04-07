@@ -80,6 +80,8 @@
 
 #include "grman/grman.h"
 
+
+
 /***************************************************
                     VERTEX
 ****************************************************/
@@ -183,7 +185,22 @@ class Vertex
         // La ligne précédente est en gros équivalent à la ligne suivante :
         // VertexInterface * m_interface = nullptr;
 
+<<<<<<< HEAD
         bool IsHide=false;
+=======
+       ///marquage
+
+        bool m_ismarqued=false;
+        bool m_ismarqued_connexeout=false;
+        bool m_ismarqued_connexein=false;
+        bool m_isin_cmpconnexeout=false;
+        bool m_isin_cmpconnexein=false;
+
+      ///indice du vertex dans la map de graph
+        int m_idx;
+
+
+>>>>>>> Forte-connexitÃ©/flo
 
     public:
 
@@ -192,12 +209,16 @@ class Vertex
         Vertex (double value=0, int r=0, std::string name=" ", VertexInterface *interface=nullptr) :
             m_value(value), m_r(r), m_name(name), m_interface(interface)  {  }
 
+       // Vertex (Vertex &v): m_value(v.m_value), m_interface(new std::shared_ptr <VertexInterface>(v.m_interface)),
+            //   m_idx(v.m_idx) , m_in(v.m_in), m_out(v.m_out){  }
+
         /// Vertex étant géré par Graph ce sera la méthode update de graph qui appellera
         /// le pre_update et post_update de Vertex (pas directement la boucle de jeu)
         /// Voir l'implémentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
 
+<<<<<<< HEAD
 
         void Afficher_option();
 
@@ -215,6 +236,30 @@ class Vertex
         void set_idx_V(int id);
         int get_idx_V();
 
+=======
+        ///marquage accseceur
+
+        void set_marque(bool x);
+        bool get_marque();
+        void set_connexeout(bool x);
+        bool get_connexeout();
+        void set_connexein(bool x);
+        bool get_connexein();
+        void set_marque_connexeout(bool x);
+        bool get_marque_connexeout();
+        void set_marque_connexein(bool x);
+        bool get_marque_connexein();
+
+
+
+        int get_idx();
+        void set_idx(int x);
+
+        bool islinked(Vertex x,int param);
+
+        void Cacher_Sommet();
+        void Afficher_Somet();
+>>>>>>> Forte-connexitÃ©/flo
 };
 
 
@@ -254,6 +299,8 @@ class EdgeInterface
         // Le constructeur met en place les éléments de l'interface
         // voir l'implémentation dans le .cpp
         EdgeInterface(Vertex& from, Vertex& to);
+
+
 };
 
 
@@ -303,6 +350,15 @@ class Edge
         /// Voir l'implémentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
+<<<<<<< HEAD
+=======
+
+        ///afficher masquer les arretes
+        void Afficher_Edges(Vertex& from , Vertex& to);
+        void hide_edge_out();
+        void hide_edge_in();
+};
+>>>>>>> Forte-connexitÃ©/flo
 
 
         void hide_edge_in(Vertex& v);
@@ -353,16 +409,34 @@ class GraphInterface
         grman::WidgetButton m_button_flux;
         grman::WidgetText m_text_flux;
 
+<<<<<<< HEAD
         grman::WidgetButton m_button_play;
         grman::WidgetText m_text_play;
+=======
+        grman::WidgetButton m_cmp_fconnexe;
+        grman::WidgetText m_cmp_fconnexe_text1;
+        grman::WidgetText m_cmp_fconnexe_text2;
+        grman::WidgetText m_cmp_fconnexe_text3;
+        //bouton pour afficher le graphe réduit
+        grman::WidgetButton m_afficher_graphreduit;
+        grman::WidgetText m_afficher_graphreduit_text1;
+        grman::WidgetText m_afficher_graphreduit_text2;
+        //bouton pour désactiver l'affichage des cmpconnexe
+        grman::WidgetButton m_cmp_fconnexe_off;
+        grman::WidgetText m_cmp_fconnexe_off_text1;
+        grman::WidgetText m_nb_cmpfc;
+
+        grman::WidgetText m_ordre_graph;
+>>>>>>> Forte-connexitÃ©/flo
 
 
 
+        std::vector<grman::WidgetBox*> m_tab_cmp_GraphReduit;
+        std::vector<grman::WidgetEdge*> m_tab_edge_GraphReduit;
+        std::vector<grman::WidgetText*> m_tab_texte_GraphReduit;
 
 
 
-        // A compléter éventuellement par des widgets de décoration ou
-        // d'édition (boutons ajouter/enlever ...)
 
     public :
 
@@ -391,8 +465,17 @@ class Graph
         int nbrEdge;
         std::string m_nomgraph;
 
+<<<<<<< HEAD
 std::vector<int> Sommet_suite_in;
 std::vector<int> Sommet_suite_out;
+=======
+        std::vector<std::vector<Vertex*>> m_tabcmpfc;
+
+
+        bool m_quitter=0;
+
+
+>>>>>>> Forte-connexitÃ©/flo
 
     public:
 
@@ -409,7 +492,6 @@ std::vector<int> Sommet_suite_out;
         /// Cette méthode est à enlever et remplacer par un système
         /// de chargement de fichiers par exemple.
         void make_example();
-
         void make_graph_1();
 
         void make_graph_2();
@@ -439,9 +521,33 @@ std::vector<int> Sommet_suite_out;
         void supprimerVertex();
         int menugraph();
 
+<<<<<<< HEAD
+=======
+        /// Reset des difféntes marquage nécessaire pout la forte connexité
+        void Reset_marquage_vertex();
+        void Reset_marquage_marqued_connexeinout();
+        void Reset_marquage_isincompf_connexeinout();
+
+        ///methode qui renvoit l'indice de l'arete qui relie les deux sommets en parametre
+        int findEdge(int sfrom, int sto);
+
+
+      /// Fonctions de recherche de forte connexité
+        std::vector<Vertex*> Cmp_fort_connexe_serach(Vertex s);
+         std::vector<std::vector<Vertex*>> search_all_cmpfc();
+
+    /// Mise en valeurs visuel de la forte connexité
+
+        void visuelle_forte_connexite(bool activate);
+        void Afficher_graphReduit(bool activate);
+
+    ///permet de revenir au menu
+      int get_quitter();
+      void set_quitter(bool x);
+
+>>>>>>> Forte-connexitÃ©/flo
         /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
         void update();
-
         void destroy_graph();
 };
 
