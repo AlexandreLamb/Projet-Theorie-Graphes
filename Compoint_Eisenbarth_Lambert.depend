@@ -62,16 +62,16 @@
 	<map>
 	"Menu.h"
 
-1523120486 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman.h
+1523139467 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman.h
 	<allegro.h>
 	<string>
 	"grman_couleurs.h"
 	"coords.h"
 	"widget.h"
 
-1523120486 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman_couleurs.h
+1523139467 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman_couleurs.h
 
-1523120487 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
+1523139467 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
 	"grman.h"
 	<iostream>
 	<string>
@@ -104,17 +104,17 @@
 	<iostream>
 	"graph.h"
 
-1523120486 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.cpp
+1523139467 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.cpp
 	"widget.h"
 
-1523138140 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
+1523139467 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
 	"grman/grman.h"
 	<iostream>
 	"graph.h"
 	"Menu.h"
 	"tools_bar.h"
 
-1523138263 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
+1523139467 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
 	<vector>
 	<map>
 	<string>
@@ -123,7 +123,10 @@
 	"tools_bar.h"
 	"grman/grman.h"
 
-1523119602 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
+1523139467 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
+	"graph.h"
+	<string>
+	<map>
 
 1522831878 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\tools_bar.cpp
 	"tools_bar.h"
@@ -379,7 +382,7 @@
 	<memory>
 	"grman/grman.h"
 
-1523120487 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\menu.cpp
+1523139467 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\menu.cpp
 	"Menu.h"
 
 1523010456 c:\users\add\desktop\zowcode\projetinfo\projet-theorie-graphes\menu.h
