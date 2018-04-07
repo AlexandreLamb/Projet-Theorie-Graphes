@@ -44,9 +44,11 @@
 			<Add library="png16.dll" />
 			<Add library="jpgalleg" />
 		</Linker>
+		<Unit filename="Menu.cpp" />
 		<Unit filename="Menu.h" />
 		<Unit filename="graph.cpp" />
 		<Unit filename="graph.h" />
+		<Unit filename="graph1.txt" />
 		<Unit filename="grman/coords.cpp" />
 		<Unit filename="grman/coords.h" />
 		<Unit filename="grman/grman.cpp" />

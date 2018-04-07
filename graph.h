@@ -185,9 +185,7 @@ class Vertex
         // La ligne prÈcÈdente est en gros Èquivalent ‡ la ligne suivante :
         // VertexInterface * m_interface = nullptr;
 
-<<<<<<< HEAD
         bool IsHide=false;
-=======
        ///marquage
 
         bool m_ismarqued=false;
@@ -200,7 +198,6 @@ class Vertex
         int m_idx;
 
 
->>>>>>> Forte-connexit√©/flo
 
     public:
 
@@ -218,7 +215,6 @@ class Vertex
         void pre_update();
         void post_update();
 
-<<<<<<< HEAD
 
         void Afficher_option();
 
@@ -236,7 +232,7 @@ class Vertex
         void set_idx_V(int id);
         int get_idx_V();
 
-=======
+
         ///marquage accseceur
 
         void set_marque(bool x);
@@ -257,9 +253,6 @@ class Vertex
 
         bool islinked(Vertex x,int param);
 
-        void Cacher_Sommet();
-        void Afficher_Somet();
->>>>>>> Forte-connexit√©/flo
 };
 
 
@@ -350,20 +343,12 @@ class Edge
         /// Voir l'implÈmentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
-<<<<<<< HEAD
-=======
 
         ///afficher masquer les arretes
         void Afficher_Edges(Vertex& from , Vertex& to);
         void hide_edge_out();
         void hide_edge_in();
-};
->>>>>>> Forte-connexit√©/flo
 
-
-        void hide_edge_in(Vertex& v);
-        void hide_edge_out(Vertex& v);
-        void Afficher_Edges(Vertex& from , Vertex& to);
 
         void set_idx_E(int id);
         int get_idx_E();
@@ -409,10 +394,10 @@ class GraphInterface
         grman::WidgetButton m_button_flux;
         grman::WidgetText m_text_flux;
 
-<<<<<<< HEAD
+
         grman::WidgetButton m_button_play;
         grman::WidgetText m_text_play;
-=======
+
         grman::WidgetButton m_cmp_fconnexe;
         grman::WidgetText m_cmp_fconnexe_text1;
         grman::WidgetText m_cmp_fconnexe_text2;
@@ -427,7 +412,6 @@ class GraphInterface
         grman::WidgetText m_nb_cmpfc;
 
         grman::WidgetText m_ordre_graph;
->>>>>>> Forte-connexit√©/flo
 
 
 
@@ -465,17 +449,16 @@ class Graph
         int nbrEdge;
         std::string m_nomgraph;
 
-<<<<<<< HEAD
+
 std::vector<int> Sommet_suite_in;
 std::vector<int> Sommet_suite_out;
-=======
+
         std::vector<std::vector<Vertex*>> m_tabcmpfc;
 
 
         bool m_quitter=0;
 
 
->>>>>>> Forte-connexit√©/flo
 
     public:
 
@@ -506,7 +489,6 @@ std::vector<int> Sommet_suite_out;
 
         double findEdgeWeight(int s1, int s2);
 
-         int findEdge(int s1, int s2);
 
         void remplirPred();
 
@@ -521,8 +503,7 @@ std::vector<int> Sommet_suite_out;
         void supprimerVertex();
         int menugraph();
 
-<<<<<<< HEAD
-=======
+
         /// Reset des diffÈntes marquage nÈcessaire pout la forte connexitÈ
         void Reset_marquage_vertex();
         void Reset_marquage_marqued_connexeinout();
@@ -545,7 +526,6 @@ std::vector<int> Sommet_suite_out;
       int get_quitter();
       void set_quitter(bool x);
 
->>>>>>> Forte-connexit√©/flo
         /// La mÈthode update ‡ appeler dans la boucle de jeu pour les graphes avec interface
         void update();
         void destroy_graph();

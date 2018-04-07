@@ -29,10 +29,10 @@ int main()
         case 1:
              g.make_graph_1();
 
-             g.fonctionnel();
+            // g.fonctionnel();
 
 
-             while(!key[KEY_ESC] &&    g.menugraph()!=1)
+             while(!key[KEY_ESC] )
              {
               g.update();
               grman::mettre_a_jour();
@@ -45,7 +45,7 @@ int main()
 
         case 2:
             g.make_graph_2();
-             while(!key[KEY_ESC] &&    g.menugraph()!=1)
+             while(!key[KEY_ESC])
              {
               g.update();
               grman::mettre_a_jour();
