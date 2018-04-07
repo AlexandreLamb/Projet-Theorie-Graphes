@@ -280,7 +280,7 @@ class Edge
         int m_to;
 
         /// Variable coefficient qui permet de savoir combien sont mangé
-        double m_weight;
+        float m_weight;
 
         /// indice du sommet pour savoir ou il est dans la map
 
@@ -430,7 +430,7 @@ std::vector<int> Sommet_suite_out;
 
         void fonctionnel();
 
-        double findEdgeWeight(int s1, int s2);
+        float findEdgeWeight(int s1, int s2);
 
          int findEdge(int s1, int s2);
 

@@ -623,7 +623,9 @@ void Graph::fonctionnel()
 /// methode qui calcul et remplit le N des sommets
 void Graph::calculN()
 {
-    int N=0;
+    float N_save=0;
+    float N=0;
+    float NPlus1=0;
     int K=0;
     int nb;
     int id_pred;
@@ -633,38 +635,56 @@ void Graph::calculN()
     /// parcours des sommets
     for(int k=0; k<ordre; k++)
     {
+        /// Nsave = N | N=Nplus1 | ici on calcul Nplu1 avec le Nsave
+        N_save=m_vertices[k].m_value;
+        N=m_vertices[k].m_valuePlus1;
+
+        /// recupere le K
         K=m_vertices[k].m_K;
-        std::cout <<"K = "<< m_vertices[k].m_K <<std::endl;
 
-        //m_vertices[k].m_value=m_vertices[k].m_valuePlus1;
-        std::cout <<"N = "<< m_vertices[k].m_value <<std::endl;
+        if(K!=0) // si K=0 pas de succ don on peut pas se reproduire et manger
+        {
+            std::cout << "N+1.1 = N + r * N * (1 - ( N / K )) "<<std::endl;
+            std::cout<< "N+1.1 = ("<< N_save << ") + ("<<m_vertices[k].m_r << ") * (" <<N_save<<") * (1-(" <<N_save<<" / "<<K << ") = ";
+            N= (N_save) + (m_vertices[k].m_r)*(N_save)*(1-(N_save)/K);
+            std::cout<< " "<< N<<std::endl;
 
-        std::cout<< "N+1.1 = ("<< m_vertices[k].m_value << ") + ("<<m_vertices[k].m_r << ") * (" <<m_vertices[k].m_value<<") * (1-(" <<m_vertices[k].m_value<<" / "<<K <<std::endl;
-        N= (m_vertices[k].m_value) + (m_vertices[k].m_r)*(m_vertices[k].m_value)*(1-(m_vertices[k].m_value)/K);
-        std::cout<< "N+1.1 = "<< N<<std::endl;
+        }
+        else {std::cout<< " K=0 -> N+1.1 = N = "<< N <<std::endl; }
+
 
         /// on recupere le nombre de ses predecesseurs
         nb=m_vertices[k].m_pred.size();
-        std::cout<< "N+1 = "<<m_vertices[k].m_value <<std::endl;
-        if(nb!=0)
+        std::cout<< "N+1 = "<<N;
+        if(nb!=0) // si nb=0 pas de predecesseurs
         {
             for(int i=0; i<nb; i++)
             {
                 id_pred=m_vertices[k].m_pred[i];
 
-                coeff=findEdgeWeight(k, id_pred);
+                coeff=findEdgeWeight(id_pred, k);
+
 
                 Npred=m_vertices[id_pred].m_value;
 
                 N=N-(coeff*Npred);
                 std::cout<< "- ( "<<coeff<<" * "<<Npred<< " ) " ;
-                 m_vertices[k].m_valuePlus1=N;
+
             }
             /// actualisation nb pop
-              std::cout<< "N+1 = "<< m_vertices[k].m_valuePlus1<<std::endl;
+            m_vertices[k].m_valuePlus1=N;
+            std::cout<< " " <<std::endl;
+              std::cout<< " N+1 =" <<N;
+             std::cout<< " = "<< m_vertices[k].m_valuePlus1<<std::endl;
 
         }
-        else{m_vertices[k].m_valuePlus1=m_vertices[k].m_value; }
+        else{m_vertices[k].m_valuePlus1=N;
+        std::cout<< " pas de pred : ";
+        std::cout<< " N+1 =" <<m_vertices[k].m_valuePlus1<<std::endl;
+
+         }
+std::cout<< " " <<std::endl;
+
 
 
     }
@@ -762,12 +782,12 @@ void Graph::remplirSucc()
 }
 
 /// methode qui renvoit le poids de l'arete des deux sommets en parametre
-double Graph::findEdgeWeight(int sfrom, int sto)
+float Graph::findEdgeWeight(int sfrom, int sto)
 {
     int s1=0;
     int s2=0;
 
-    double poids=0;
+    float poids=0;
 
     /// parcourt la map d'arete
     for(auto &elt : m_edges)
@@ -780,7 +800,6 @@ double Graph::findEdgeWeight(int sfrom, int sto)
        if(s1==sfrom && s2==sto)
        {
            poids= elt.second.m_weight;
-
 
            return poids;
        }
@@ -816,9 +835,9 @@ void Graph::supprimerVertex(){
 
 
             }
-            }
         }
     }
+}
 
 
 
@@ -830,12 +849,10 @@ void Graph::charger(std::string graphName){
     std::string picName;
     bool bo=false;
 
-std::cout<<"rentrer dans charger"<<std::endl;
 
             if (fichier){
 
-
-         fichier >> Graph::ordre;
+        fichier >> Graph::ordre;
         fichier >> Graph::nbrEdge;
 
         for(int i=0 ; i <ordre  ; i++){
@@ -845,7 +862,7 @@ std::cout<<"rentrer dans charger"<<std::endl;
         fichier >> r;
         fichier >> picName;
 
-        add_interfaced_vertex(i,poidVertex,posX,posY,r,picName+".jpg");
+        add_interfaced_vertex(i,poidVertex,r,posX,posY,picName+".jpg");
         }
         for(int j=0 ; j < nbrEdge ; j++){
 
