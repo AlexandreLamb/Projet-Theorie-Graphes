@@ -625,19 +625,21 @@ void Graph::calculN()
 {
     float N_save=0;
     float N=0;
-    float NPlus1=0;
     int K=0;
     int nb;
     int id_pred;
     float Npred;
     float coeff=0;
+    std::vector<float> liste_N;
+
 
     /// parcours des sommets
     for(int k=0; k<ordre; k++)
     {
         /// Nsave = N | N=Nplus1 | ici on calcul Nplu1 avec le Nsave
+        /// sauvegarde du N+1 que l'on ecrase
+        N=m_vertices[k].m_value;
         N_save=m_vertices[k].m_value;
-        N=m_vertices[k].m_valuePlus1;
 
         /// recupere le K
         K=m_vertices[k].m_K;
@@ -645,9 +647,8 @@ void Graph::calculN()
         if(K!=0) // si K=0 pas de succ don on peut pas se reproduire et manger
         {
             std::cout << "N+1.1 = N + r * N * (1 - ( N / K )) "<<std::endl;
-            std::cout<< "N+1.1 = ("<< N_save << ") + ("<<m_vertices[k].m_r << ") * (" <<N_save<<") * (1-(" <<N_save<<" / "<<K << ") = ";
+            std::cout<< "N+1.1 = ("<< N_save << ") + ("<<m_vertices[k].m_r << ") * (" <<N_save<<") * (1-(" <<N_save<<" / "<<K << ") = "<<std::endl;
             N= (N_save) + (m_vertices[k].m_r)*(N_save)*(1-(N_save)/K);
-            std::cout<< " "<< N<<std::endl;
 
         }
         else {std::cout<< " K=0 -> N+1.1 = N = "<< N <<std::endl; }
@@ -655,7 +656,7 @@ void Graph::calculN()
 
         /// on recupere le nombre de ses predecesseurs
         nb=m_vertices[k].m_pred.size();
-        std::cout<< "N+1 = "<<N;
+        std::cout<< "N+1 = N ";
         if(nb!=0) // si nb=0 pas de predecesseurs
         {
             for(int i=0; i<nb; i++)
@@ -664,30 +665,39 @@ void Graph::calculN()
 
                 coeff=findEdgeWeight(id_pred, k);
 
-
+                /// N inchange encore
                 Npred=m_vertices[id_pred].m_value;
 
                 N=N-(coeff*Npred);
                 std::cout<< "- ( "<<coeff<<" * "<<Npred<< " ) " ;
 
             }
-            /// actualisation nb pop
-            m_vertices[k].m_valuePlus1=N;
-            std::cout<< " " <<std::endl;
-              std::cout<< " N+1 =" <<N;
-             std::cout<< " = "<< m_vertices[k].m_valuePlus1<<std::endl;
+
+            std::cout<< " = " << N<<std::endl;
+            /// sauvegarde des valeurs de N et Nplus 1 dans des vecteurs
+            liste_N.push_back(N);
+            std::cout<< " = " <<std::endl;
 
         }
-        else{m_vertices[k].m_valuePlus1=N;
-        std::cout<< " pas de pred : ";
-        std::cout<< " N+1 =" <<m_vertices[k].m_valuePlus1<<std::endl;
+        else
+        {
+            std::cout<< " = " << N;
+            std::cout<< "  car pas de pred  "<<std::endl;
+            liste_N.push_back(N);
 
          }
-std::cout<< " " <<std::endl;
+        std::cout<< " " <<std::endl;
+    }
 
 
+    /// parcours des sommets pour montee en memoir les vecteurs dans les attributs
+    for(int k=0; k<ordre; k++)
+    {
+        m_vertices[k].m_value=liste_N[k];
+        std::cout <<"N+1 = "<< m_vertices[k].m_value<<std::endl;
 
     }
+
 }
 
 /// methode qui calcul et remplit le K des sommets

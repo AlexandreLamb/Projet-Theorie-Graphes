@@ -160,9 +160,6 @@ class Vertex
         /// Nombre de la population
         float m_value;
 
-        /// Nombre de la population à t+1
-        float m_valuePlus1;
-
 
         /// Variable K qui nous permet de calculer la populataion a t+1
         float m_K;
