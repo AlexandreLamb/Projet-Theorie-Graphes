@@ -29,11 +29,14 @@ int main()
         case 1:
              g.make_graph_1();
 
+
             // g.fonctionnel();
 
 
              while(!key[KEY_ESC] )
+
              {
+
               g.update();
               grman::mettre_a_jour();
              }

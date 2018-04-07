@@ -87,7 +87,7 @@ void Vertex::Afficher_option(){
 
          m_interface-> m_tools_label.set_message("Option Sommet");
          m_interface-> m_label_cacher.set_message("Cacher");
-         m_interface-> m_label_edit.set_message("Editer");
+         m_interface-> m_label_edit.set_message("Retour");
 
          m_interface-> m_tools_label.set_pos(0,0);
 
@@ -516,46 +516,24 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_cmp_fconnexe_text2.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Center);
     m_cmp_fconnexe_text3.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Down);
 
+    m_tool_box.add_child(m_button_K_co);
+
+    m_button_K_co.set_pos(10,280);
+    m_button_K_co.set_dim(45,30);
+    m_button_K_co.set_bg_color(ROUGE);
+
+    m_button_K_co.add_child(m_label_K_co);
+    m_label_K_co.set_message("K-Co");
+    m_label_K_co.set_gravity_xy(grman::GravityX::Center,grman::GravityY::Center);
 
     m_tool_box.set_bg_color(BLANCBLEU);
 
 
 }
 
-/// Méthode spéciale qui construit un graphe arbitraire (démo)
-/// Cette méthode est à enlever et remplacer par un système
-/// de chargement de fichiers par exemple.
-/// Bien sûr on ne veut pas que vos graphes soient construits
-/// "à la main" dans le code comme ça.
 void Graph::make_example()
 {
-    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
-    // La ligne précédente est en gros équivalente à :
-    // m_interface = new GraphInterface(50, 0, 750, 600);
 
-    /// Les sommets doivent être définis avant les arcs
-    // Ajouter le sommet d'indice 0 de valeur 30 en x=200 et y=100 avec l'image clown1.jpg etc...
-    add_interfaced_vertex(0, 29, 0, 0, 2, "clown2.jpg");
-    add_interfaced_vertex(1, 60.0, 400, 100,2, "clown2.jpg");
-    add_interfaced_vertex(2,  50.0, 200, 300, 2, "clown3.jpg");
-    add_interfaced_vertex(3,  0.0, 400, 300, 2, "clown4.jpg");
-    add_interfaced_vertex(4,  100.0, 600, 300,2, "clown5.jpg");
-    add_interfaced_vertex(5,  0.0, 100, 500,2, "bad_clowns_xx3xx.jpg", 0);
-    add_interfaced_vertex(6,  0.0, 300, 500,2, "bad_clowns_xx3xx.jpg", 1);
-    add_interfaced_vertex(7,  0.0, 500, 500,2, "bad_clowns_xx3xx.jpg", 2);
-
-    /// Les arcs doivent être définis entre des sommets qui existent !
-    // AJouter l'arc d'indice 0, allant du sommet 1 au sommet 2 de poids 50 etc...
-    add_interfaced_edge(0, 1, 2, 50.0);
-    add_interfaced_edge(1, 0, 1, 50.0);
-    add_interfaced_edge(2, 1, 3, 75.0);
-    add_interfaced_edge(3, 4, 1, 25.0);
-    add_interfaced_edge(4, 6, 3, 25.0);
-    add_interfaced_edge(5, 7, 3, 25.0);
-    add_interfaced_edge(6, 3, 4, 0.0);
-    add_interfaced_edge(7, 2, 0, 100.0);
-    add_interfaced_edge(8, 5, 2, 20.0);
-    add_interfaced_edge(9, 3, 7, 80.0);
 }
 
 
@@ -573,12 +551,207 @@ void Graph::make_graph_2(){
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
     Graph::charger("graph2");
     m_nomgraph ="graph2";
-}
-
-void Graph::find_K_connex(){
 
 
 }
+
+
+long int** Graph::find_K_connex(){
+
+long int* tab;
+long int** liste;
+
+long int i,j;
+long int n= ordre;
+
+int cmp = 0;
+int k =0;
+tab=(long int*)malloc(n*sizeof(long int));
+liste = (long int**)malloc((long int) pow((double)n,(double)p) * sizeof(long int*));
+for(i=0;i<(long int )pow((double)n,(double)p);i++){
+    liste[i] = (long int*)malloc(p*sizeof(long int));
+}
+for(i=0;i<n;i++){
+    tab[i]=i;
+}
+for(i=0;i<(long int )pow((double)n,(double)p);i++){
+    for(j=0;j<p;j++){
+        liste[i][j] = tab[(i/(long int)pow((double)n,(double)(p-(j+1))))%n];
+    }
+}
+for(k;k<p;k++){
+    for(i=0;i<(long int )pow((double)n,(double)p);i++){
+        for(j=0;j<p;j++){
+            if(liste[i][k]==liste[i][j] && k!=j ){
+                liste[i][0]=-1;
+        }
+    }
+}
+}
+return liste;
+}
+
+ bool Graph::IsConnex(){
+
+
+
+int n = ordre;
+
+long int** tab ;
+
+
+std::vector<int> SomemtMarque;
+
+int* marque;
+
+int ** adja = new int* [ordre];
+int tmp1=0,tmp2=0;
+for(int i =0 ; i < ordre;i++){
+    adja[i] = new int [ordre];
+}
+
+std::cout<<"Choisir quelle k-connexité vous voulez tester ? ...";
+std::cin>>Graph::p;
+
+tab= find_K_connex();
+
+
+
+for(int i=0;i<(long int )pow((double)n,(double)p);i++){
+   if(tab[i][0] != -1 ){
+
+    for(int j=0;j<p;j++){
+
+
+              m_vertices[tab[i][j]].IsMarque=true;  ///on marque toute la ligne
+            m_vertices[tab[i][j]].Cacher_Sommet();
+            SomemtMarque.push_back(tab[i][j]);
+
+
+    }
+
+    for(int a =0 ; a < ordre;a++){
+        for(int b = 0 ; b < ordre ; b ++){
+            adja[a][b]=0;
+        }
+    }
+
+
+
+    for(int a = 0 ; a < nbrEdge ; a++ ){
+        if(!m_vertices[m_edges[a].m_from].IsMarque && !m_vertices[m_edges[a].m_to].IsMarque )
+        {
+            adja[m_edges[a].m_from][m_edges[a].m_to] = 1;
+            adja[m_edges[a].m_to][m_edges[a].m_from] = 1;
+            tmp1=m_edges[a].m_to;
+        }
+    }
+
+
+
+     marque =  marquage(adja,ordre-p,tmp1);
+     tmp2=0;
+
+     for(int x =0 ;x< ordre ;x++){
+
+        tmp2=marque[x]+tmp2; ///nbr sommet marqué
+     }
+
+    if(tmp2 == ordre-p){
+            std::cout<<"les sommet : "<<std::endl;
+        for(int i = 0 ; i<SomemtMarque.size();i++){
+                std::cout<<"- "<<SomemtMarque[i]<<std::endl;
+        }
+    std::cout<<"lorsqu'il sont deconnecte ne rende pas le graph non connexe"<<std::endl;
+    }
+    else{
+        std::cout<<"les sommet marque on deconnecte le graph"<<std::endl;
+    }
+
+    SomemtMarque.clear();
+
+    for(int a=0;a<p;a++){
+
+              m_vertices[tab[i][a]].IsMarque=false;  ///on marque toute la ligne
+                m_vertices[tab[i][a]].Afficher_Somet();
+    }
+
+
+
+   }
+}
+
+
+
+
+}
+void Graph::Temporise(){
+    bool isTemp=false;
+        m_interface->m_tool_box.add_child(m_interface->m_temp);
+        m_interface->m_temp.set_pos(10,400);
+        m_interface->m_temp.set_dim(35,40);
+        m_interface->m_temp.set_bg_color(ROUGE);
+
+
+        do{
+        if(grman::mouse_click && m_interface->m_temp.is_mouse_over()){
+
+        isTemp=true;
+
+        }
+
+        }
+        while(isTemp==false);
+}
+
+int* Graph::marquage(int** adja , int _ordre , int s ){
+
+    int* marques = new int[ordre];
+    int x,y;
+    int cmp=0;
+    /*int* tab = new int[_ordre];
+    for(int i = 0 ; i< ordre ; i++ ){
+            std::cout<<"s = " <<s<<std::endl;
+        if((s<ordre)&&(!m_vertices[s].IsMarque)){
+        tab[cmp]=s;
+        std::cout<<"tab de " <<cmp <<" = "<< tab[cmp]<<std::endl;
+        cmp++;
+
+        }
+        if(s>=ordre) {
+            s = 0;
+        }
+s++;
+
+    }*/
+    for(x=0;x<ordre;x++){
+        marques[x]= 0;
+    }
+    marques[s]=1;
+
+   for(x=0;x<ordre;x++){
+        if(marques[x]){
+            for(y=0;y<ordre;y++){
+                    if(adja[x][y]&&!marques[y]){
+                            marques[y]=1;
+                    }
+            }
+        }
+    }
+
+    for(x=s;x>0;x--){
+
+        if(marques[x]){
+            for(y=0;y<ordre;y++){
+                    if(adja[x][y]&&!marques[y]){
+                            marques[y]=1;
+                    }
+            }
+        }
+    }
+return marques;
+}
+
 
 int Graph::KparmisN(int k,int n){
 
@@ -591,6 +764,33 @@ void Graph::addVertex()
 }
 
 
+
+
+
+
+std::vector<int> Graph::allouer_k_uplet(){
+
+    std::vector<int> vec;
+    int** mat;
+    int cmp=0;
+
+    mat = new int*[ordre];
+    for(int i = 0 ; i < ordre ; i++ ){
+        mat[i]=new int [ordre-i];
+    }
+
+        for(int i = 0 ; i <ordre ; i++){
+            //mat[i][0]=i;
+            //vec.push_back( mat[i][0]);
+            for(int j =0; j<ordre-i;j++){
+                mat[i][j]=cmp;
+                vec.push_back( mat[i][j]);
+                cmp++;
+              }
+            cmp=i+1;
+        }
+        return vec;
+}
 
 
 ///zoe : sous prgramme qui gère partie fonctinnel sans affichage
@@ -923,8 +1123,17 @@ int Graph::menugraph()
     }
     if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over()){
 
-       sauvgarder(m_nomgraph);
-               //visuelle_forte_connexite(0);
+
+        sauvgarder(m_nomgraph);
+
+    }
+    if(grman::mouse_click && m_interface->m_button_flux.is_mouse_over()){
+
+
+
+    }
+    if(grman::mouse_click && m_interface->m_button_K_co.is_mouse_over()){
+        IsConnex();
 
 
     }
@@ -1474,14 +1683,11 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     Sommet_suite_in.push_back(id_vert1);
     Sommet_suite_out.push_back(id_vert2);
 
-/*****************************************
-    je laisse pour l'instant c'est 2 ligne
-    et mets les deux du haut en commentaire
-    juste que je verifie que ca pose pas de
-    problmes quand je les utilise
 
-******************************************/
    /* if((idx!=id_vert1) ||(idx!=id_vert2))
+=======
+   /* if((idx!=id_vert1) ||(idx!=id_vert2) )
+>>>>>>> k-conex/alex
     {
         m_vertices[id_vert1].m_in.push_back(idx);
         m_vertices[id_vert2].m_out.push_back(idx);

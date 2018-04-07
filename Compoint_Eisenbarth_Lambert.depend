@@ -5,6 +5,13 @@
 1522695206 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\coords.h
 	<cmath>
 
+1523006668 D
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
+
 1523120469 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman.cpp
 	<cmath>
 	<unordered_map>
@@ -19,6 +26,42 @@
 	<loadpng.h>
 	<jpgalleg.h>
 
+1523007153 onex/alex
+	<cmath>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<string>
+	<iostream>
+	<regex>
+	"grman.h"
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+	"Menu.h"
+	"tools_bar.h"
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"fstream"
+	"tools_bar.h"
+	"grman/grman.h"
+	"graph.h"
+	<string>
+	<map>
+	"Menu.h"
+
 1523120486 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman.h
 	<allegro.h>
 	<string>
@@ -27,13 +70,6 @@
 	"widget.h"
 
 1523120486 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\grman_couleurs.h
-
-1523010456 D
-	<vector>
-	<map>
-	<string>
-	<memory>
-	"grman/grman.h"
 
 1523120487 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.h
 	"grman.h"
@@ -71,14 +107,14 @@
 1523120486 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\grman\widget.cpp
 	"widget.h"
 
-1523137627 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
+1523138140 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\main.cpp
 	"grman/grman.h"
 	<iostream>
 	"graph.h"
 	"Menu.h"
 	"tools_bar.h"
 
-1523122640 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
+1523138263 c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.h
 	<vector>
 	<map>
 	<string>
@@ -87,10 +123,7 @@
 	"tools_bar.h"
 	"grman/grman.h"
 
-1523137576 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
-	"graph.h"
-	<string>
-	<map>
+1523119602 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\graph.cpp
 
 1522831878 source:c:\users\al173632\documents\projet\compoint_eisenbarth_lambert\tools_bar.cpp
 	"tools_bar.h"
