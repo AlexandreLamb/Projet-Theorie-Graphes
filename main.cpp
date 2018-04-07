@@ -25,10 +25,10 @@ int main()
         {
         case 1:
              g.make_graph_1();
-                g.allouer_k_uplet();
-                        //g.find_K_connex();
+            g.IsConnex();
              while(!key[KEY_ESC] &&    g.menugraph()!=1)
              {
+
               g.update();
               grman::mettre_a_jour();
              }

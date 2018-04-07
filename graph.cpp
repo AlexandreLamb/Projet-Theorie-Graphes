@@ -260,14 +260,14 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
 }
 
 
-void Edge::hide_edge_in(Vertex& v){
+void Edge::hide_edge_in(){
 
 m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
 m_interface->m_top_edge.detach_from();
 
 
 }
-void Edge::hide_edge_out(Vertex& v){
+void Edge::hide_edge_out(){
 
 m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
 m_interface->m_top_edge.detach_to();
@@ -457,28 +457,192 @@ void Graph::make_graph_2(){
     m_nomgraph ="graph2";
 }
 
-void Graph::find_K_connex(){
-    int kmin;
-    int cmp1=0;
-    int cmp2=1;
-    int cmp3=0;
-    int kParmisN;
-    bool IsKmin =false;
-    int** pyra=Graph::allouer_k_uplet();
+long int** Graph::find_K_connex(){
 
-        for(int j = 0 ; j < ordre-1 ;j++){
+long int* tab;
+long int** liste;
 
-            for(int i = cmp3 ; i< ordre; i++){
-                std::cout<<i<<" "<<pyra[cmp1][i]<<std::endl;
+long int i,j;
+long int n= 6;
+long int p = 4;
 
-            }
-            cmp1++;
-            cmp3++;
+int cmp = 0;
+int k =0;
+tab=(long int*)malloc(n*sizeof(long int));
+liste = (long int**)malloc((long int) pow((double)n,(double)p) * sizeof(long int*));
+for(i=0;i<(long int )pow((double)n,(double)p);i++){
+    liste[i] = (long int*)malloc(p*sizeof(long int));
+}
+for(i=0;i<n;i++){
+    tab[i]=i;
+}
+for(i=0;i<(long int )pow((double)n,(double)p);i++){
+    for(j=0;j<p;j++){
 
 
+        liste[i][j] = tab[(i/(long int)pow((double)n,(double)(p-(j+1))))%n];
+
+
+
+
+    }
+}
+for(k;k<p;k++){
+    for(i=0;i<(long int )pow((double)n,(double)p);i++){
+        for(j=0;j<p;j++){
+            if(liste[i][k]==liste[i][j] && k!=j ){
+                liste[i][0]=-1;
         }
+    }
+}
 
 }
+return liste;
+}
+
+ bool Graph::IsConnex(){
+
+int p =4;
+int n = 6;
+
+long int** tab ;
+tab= find_K_connex();
+
+int* marque;
+
+int ** adja = new int* [ordre];
+int tmp1=0,tmp2=0;
+for(int i =0 ; i < ordre;i++){
+    adja[i] = new int [ordre];
+}
+
+
+for(int i=0;i<(long int )pow((double)n,(double)p);i++){
+    for(int j=0;j<p;j++){
+
+
+       std::cout<<tab[i][j];
+
+    }
+    std::cout<<std::endl;
+}
+
+for(int i=0;i<(long int )pow((double)n,(double)p);i++){
+   if(tab[i][0] != -1 ){
+
+    for(int j=0;j<p;j++){
+
+
+              m_vertices[tab[i][j]].IsMarque=true;  ///on marque toute la ligne
+            std::cout<<"sommet d'indice "<<tab[i][j]<<" marque"<<std::endl;
+
+
+    }
+
+    for(int a =0 ; a < ordre;a++){
+        for(int b = 0 ; b < ordre ; b ++){
+            adja[a][b]=0;
+        }
+    }
+
+
+
+    for(int a = 0 ; a < nbrEdge ; a++ ){
+        if(!m_vertices[m_edges[a].m_from].IsMarque && !m_vertices[m_edges[a].m_to].IsMarque )
+        {
+            adja[m_edges[a].m_from][m_edges[a].m_to] = 1;
+            adja[m_edges[a].m_to][m_edges[a].m_from] = 1;
+            tmp1=m_edges[a].m_to;
+        }
+    }
+    std::cout<<"matrice d'adjacence apres marquage: "<<std::endl;
+    for(int a =0 ; a < ordre;a++){
+        for(int b = 0 ; b < ordre ; b ++){
+            std::cout<<adja[a][b];
+        }
+        std::cout<<std::endl;
+    }
+
+
+     marque =  marquage(adja,ordre-p,tmp1);
+     tmp2=0;
+     std::cout<<"_ordre "<<ordre-p<<std::endl;
+     for(int x =0 ;x< ordre ;x++){
+            std::cout<<"marques de "<<x<<" = " <<marque[x]<<std::endl;
+        tmp2=marque[x]+tmp2; ///nbr sommet marqué
+     }
+     std::cout <<"tmp 2 = "<<tmp2<<std::endl;
+    if(tmp2 == ordre-p){
+        std::cout<<"HOURA"<<std::endl;
+    }
+    else{
+        std::cout<<"PAS HOURRA"<<std::endl;
+    }
+
+
+    for(int a=0;a<p;a++){
+
+              m_vertices[tab[i][a]].IsMarque=false;  ///on marque toute la ligne
+
+    }
+    system("pause");
+   }
+}
+
+
+
+
+}
+
+int* Graph::marquage(int** adja , int _ordre , int s ){
+
+    std::cout<<"sommet de depart "<<s<<std::endl;
+    int* marques = new int[ordre];
+    int x,y;
+    int cmp=0;
+    /*int* tab = new int[_ordre];
+    for(int i = 0 ; i< ordre ; i++ ){
+            std::cout<<"s = " <<s<<std::endl;
+        if((s<ordre)&&(!m_vertices[s].IsMarque)){
+        tab[cmp]=s;
+        std::cout<<"tab de " <<cmp <<" = "<< tab[cmp]<<std::endl;
+        cmp++;
+
+        }
+        if(s>=ordre) {
+            s = 0;
+        }
+s++;
+
+    }*/
+    for(x=0;x<ordre;x++){
+        marques[x]= 0;
+    }
+    marques[s]=1;
+
+   for(x=0;x<ordre;x++){
+        if(marques[x]){
+            for(y=0;y<ordre;y++){
+                    if(adja[x][y]&&!marques[y]){
+                            marques[y]=1;
+                    }
+            }
+        }
+    }
+
+    for(x=s;x>0;x--){
+
+        if(marques[x]){
+            for(y=0;y<ordre;y++){
+                    if(adja[x][y]&&!marques[y]){
+                            marques[y]=1;
+                    }
+            }
+        }
+    }
+return marques;
+}
+
 
 int Graph::KparmisN(int k,int n){
 
@@ -513,26 +677,29 @@ return result;
 
 
 
-int** Graph::allouer_k_uplet(){
+
+std::vector<int> Graph::allouer_k_uplet(){
+
+    std::vector<int> vec;
     int** mat;
     int cmp=0;
+
     mat = new int*[ordre];
     for(int i = 0 ; i < ordre ; i++ ){
         mat[i]=new int [ordre-i];
     }
+
         for(int i = 0 ; i <ordre ; i++){
             //mat[i][0]=i;
-            for(int j =0 ; j<ordre-i;j++){
-              mat[i][j]=cmp;
-              if(i!=mat[i][j]){
-               std::cout<<i<<" "<< mat[i][j]<<std::endl;
-              }
+            //vec.push_back( mat[i][0]);
+            for(int j =0; j<ordre-i;j++){
+                mat[i][j]=cmp;
+                vec.push_back( mat[i][j]);
                 cmp++;
-            }
+              }
             cmp=i+1;
-
         }
-
+        return vec;
 }
 
 
@@ -621,12 +788,12 @@ void Graph::supprimerVertex(){
 
             //std::cout<<elmt.second.m_out.size();
             for(int i =0 ; i < elmt.second.m_in.size();i++){
-            m_edges[elmt.second.m_in[i]].hide_edge_in(elmt.second);
+            m_edges[elmt.second.m_in[i]].hide_edge_in();
 
             }
 
             for(int i =0 ; i < elmt.second.m_out.size();i++){
-                m_edges[elmt.second.m_out[i]].hide_edge_out(elmt.second);
+                m_edges[elmt.second.m_out[i]].hide_edge_out();
 
 
             }
@@ -733,7 +900,12 @@ int Graph::menugraph()
     }
     if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over()){
 
-       sauvgarder(m_nomgraph);
+        sauvgarder(m_nomgraph);
+
+    }
+    if(grman::mouse_click && m_interface->m_button_flux.is_mouse_over()){
+
+
 
     }
 
@@ -838,8 +1010,8 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_edges[idx].m_from=id_vert1;
     m_edges[idx].m_to=id_vert2;
 
-    //m_vertices[id_vert1].m_in.push_back(idx);
-    //m_vertices[id_vert2].m_out.push_back(idx);
+    m_vertices[id_vert1].m_in.push_back(idx);
+    m_vertices[id_vert2].m_out.push_back(idx);
 
 
     std::cout<<"les sommet "<<id_vert1<<" et "<<id_vert2<<" sont relié par l'arrete " <<idx <<std::endl;
@@ -852,14 +1024,14 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     juste que je verifie que ca pose pas de
     problmes quand je les utilise
 
-/******************************************/
-    if((idx!=id_vert1) ||(idx!=id_vert2) )
+******************************************/
+   /* if((idx!=id_vert1) ||(idx!=id_vert2) )
     {
         m_vertices[id_vert1].m_in.push_back(idx);
         m_vertices[id_vert2].m_out.push_back(idx);
 
     }
-
+*/
 
 }
 

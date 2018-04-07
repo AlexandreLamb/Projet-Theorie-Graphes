@@ -176,6 +176,8 @@ class Vertex
 
         bool IsHide=false;
 
+        bool IsMarque=false;
+
     public:
 
         /// Les constructeurs sont à compléter selon vos besoin...
@@ -199,6 +201,8 @@ class Vertex
         void Afficher_Somet();
 
         void Cacher_Arretes();
+
+        void Deco();
 
         void Cacher_option();
 
@@ -295,8 +299,8 @@ class Edge
         void post_update();
 
 
-        void hide_edge_in(Vertex& v);
-        void hide_edge_out(Vertex& v);
+        void hide_edge_in();
+        void hide_edge_out();
         void Afficher_Edges(Vertex& from , Vertex& to);
 
         void set_idx_E(int id);
@@ -404,11 +408,15 @@ std::vector<int> Sommet_suite_out;
 
         void make_graph_2();
 
-        void find_K_connex();
+        long int** find_K_connex();
+
+        bool IsConnex();
+
+        int* marquage(int** adja , int _ordre , int s );
 
         int KparmisN(int k,int n);
 
-        int** allouer_k_uplet();
+        std::vector<int> allouer_k_uplet();
 
         void fonctionnel();
 

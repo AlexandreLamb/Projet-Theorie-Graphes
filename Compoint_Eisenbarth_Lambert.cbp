@@ -40,17 +40,14 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-<<<<<<< HEAD
-		<Unit filename="Menu.cpp" />
-		<Unit filename="Menu.h" />
-=======
 		<Linker>
 			<Add library="alleg44.dll" />
 			<Add library="loadpng" />
 			<Add library="png16.dll" />
 			<Add library="jpgalleg" />
 		</Linker>
->>>>>>> branch/zoe
+		<Unit filename="Menu.cpp" />
+		<Unit filename="Menu.h" />
 		<Unit filename="graph.cpp" />
 		<Unit filename="graph.h" />
 		<Unit filename="grman/coords.cpp" />
