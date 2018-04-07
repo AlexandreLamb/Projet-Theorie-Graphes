@@ -399,17 +399,33 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_text_flux.set_message("ModeF");
     m_text_flux.set_gravity_xy(grman::GravityX::Center,grman::GravityY::Center);
 
+    m_tool_box.add_child(m_button_play);
+    m_button_play.set_dim(70,30);
+    m_button_play.set_gravity_x(grman::GravityX::Center);
+    m_button_play.set_posy(300);
+    m_button_play.set_bg_color(ROUGE);
+    m_button_play.add_child(m_text_play);
+     m_text_play.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Center);
+     m_text_play.set_message("Play");
 
-    m_tool_box.set_bg_color(BLANCBLEU);
-
-
-}
+    m_tool_box.add_child(m_button_pause);
+    m_button_pause.set_dim(70,30);
+    m_button_pause.set_gravity_x(grman::GravityX::Center);
+    m_button_pause.set_posy(332);
+    m_button_pause.set_bg_color(ROUGE);
+    m_button_pause.add_child(m_text_pause);
+     m_text_pause.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Center);
+     m_text_pause.set_message("Pause");
 
 /// Méthode spéciale qui construit un graphe arbitraire (démo)
 /// Cette méthode est à enlever et remplacer par un système
 /// de chargement de fichiers par exemple.
 /// Bien sûr on ne veut pas que vos graphes soient construits
 /// "à la main" dans le code comme ça.
+
+
+
+}
 void Graph::make_example()
 {
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
@@ -542,22 +558,19 @@ void Graph::fonctionnel()
     /// variables
 
     float N=0;
-    bool play = false; // savoir quand c'est play ou non
-    bool mode_flux=false; // savoir si bouton mode flux est actif
     double coeff=0;
 
-    mode_flux = true; // savoir si appuyer sur bouton mode flux
 
-    if(mode_flux){
+    /// condition: si l'utilisateur appuie sur play et tant qu'il n'appuie pas sur pause ou rappuie sur play
 
-    /// condition: si l'utilisateur appuie sur play et tant qu'il n'appuie pas sur pause
-    play = true; // trouver : quand il clique sur play dans toolbar
+           if(play)
+            {
 
-        if(play)
-        {
                       std::cout << " " <<std::endl;
                       std::cout << " ----- TEST FLUX -----"  <<std::endl;
                       std::cout << " " <<std::endl;
+                /// montee en memoire des valeures sur les curseurs ou sur fichier si curseur pas modi
+
 
                 /// remplit pour chaque sommet vecteur de pred
                 remplirPred();
@@ -582,13 +595,7 @@ void Graph::fonctionnel()
 
 
 
-
-            do
-            {
-                for (int j=0; j<10; j++)
-                {
-
-                    std::cout << "  ---- Boucle " <<j <<" ----" <<std::endl;
+                    std::cout << "  ---- Boucle ---- " <<std::endl;
 
                 /// on calcul et met à jour le K de chaque sommet
                 calculK();
@@ -598,8 +605,8 @@ void Graph::fonctionnel()
                 {
                     for(int j=0; j<m_vertices[i].m_succ.size(); j++)
                     {
-                        coeff=findEdgeWeight(i,m_vertices[i].m_succ[j]);
-                    // std::cout << " "<<m_vertices[m_vertices[i].m_succ[j]].m_value <<"  "<<m_vertices[m_vertices[i].m_succ[j]].m_name<<" * "<<coeff<<" + ";
+                    coeff=findEdgeWeight(i,m_vertices[i].m_succ[j]);
+                    //std::cout << " "<<m_vertices[m_vertices[i].m_succ[j]].m_value <<"  "<<m_vertices[m_vertices[i].m_succ[j]].m_name<<" * "<<coeff<<" + ";
                     }
                     std::cout << "K= "<< m_vertices[i].m_K<<std::endl;
                 }
@@ -622,24 +629,31 @@ void Graph::fonctionnel()
 
 /*/
                 std::cout << " "<<std::endl;
-                }
 
             }
-            while(!play);
-        }
-    }
 }
+
+/*
+void Graph::update(){
+
+    for ( int i = 0 ; i < Graph::m_vertices ; i++ ){
+       Graph::m_vertices[i] Graph::m_vertices[i].m_interface->m_slider_value.get_value()
+    }
+
+}
+*/
+
 
 /// methode qui calcul et remplit le N des sommets
 void Graph::calculN()
 {
-    float N_save=0;
-    float N=0;
+    double N_save=0;
+    double N=0;
     int K=0;
     int nb;
     int id_pred;
-    float Npred;
-    float coeff=0;
+    double Npred;
+    double coeff=0;
     std::vector<float> liste_N;
 
 
@@ -648,7 +662,9 @@ void Graph::calculN()
     {
         /// Nsave = N | N=Nplus1 | ici on calcul Nplu1 avec le Nsave
         /// sauvegarde du N+1 que l'on ecrase
-        N=m_vertices[k].m_value;
+        N=m_vertices[k].m_interface->m_slider_value.get_value();
+        /// conversion de valeur à pourcentage
+        N=
         N_save=m_vertices[k].m_value;
 
         /// recupere le K
@@ -662,6 +678,7 @@ void Graph::calculN()
 
         }
         else {//std::cout<< " K=0 -> N+1.1 = N = "<< N <<std::endl;
+            N= N_save;
 
         }
 
@@ -719,9 +736,9 @@ void Graph::calculK()
 {
      int nb=0;
      int id_succ=0, id_arc=0;
-     float N=0;
-     float coeff=0;
-     float K=0;
+     double N=0;
+     double coeff=0;
+     double K=0;
 
     /// parcours sommet
     for(int k=0; k<ordre; k++)
@@ -740,7 +757,7 @@ void Graph::calculK()
             coeff=findEdgeWeight(k,id_succ);
 
             ///on recupere le nombre de pop du succ
-            N=m_vertices[id_succ].m_value;
+            N=m_vertices[id_succ].m_interface->m_slider_value.get_value();
 
 
             /// on calcul K
@@ -811,7 +828,7 @@ float Graph::findEdgeWeight(int sfrom, int sto)
     int s1=0;
     int s2=0;
 
-    float poids=0;
+    double poids=0;
 
     /// parcourt la map d'arete
     for(auto &elt : m_edges)
@@ -823,7 +840,7 @@ float Graph::findEdgeWeight(int sfrom, int sto)
        /// si les sommets s1 et s2 sont les meme que les sommets en parametres on retourne la valeur de l'arete (coeff)
        if(s1==sfrom && s2==sto)
        {
-           poids= elt.second.m_weight;
+           poids= elt.second.m_interface->m_slider_weight.get_value();
 
            return poids;
        }
@@ -967,6 +984,28 @@ int Graph::menugraph()
         return 1;
     }
 
+    if(grman::mouse_click&1 && m_interface->m_button_flux.is_mouse_over())
+    {
+        fonctionnel();
+       std::cout<<"1";
+    }
+
+
+
+
+    if(grman::mouse_click && m_interface->m_button_play.is_mouse_over())
+        {
+                play=true;
+
+
+        }if
+        (grman::mouse_click && m_interface->m_button_pause.is_mouse_over())
+        {
+                play=false;
+
+
+        }
+
     return 0;
 }
 
@@ -1010,6 +1049,8 @@ void Graph::update()
     m_interface->m_top_box.update();
     menugraph();
     supprimerVertex();
+    if(play)
+    fonctionnel();
 
     for (auto &elt : m_vertices)
         elt.second.post_update();

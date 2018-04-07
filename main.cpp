@@ -26,10 +26,10 @@ int main()
         {
         case 1:
              g.make_graph_1();
-             g.fonctionnel();
+            // g.fonctionnel();
                 g.allouer_k_uplet();
                         //g.find_K_connex();
-             while(!key[KEY_ESC] &&    g.menugraph()!=1)
+             while(!key[KEY_ESC])
              {
               g.update();
               grman::mettre_a_jour();

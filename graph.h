@@ -157,7 +157,7 @@ class Vertex
         /// liste des indices des arcs partant du sommet : accès aux successeurs
         std::vector<int> m_out;
 
-        /// Nombre de la population
+        /// pourcentage de la population
         float m_value;
 
 
@@ -360,8 +360,8 @@ class GraphInterface
         grman::WidgetButton m_button_play;
         grman::WidgetText m_text_play;
 
-
-
+        grman::WidgetButton m_button_pause;
+        grman::WidgetText m_text_pause;
 
 
 
@@ -390,7 +390,7 @@ class Graph
 
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<GraphInterface> m_interface = nullptr;
-
+        bool play=false;
         int ordre;
         int nbrEdge;
         std::string m_nomgraph;
