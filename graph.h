@@ -158,14 +158,17 @@ class Vertex
         std::vector<int> m_out;
 
         /// pourcentage de la population
-        float m_value;
+        double m_value;
 
 
         /// Variable K qui nous permet de calculer la populataion a t+1
-        float m_K;
+        double m_K;
 
         /// Varible r qui est le rythme d ecroissance
         int m_r;
+
+        /// variable d erefrence pour le nb de la pop
+        double m_val_ref;
 
 
         /// indice du sommet pour savoir ou il est dans la map
@@ -193,8 +196,8 @@ class Vertex
 
         /// Les constructeurs sont à compléter selon vos besoin...
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
-        Vertex (double value=0, int r=0, std::string name=" ", VertexInterface *interface=nullptr) :
-            m_value(value), m_r(r), m_name(name), m_interface(interface)  {  }
+        Vertex (double value=0, int r=0, double val_ref=0, std::string name=" ", VertexInterface *interface=nullptr) :
+            m_value(value), m_r(r), m_val_ref(val_ref), m_name(name), m_interface(interface)  {  }
 
         /// Vertex étant géré par Graph ce sera la méthode update de graph qui appellera
         /// le pre_update et post_update de Vertex (pas directement la boucle de jeu)
@@ -390,13 +393,14 @@ class Graph
 
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<GraphInterface> m_interface = nullptr;
+
         bool play=false;
         int ordre;
         int nbrEdge;
         std::string m_nomgraph;
 
-std::vector<int> Sommet_suite_in;
-std::vector<int> Sommet_suite_out;
+        std::vector<int> Sommet_suite_in;
+        std::vector<int> Sommet_suite_out;
 
     public:
 
@@ -404,8 +408,8 @@ std::vector<int> Sommet_suite_out;
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
         Graph (GraphInterface *interface=nullptr) :
             m_interface(interface)  {  }
-
-        void add_interfaced_vertex(int idx, float value,  int x, int y, int r, std::string pic_name="", int pic_idx=0 );
+                                 //int idx, double value, int r, double val_ref, int x, int y, std::string pic_name, int pic_idx
+        void add_interfaced_vertex(int idx, double value,int r, double val_ref, int x, int y, std::string pic_name="", int pic_idx=0 );
         void add_interfaced_edge(int idx, int vert1, int vert2, double weight=0);
 
         /// Méthode spéciale qui construit un graphe arbitraire (démo)
