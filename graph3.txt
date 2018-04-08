@@ -1,0 +1,59 @@
+20
+37
+0 35 14 0 0 anguille_adulte
+0 206 545 0 0 lucioperca
+0 215 6 0 0 abrassis
+0 221 138 0 0 anguille_jeune
+0 657 593 0 0 gibbosus
+0 575 4 0 0 syngnattrus
+0 785 33 0 0 potatt
+0 66 258 0 0 gobius
+0 110 655 0 0 boverie
+0 391 4 0 0 gasterosteus
+0 796 587 0 0 crangon
+0 293 635 0 0 pataemcrete
+0 474 656 0 0 nysis
+0 358 143 0 0 salinus
+0 782 399 0 0 cephalus_jeune
+0 6 397 0 0 cerastodem
+0 810 170 0 0 zooplankton
+0 430 355 0 0 detritus
+0 40 502 0 0 phytoplankton
+0 492 178 0 0 zostera
+0 5 0
+0 8 0
+0 10 0
+0 12 0
+1 5 0
+1 7 0
+1 8 0
+1 10 0
+2 15 0
+2 17 0
+2 12 0
+3 11 0
+3 12 0
+4 9 0
+4 10 0
+4 8 0
+4 7 0
+5 17 0
+5 12 0
+6 12 0
+6 13 0
+7 12 0
+7 13 0
+8 12 0
+8 13 0
+9 13 0
+10 12 0
+10 16 0
+11 16 0
+12 17 0
+12 16 0
+13 16 0
+13 17 0
+14 16 0
+14 19 0
+15 17 0
+16 18 0

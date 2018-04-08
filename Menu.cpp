@@ -55,7 +55,7 @@ MenuInterface::MenuInterface(int x,int y,int w, int h)
          return 2;
      }
 
-      if(grman::mouse_click&1 && m_interface->m_graph1.is_mouse_over())
+      if(grman::mouse_click&1 && m_interface->m_graph3.is_mouse_over())
      {
          return 3;
      }

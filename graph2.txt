@@ -1,19 +1,19 @@
 14
 17
-2 1 1 aigle
-2 1 1 girafe
-2 1 1 lion
-2 1 1 zebre
-2 1 1 hyene
-2 1 1 guepard
-2 1 1 lievre
-2 1 1 insectes
-2 1 1 gazelle
-2 1 1 verre
-2 1 1 buffle
-2 1 1 acacia
-2 1 1 herbe
-2 1 1 bacterie
+0 5 13 1 0 aigle
+0 569 167 1 0 giraffe
+0 234 26 1 0 lion
+0 5 182 1 0 zebra
+0 242 5 1 0 hyena
+0 142 608 1 0 guepard
+0 573 412 1 0 hare
+0 514 33 1 0 worm
+0 449 529 1 0 antelope
+0 193 146 1 0 verre
+0 342 66 1 0 buffalo
+0 167 290 1 0 acacia
+0 35 489 1 0 herbe
+0 402 299 1 0 bacteria
 1 11 2
 0 10 2
 2 1 2

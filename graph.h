@@ -110,6 +110,8 @@ class VertexInterface
 
         // Une image de "remplissage"
         grman::WidgetImage m_img;
+        grman::WidgetImage m_img_Dead;
+
 
         // Un label indiquant l'index du sommet
         grman::WidgetText m_label_idx;
@@ -221,6 +223,8 @@ class Vertex
 
         void set_idx_V(int id);
         int get_idx_V();
+
+        int get_value();
 
 };
 
@@ -358,13 +362,16 @@ class GraphInterface
         grman::WidgetImage m_retour_img;
 
         grman::WidgetButton m_button_flux;
-        grman::WidgetText m_text_flux;
+        grman::WidgetText m_text1_flux;
+        grman::WidgetText m_text2_flux;
 
         grman::WidgetButton m_button_play;
-        grman::WidgetText m_text_play;
+        grman::WidgetText m_text1_play;
+        grman::WidgetText m_text2_play;
 
         grman::WidgetButton m_button_pause;
-        grman::WidgetText m_text_pause;
+        grman::WidgetText m_text1_pause;
+        grman::WidgetText m_text2_pause;
 
 
 
@@ -402,6 +409,8 @@ class Graph
         std::vector<int> Sommet_suite_in;
         std::vector<int> Sommet_suite_out;
 
+        bool m_quitter=false;
+
     public:
 
         /// Les constructeurs sont à compléter selon vos besoin...
@@ -419,6 +428,8 @@ class Graph
         void make_example();
 
         void make_graph_1();
+
+        void make_graph_3();
 
         void make_graph_2();
 
@@ -452,6 +463,8 @@ class Graph
         /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
         void update();
 
+        bool get_quitter();
+        void set_quitter(bool x);
         void destroy_graph();
 };
 
