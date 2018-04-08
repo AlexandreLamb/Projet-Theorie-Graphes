@@ -14,6 +14,7 @@ class MenuInterface
     friend class Menu;
 public:
     MenuInterface(int x,int y,int w, int h);
+    MenuInterface(int w, int h);
     int z;
 
 private:
@@ -32,7 +33,11 @@ private:
     grman::WidgetText m_graph3_text;
 
 
+    grman::WidgetImage m_demarer_img;
 
+
+    grman::WidgetImage m_titre_img;
+    grman::WidgetButton m_button_demarrer;
 
 };
 
@@ -43,13 +48,16 @@ class Menu
     public:
         Menu(MenuInterface *interface=nullptr): m_interface(interface){  };
         void update();
+        bool update2();
         int choixgraph();
         void demarermenu();
+        void ecran_Aceuille();
 
     virtual ~Menu();
 
     private:
         std::shared_ptr<MenuInterface> m_interface = nullptr;
+
 
 };
 

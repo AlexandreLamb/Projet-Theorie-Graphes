@@ -137,6 +137,8 @@ class VertexInterface
 
         grman::WidgetText m_tools_text;
 
+        grman::WidgetText m_label_name;
+
 
     public :
 
@@ -158,9 +160,12 @@ class Vertex
     private :
         /// liste des indices des arcs arrivant au sommet : accès aux prédécesseurs
         std::vector<int> m_in;
+        std::vector<int> m_in2;
 
         /// liste des indices des arcs partant du sommet : accès aux successeurs
         std::vector<int> m_out;
+        std::vector<int> m_out2;
+
 
         /// pourcentage de la population
         double m_value;
@@ -246,7 +251,6 @@ class Vertex
         void set_idx_V(int id);
         int get_idx_V();
 
-<<<<<<< HEAD
 
         ///marquage accseceur
 
@@ -261,15 +265,17 @@ class Vertex
         void set_marque_connexein(bool x);
         bool get_marque_connexein();
 
+        std::string get_name(){return m_name ;}
+
 
 
         int get_idx();
         void set_idx(int x);
 
         bool islinked(Vertex x,int param);
-=======
+
         int get_value();
->>>>>>> partieFonctionnelle
+
 
 };
 
@@ -330,7 +336,7 @@ class Edge
         int m_to;
 
         /// Variable coefficient qui permet de savoir combien sont mangé
-        float m_weight;
+        double m_weight;
 
         /// indice du sommet pour savoir ou il est dans la map
 
@@ -403,11 +409,14 @@ class GraphInterface
 
         grman::WidgetText m_tool_text;
 
+
+
         grman::WidgetButton m_afficher_sommet;
         grman::WidgetText m_afficher_sommet_text;
 
         grman::WidgetButton m_retour;
         grman::WidgetImage m_retour_img;
+        grman::WidgetText m_text_flux;
 
         grman::WidgetButton m_button_flux;
         grman::WidgetText m_text1_flux;
@@ -415,7 +424,7 @@ class GraphInterface
 
 
         grman::WidgetButton m_button_play;
-<<<<<<< HEAD
+
         grman::WidgetText m_text_play;
 
 
@@ -434,10 +443,9 @@ class GraphInterface
 
         grman::WidgetText m_ordre_graph;
 
-=======
+
         grman::WidgetText m_text1_play;
         grman::WidgetText m_text2_play;
->>>>>>> partieFonctionnelle
 
         grman::WidgetButton m_button_pause;
         grman::WidgetText m_text1_pause;
@@ -485,21 +493,16 @@ class Graph
         int nbrEdge;
         std::string m_nomgraph;
 
-<<<<<<< HEAD
 
-std::vector<int> Sommet_suite_in;
-std::vector<int> Sommet_suite_out;
-=======
         std::vector<int> Sommet_suite_in;
         std::vector<int> Sommet_suite_out;
 
         bool m_quitter=false;
->>>>>>> partieFonctionnelle
 
         std::vector<std::vector<Vertex*>> m_tabcmpfc;
 
 
-        bool m_quitter=0;
+
 
 
 
@@ -575,17 +578,14 @@ std::vector<int> Sommet_suite_out;
         void Afficher_graphReduit(bool activate);
 
     ///permet de revenir au menu
-      int get_quitter();
-      void set_quitter(bool x);
+
 
         /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
         void update();
-<<<<<<< HEAD
-=======
+
 
         bool get_quitter();
         void set_quitter(bool x);
->>>>>>> partieFonctionnelle
         void destroy_graph();
 };
 

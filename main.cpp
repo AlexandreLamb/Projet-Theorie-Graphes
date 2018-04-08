@@ -16,9 +16,20 @@ int main()
 
     /// Un exemple de graphe
     Menu m;
+    Menu m2;
     Graph g;
+    bool Isclick = true ;
 
-   m.demarermenu();
+    m2.ecran_Aceuille();
+    while(Isclick)
+    {
+       Isclick = m2.update2();
+        grman::mettre_a_jour();
+
+    }
+
+
+    m.demarermenu();
 
     while (!key[KEY_SPACE])
     {
@@ -28,47 +39,29 @@ int main()
         {
         case 1:
              g.make_graph_1();
-<<<<<<< HEAD
 
-
-            // g.fonctionnel();
-
-
-             while(!key[KEY_ESC] )
-
-=======
-            // g.fonctionnel();
-                g.allouer_k_uplet();
-                        //g.find_K_connex();
              while(!key[KEY_ESC] && g.get_quitter()!=1)
->>>>>>> partieFonctionnelle
              {
 
               g.update();
               grman::mettre_a_jour();
              }
-<<<<<<< HEAD
-=======
-             g.set_quitter(0);
-             g.destroy_graph();
->>>>>>> partieFonctionnelle
 
-             g.destroy_graph();
              g.set_quitter(0);
+             g.destroy_graph();
+
 
             break;
 
         case 2:
             g.make_graph_2();
-<<<<<<< HEAD
-             while(!key[KEY_ESC])
-=======
+
              while(!key[KEY_ESC] && g.get_quitter()!=1)
->>>>>>> partieFonctionnelle
              {
               g.update();
               grman::mettre_a_jour();
              }
+             g.set_quitter(0);
              g.destroy_graph();
             break;
 
@@ -80,6 +73,7 @@ int main()
               g.update();
               grman::mettre_a_jour();
              }
+             g.set_quitter(0);
              g.destroy_graph();
             break;
 
