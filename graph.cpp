@@ -249,7 +249,7 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
 
     // Le slider de réglage de valeur
     m_box_edge.add_child( m_slider_weight );
-    m_slider_weight.set_range(0.0 , 100.0); // Valeurs arbitraires, à adapter...
+    m_slider_weight.set_range(0.0 , 1000.0); // Valeurs arbitraires, à adapter...
     m_slider_weight.set_dim(16,40);
     m_slider_weight.set_gravity_y(grman::GravityY::Up);
 
@@ -634,7 +634,19 @@ void Graph::fonctionnel()
                     std::cout << " "<<std::endl;
                 }
 
+
 /*/
+
+                /// anomations du mort quand la population est morte
+                for(int i=0; i<ordre; i++)
+                 {
+                     if(m_vertices[i].m_value==0)
+                     {
+                         rest(40);
+                         m_vertices[i].m_interface->m_img.set_pic_name("Dead.png");
+
+                     }
+                 }
                 std::cout << " "<<std::endl;
 
             }
@@ -675,7 +687,7 @@ void Graph::calculN()
 
 
         /// conversion de valeur à pourcentage  avec la valeure de reference
-        N=N*m_vertices[k].m_val_ref/100;
+        N=N*m_vertices[k].m_val_ref/1000;
 
         /// on fait monter dans les attributs cette valeure pour le calcul du K
         m_vertices[k].m_value=N;
@@ -746,7 +758,7 @@ void Graph::calculN()
 
         /// conversion de valeur à pourcentage  avec la valeure de reference
         val_ref=m_vertices[k].m_val_ref;
-        N_pourc= 100*N/val_ref;
+        N_pourc= 1000*N/val_ref;
 
         /// afichage de cette valeur sur les curseurs
         m_vertices[k].m_interface->m_slider_value.set_value(N_pourc);
