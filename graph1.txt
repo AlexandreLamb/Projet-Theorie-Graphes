@@ -1,18 +1,15 @@
 6
 6
-0 81 46 0 requin
-0 413 293 0 thon
-0 428 71 0 maquerau
-0 433 546 0 petit_poisson
-0 77 529 0 langoustine
-0 50 266 0 orga
-0 1 0
-1 2 0
-1 3 0
-2 0 0
-3 4 0
-4 5 0
-<<<<<<< HEAD
-=======
+2 233 7 2 10 requin
+4 250 298 6 20 thon
+6 332 100 4 30 maquerau
+30 60 602 12 40 petit_poisson
+45 452 598 9 60 langoustine
+50 526 327 15 1000 orga
+0 1 20
+1 2 2
+2 3 15
+3 4 2
+4 5 2
+2 4 12
 
->>>>>>> e4f0581c19c4be70c3358ea7f1cd2c8d0379a065

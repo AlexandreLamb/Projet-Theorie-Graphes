@@ -28,6 +28,7 @@ int main()
         {
         case 1:
              g.make_graph_1();
+<<<<<<< HEAD
 
 
             // g.fonctionnel();
@@ -35,11 +36,22 @@ int main()
 
              while(!key[KEY_ESC] )
 
+=======
+            // g.fonctionnel();
+                g.allouer_k_uplet();
+                        //g.find_K_connex();
+             while(!key[KEY_ESC] && g.get_quitter()!=1)
+>>>>>>> partieFonctionnelle
              {
 
               g.update();
               grman::mettre_a_jour();
              }
+<<<<<<< HEAD
+=======
+             g.set_quitter(0);
+             g.destroy_graph();
+>>>>>>> partieFonctionnelle
 
              g.destroy_graph();
              g.set_quitter(0);
@@ -48,7 +60,11 @@ int main()
 
         case 2:
             g.make_graph_2();
+<<<<<<< HEAD
              while(!key[KEY_ESC])
+=======
+             while(!key[KEY_ESC] && g.get_quitter()!=1)
+>>>>>>> partieFonctionnelle
              {
               g.update();
               grman::mettre_a_jour();
@@ -57,11 +73,22 @@ int main()
             break;
 
         case 3:
+
+             g.make_graph_3();
+             while(!key[KEY_ESC] && g.get_quitter()!=1)
+             {
+              g.update();
+              grman::mettre_a_jour();
+             }
+             g.destroy_graph();
             break;
+
+
 
         default:
             grman::mettre_a_jour();
         }
+
     }
 
     grman::fermer_allegro();

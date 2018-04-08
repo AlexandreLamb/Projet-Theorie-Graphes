@@ -112,6 +112,8 @@ class VertexInterface
 
         // Une image de "remplissage"
         grman::WidgetImage m_img;
+        grman::WidgetImage m_img_Dead;
+
 
         // Un label indiquant l'index du sommet
         grman::WidgetText m_label_idx;
@@ -160,8 +162,9 @@ class Vertex
         /// liste des indices des arcs partant du sommet : accès aux successeurs
         std::vector<int> m_out;
 
-        /// Nombre de la population
-        float m_value;
+        /// pourcentage de la population
+        double m_value;
+
 
         /// Variable K qui nous permet de calculer la populataion a t+1
         double m_K;
@@ -169,12 +172,18 @@ class Vertex
         /// Varible r qui est le rythme d ecroissance
         int m_r;
 
+        /// variable d erefrence pour le nb de la pop
+        double m_val_ref;
+
+
         /// indice du sommet pour savoir ou il est dans la map
         int m_indx_V;
 
         /// vector des predecesseurs
         std::vector<int> m_pred;
 
+        /// vector des successeurs
+        std::vector<int> m_succ;
 
         std::string m_name;
 
@@ -206,8 +215,8 @@ class Vertex
 
         /// Les constructeurs sont à compléter selon vos besoin...
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
-        Vertex (double value=0, int r=0, std::string name=" ", VertexInterface *interface=nullptr) :
-            m_value(value), m_r(r), m_name(name), m_interface(interface)  {  }
+        Vertex (double value=0, int r=0, double val_ref=0, std::string name=" ", VertexInterface *interface=nullptr) :
+            m_value(value), m_r(r), m_val_ref(val_ref), m_name(name), m_interface(interface)  {  }
 
        // Vertex (Vertex &v): m_value(v.m_value), m_interface(new std::shared_ptr <VertexInterface>(v.m_interface)),
             //   m_idx(v.m_idx) , m_in(v.m_in), m_out(v.m_out){  }
@@ -237,6 +246,7 @@ class Vertex
         void set_idx_V(int id);
         int get_idx_V();
 
+<<<<<<< HEAD
 
         ///marquage accseceur
 
@@ -257,6 +267,9 @@ class Vertex
         void set_idx(int x);
 
         bool islinked(Vertex x,int param);
+=======
+        int get_value();
+>>>>>>> partieFonctionnelle
 
 };
 
@@ -317,7 +330,7 @@ class Edge
         int m_to;
 
         /// Variable coefficient qui permet de savoir combien sont mangé
-        double m_weight;
+        float m_weight;
 
         /// indice du sommet pour savoir ou il est dans la map
 
@@ -397,10 +410,12 @@ class GraphInterface
         grman::WidgetImage m_retour_img;
 
         grman::WidgetButton m_button_flux;
-        grman::WidgetText m_text_flux;
+        grman::WidgetText m_text1_flux;
+        grman::WidgetText m_text2_flux;
 
 
         grman::WidgetButton m_button_play;
+<<<<<<< HEAD
         grman::WidgetText m_text_play;
 
 
@@ -419,7 +434,14 @@ class GraphInterface
 
         grman::WidgetText m_ordre_graph;
 
+=======
+        grman::WidgetText m_text1_play;
+        grman::WidgetText m_text2_play;
+>>>>>>> partieFonctionnelle
 
+        grman::WidgetButton m_button_pause;
+        grman::WidgetText m_text1_pause;
+        grman::WidgetText m_text2_pause;
 
         std::vector<grman::WidgetBox*> m_tab_cmp_GraphReduit;
         std::vector<grman::WidgetEdge*> m_tab_edge_GraphReduit;
@@ -457,14 +479,22 @@ class Graph
         /// le POINTEUR sur l'interface associée, nullptr -> pas d'interface
         std::shared_ptr<GraphInterface> m_interface = nullptr;
 
+        bool play=false;
         int ordre;
         int p=0;
         int nbrEdge;
         std::string m_nomgraph;
 
+<<<<<<< HEAD
 
 std::vector<int> Sommet_suite_in;
 std::vector<int> Sommet_suite_out;
+=======
+        std::vector<int> Sommet_suite_in;
+        std::vector<int> Sommet_suite_out;
+
+        bool m_quitter=false;
+>>>>>>> partieFonctionnelle
 
         std::vector<std::vector<Vertex*>> m_tabcmpfc;
 
@@ -479,8 +509,8 @@ std::vector<int> Sommet_suite_out;
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
         Graph (GraphInterface *interface=nullptr) :
             m_interface(interface)  {  }
-
-        void add_interfaced_vertex(int idx, double value,  int x, int y, int r, std::string pic_name="", int pic_idx=0 );
+                                 //int idx, double value, int r, double val_ref, int x, int y, std::string pic_name, int pic_idx
+        void add_interfaced_vertex(int idx, double value,int r, double val_ref, int x, int y, std::string pic_name="", int pic_idx=0 );
         void add_interfaced_edge(int idx, int vert1, int vert2, double weight=0);
 
         /// Méthode spéciale qui construit un graphe arbitraire (démo)
@@ -489,6 +519,8 @@ std::vector<int> Sommet_suite_out;
         /// de chargement de fichiers par exemple.
         void make_example();
         void make_graph_1();
+
+        void make_graph_3();
 
         void make_graph_2();
 
@@ -504,10 +536,12 @@ std::vector<int> Sommet_suite_out;
 
         void fonctionnel();
 
-        double findEdgeWeight(int s1, int s2);
+        float findEdgeWeight(int s1, int s2);
 
 
         void remplirPred();
+
+        void remplirSucc();
 
         void calculK();
 
@@ -546,6 +580,12 @@ std::vector<int> Sommet_suite_out;
 
         /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
         void update();
+<<<<<<< HEAD
+=======
+
+        bool get_quitter();
+        void set_quitter(bool x);
+>>>>>>> partieFonctionnelle
         void destroy_graph();
 };
 
