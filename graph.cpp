@@ -18,7 +18,7 @@ VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, in
 
     // Le slider de réglage de valeur
     m_top_box.add_child( m_slider_value );
-    m_slider_value.set_range(0.0 , 100.0); // Valeurs arbitraires, à adapter...
+    m_slider_value.set_range(0.0, 100.0);  // Valeurs arbitraires, à adapter...
     m_slider_value.set_dim(20,80);
     m_slider_value.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
 
@@ -59,23 +59,25 @@ VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, in
 
 }
 
-void Vertex::Cacher_option() {
+void Vertex::Cacher_option()
+{
 
     m_interface->m_top_box.remove_child(m_interface->m_tools_box);
     m_interface->m_top_box.set_border(2);
 }
 
-void Vertex::Afficher_option(){
+void Vertex::Afficher_option()
+{
 
-        if(grman::mouse_click && m_interface->m_tools_button.is_mouse_over())
+    if(grman::mouse_click && m_interface->m_tools_button.is_mouse_over())
     {
         m_interface->m_top_box.add_child(m_interface->m_tools_box);
 
-    m_interface->m_tools_box.add_child(m_interface->m_tools_label);
-    m_interface->m_tools_box.add_child(m_interface->m_button_cacher);
-    m_interface-> m_tools_box.add_child(m_interface->m_label_cacher);
-    m_interface->m_tools_box.add_child(m_interface->m_button_edit);
-    m_interface->m_tools_box.add_child(m_interface->m_label_edit);
+        m_interface->m_tools_box.add_child(m_interface->m_tools_label);
+        m_interface->m_tools_box.add_child(m_interface->m_button_cacher);
+        m_interface-> m_tools_box.add_child(m_interface->m_label_cacher);
+        m_interface->m_tools_box.add_child(m_interface->m_button_edit);
+        m_interface->m_tools_box.add_child(m_interface->m_label_edit);
 
         m_interface->m_top_box.set_border(0);
 
@@ -85,88 +87,94 @@ void Vertex::Afficher_option(){
         m_interface->m_tools_box.set_border(1);
         m_interface->m_tools_box.set_bg_color(CYAN);
 
-         m_interface-> m_tools_label.set_message("Option Sommet");
-         m_interface-> m_label_cacher.set_message("Cacher");
-         m_interface-> m_label_edit.set_message("Editer");
+        m_interface-> m_tools_label.set_message("Option Sommet");
+        m_interface-> m_label_cacher.set_message("Cacher");
+        m_interface-> m_label_edit.set_message("Editer");
 
-         m_interface-> m_tools_label.set_pos(0,0);
+        m_interface-> m_tools_label.set_pos(0,0);
 
-         m_interface->m_button_cacher.set_pos(0,20);
-         m_interface->m_button_edit.set_pos(0,40);
+        m_interface->m_button_cacher.set_pos(0,20);
+        m_interface->m_button_edit.set_pos(0,40);
 
-         m_interface->m_label_cacher.set_pos(40,20);
-         m_interface->m_label_edit.set_pos(40,40);
+        m_interface->m_label_cacher.set_pos(40,20);
+        m_interface->m_label_edit.set_pos(40,40);
 
-         m_interface->  m_button_cacher.set_bg_color(JAUNE);
-         m_interface-> m_button_edit.set_bg_color(JAUNE);
+        m_interface->  m_button_cacher.set_bg_color(JAUNE);
+        m_interface-> m_button_edit.set_bg_color(JAUNE);
 
-         m_interface->m_button_cacher.set_dim(30,10);
-         m_interface->m_button_edit.set_dim(30,10);
+        m_interface->m_button_cacher.set_dim(30,10);
+        m_interface->m_button_edit.set_dim(30,10);
 
     }
-   /* else {
+    /* else {
 
-        m_interface->m_tools_box.remove_child(m_interface->m_tools_label);
-       m_interface-> m_tools_box.remove_child(m_interface->m_button_cacher);
-       m_interface-> m_tools_box.remove_child(m_interface->m_label_cacher);
-       m_interface-> m_tools_box.remove_child(m_interface->m_button_edit);
-       m_interface-> m_tools_box.remove_child(m_interface->m_label_edit);
+         m_interface->m_tools_box.remove_child(m_interface->m_tools_label);
+        m_interface-> m_tools_box.remove_child(m_interface->m_button_cacher);
+        m_interface-> m_tools_box.remove_child(m_interface->m_label_cacher);
+        m_interface-> m_tools_box.remove_child(m_interface->m_button_edit);
+        m_interface-> m_tools_box.remove_child(m_interface->m_label_edit);
 
-    }*/
+     }*/
 
 }
 
-void Vertex::Toggle_Sommet(){
+void Vertex::Toggle_Sommet()
+{
 
-    if(grman::mouse_click && m_interface->m_button_cacher.is_mouse_over()){
+    if(grman::mouse_click && m_interface->m_button_cacher.is_mouse_over())
+    {
         Vertex::IsHide = !Vertex::IsHide;
 
-        if(IsHide==true){
+        if(IsHide==true)
+        {
             //Cacher_Sommet();
 
         }
     }
 
-    if(grman::mouse_click && m_interface->m_button_edit.is_mouse_over()){
+    if(grman::mouse_click && m_interface->m_button_edit.is_mouse_over())
+    {
         Cacher_option();
 
     }
 
 }
 
-void Vertex::Afficher_Somet(){
-        m_interface->m_top_box.add_child( m_interface->m_img );
+void Vertex::Afficher_Somet()
+{
+    m_interface->m_top_box.add_child( m_interface->m_img );
 
-        m_interface->m_top_box.add_child(m_interface->m_slider_value);
+    m_interface->m_top_box.add_child(m_interface->m_slider_value);
 
-        m_interface->m_top_box.add_child(m_interface->m_label_value);
-
-
+    m_interface->m_top_box.add_child(m_interface->m_label_value);
 
 
-        m_interface->m_top_box.add_child(m_interface->m_tools_box);
 
-       m_interface->m_top_box.add_child(m_interface-> m_box_label_idx );
 
-       m_interface->m_box_label_idx.set_pos(115,90);
-        m_interface->m_img.set_pos(30,0);
-         m_interface->m_top_box.set_dim(130, 100);
+    m_interface->m_top_box.add_child(m_interface->m_tools_box);
 
-         m_interface->m_top_box.set_border(2);
+    m_interface->m_top_box.add_child(m_interface-> m_box_label_idx );
+
+    m_interface->m_box_label_idx.set_pos(115,90);
+    m_interface->m_img.set_pos(30,0);
+    m_interface->m_top_box.set_dim(130, 100);
+
+    m_interface->m_top_box.set_border(2);
 
     m_interface->m_top_box.add_child(m_interface->m_tools_button);
 
-        m_interface->m_top_box.remove_child(m_interface->m_tools_box);
-        m_interface->m_tools_box.remove_child(m_interface->m_tools_label);
-       m_interface-> m_tools_box.remove_child(m_interface->m_button_cacher);
-       m_interface-> m_tools_box.remove_child(m_interface->m_label_cacher);
-       m_interface-> m_tools_box.remove_child(m_interface->m_button_edit);
-       m_interface-> m_tools_box.remove_child(m_interface->m_label_edit);
+    m_interface->m_top_box.remove_child(m_interface->m_tools_box);
+    m_interface->m_tools_box.remove_child(m_interface->m_tools_label);
+    m_interface-> m_tools_box.remove_child(m_interface->m_button_cacher);
+    m_interface-> m_tools_box.remove_child(m_interface->m_label_cacher);
+    m_interface-> m_tools_box.remove_child(m_interface->m_button_edit);
+    m_interface-> m_tools_box.remove_child(m_interface->m_label_edit);
 
 
 }
 
-void Vertex::Cacher_Sommet(){
+void Vertex::Cacher_Sommet()
+{
 
     m_interface->m_top_box.remove_child(m_interface->m_img);
     m_interface->m_top_box.remove_child(m_interface->m_tools_box);
@@ -179,7 +187,8 @@ void Vertex::Cacher_Sommet(){
 
 }
 
-void Vertex::Cacher_Arretes(){
+void Vertex::Cacher_Arretes()
+{
 
 
 
@@ -223,8 +232,10 @@ int Vertex::get_idx_V()
     return m_indx_V;
 }
 
-
-
+int Vertex::get_value()
+{
+    return m_value;
+}
 /***************************************************
                     EDGE
 ****************************************************/
@@ -249,7 +260,7 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
 
     // Le slider de réglage de valeur
     m_box_edge.add_child( m_slider_weight );
-    m_slider_weight.set_range(0.0 , 100.0); // Valeurs arbitraires, à adapter...
+    m_slider_weight.set_range(0.0, 100.0);  // Valeurs arbitraires, à adapter...
     m_slider_weight.set_dim(16,40);
     m_slider_weight.set_gravity_y(grman::GravityY::Up);
 
@@ -260,20 +271,23 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
 }
 
 
-void Edge::hide_edge_in(Vertex& v){
+void Edge::hide_edge_in(Vertex& v)
+{
 
-m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
-m_interface->m_top_edge.detach_from();
+    m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
+    m_interface->m_top_edge.detach_from();
 
-
-}
-void Edge::hide_edge_out(Vertex& v){
-
-m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
-m_interface->m_top_edge.detach_to();
 
 }
-void Edge::Afficher_Edges(Vertex& from , Vertex& to){
+void Edge::hide_edge_out(Vertex& v)
+{
+
+    m_interface->m_top_edge.remove_child(m_interface->m_box_edge);
+    m_interface->m_top_edge.detach_to();
+
+}
+void Edge::Afficher_Edges(Vertex& from, Vertex& to)
+{
 
     m_interface->m_top_edge.attach_from(from.m_interface->m_top_box);
     m_interface->m_top_edge.attach_to(to.m_interface->m_top_box);
@@ -334,13 +348,13 @@ int Edge::get_idx_E()
 /// éléments qui seront ensuite ajoutés lors de la mise ne place du Graphe
 GraphInterface::GraphInterface(int x, int y, int w, int h)
 {
-    m_top_box.set_dim(800,740);
+    m_top_box.set_dim(1024,760);
     m_top_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
     m_top_box.set_bg_color(VERTFLUO);
 
     m_top_box.add_child(m_main_box);
 
-    m_main_box.set_dim(708,720);
+    m_main_box.set_dim(944,750);
 
 
     m_main_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
@@ -349,7 +363,7 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_top_box.add_child(m_tool_box);
 
 
-    m_tool_box.set_dim(80,720);
+    m_tool_box.set_dim(80,750);
 
     m_tool_box.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
     m_tool_box.set_bg_color(BLANCBLEU);
@@ -388,34 +402,31 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_retour_img.set_border(0);
     m_retour_img.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Down);
 
-
-    m_tool_box.add_child(m_button_flux);
-
-    m_button_flux.set_pos(10,200);
-    m_button_flux.set_dim(45,30);
-    m_button_flux.set_bg_color(ROUGE);
-
-    m_button_flux.add_child(m_text_flux);
-    m_text_flux.set_message("ModeF");
-    m_text_flux.set_gravity_xy(grman::GravityX::Center,grman::GravityY::Center);
-
     m_tool_box.add_child(m_button_play);
     m_button_play.set_dim(70,30);
     m_button_play.set_gravity_x(grman::GravityX::Center);
     m_button_play.set_posy(300);
     m_button_play.set_bg_color(ROUGE);
-    m_button_play.add_child(m_text_play);
-     m_text_play.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Center);
-     m_text_play.set_message("Play");
+    m_button_play.add_child(m_text1_play);
+    m_text1_play.set_posy(6);
+    m_text1_play.set_message("Play");
+    m_button_play.add_child(m_text2_play);
+    m_text2_play.set_message("Mode F");
+    m_text2_play.set_posy(18);
+
 
     m_tool_box.add_child(m_button_pause);
     m_button_pause.set_dim(70,30);
     m_button_pause.set_gravity_x(grman::GravityX::Center);
     m_button_pause.set_posy(332);
     m_button_pause.set_bg_color(ROUGE);
-    m_button_pause.add_child(m_text_pause);
-     m_text_pause.set_gravity_xy(grman::GravityX::Center, grman::GravityY::Center);
-     m_text_pause.set_message("Pause");
+    m_button_pause.add_child(m_text1_pause);
+    m_text1_pause.set_posy(6);
+    m_text1_pause.set_message("Pause");
+    m_button_pause.add_child(m_text2_pause);
+    m_text2_pause.set_message("Mode F");
+    m_text2_pause.set_posy(18);
+
 
 /// Méthode spéciale qui construit un graphe arbitraire (démo)
 /// Cette méthode est à enlever et remplacer par un système
@@ -458,7 +469,8 @@ void Graph::make_example()
 }
 
 
-void Graph::make_graph_1(){
+void Graph::make_graph_1()
+{
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
     Graph::charger("graph1");
@@ -466,14 +478,28 @@ void Graph::make_graph_1(){
 
 }
 
-void Graph::make_graph_2(){
+void Graph::make_graph_3()
+{
+
+    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
+    Graph::charger("graph3");
+    m_nomgraph ="graph3";
+
+    for( int i = 0 ; i < m_vertices.size() ; i++ ){
+        m_vertices[i].m_interface->m_top_box.set_dim(50,50);
+    }
+}
+
+void Graph::make_graph_2()
+{
 
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
     Graph::charger("graph2");
     m_nomgraph ="graph2";
 }
 
-void Graph::find_K_connex(){
+void Graph::find_K_connex()
+{
     int kmin;
     int cmp1=0;
     int cmp2=1;
@@ -482,72 +508,84 @@ void Graph::find_K_connex(){
     bool IsKmin =false;
     int** pyra=Graph::allouer_k_uplet();
 
-        for(int j = 0 ; j < ordre-1 ;j++){
+    for(int j = 0 ; j < ordre-1 ; j++)
+    {
 
-            for(int i = cmp3 ; i< ordre; i++){
-                std::cout<<i<<" "<<pyra[cmp1][i]<<std::endl;
-
-            }
-            cmp1++;
-            cmp3++;
-
+        for(int i = cmp3 ; i< ordre; i++)
+        {
+            std::cout<<i<<" "<<pyra[cmp1][i]<<std::endl;
 
         }
+        cmp1++;
+        cmp3++;
+
+
+    }
 
 }
 
-int Graph::KparmisN(int k,int n){
+int Graph::KparmisN(int k,int n)
+{
 
-int result=0;
-int nFacto=1;
-int kFacto=1;
-int kMoinNFacto=1;
-int tmp =(n-k)+1;
+    int result=0;
+    int nFacto=1;
+    int kFacto=1;
+    int kMoinNFacto=1;
+    int tmp =(n-k)+1;
 
 
-if( n != 0 && k != 0 ){
+    if( n != 0 && k != 0 )
+    {
 
-    for(int i=1 ; i < n+1 ; i++){
-        nFacto=i*nFacto;
+        for(int i=1 ; i < n+1 ; i++)
+        {
+            nFacto=i*nFacto;
+        }
+
+        for(int i=1 ; i < k+1 ; i++)
+        {
+            kFacto=i*kFacto;
+        }
+        for(int i=1 ; i < tmp ; i++)
+        {
+            kMoinNFacto=i*kMoinNFacto;
+        }
+        result=(nFacto)/(kFacto*kMoinNFacto);
+
+        return result;
     }
 
-    for(int i=1 ; i < k+1 ; i++){
-        kFacto=i*kFacto;
-    }
-    for(int i=1 ; i < tmp ; i++){
-        kMoinNFacto=i*kMoinNFacto;
-    }
-    result=(nFacto)/(kFacto*kMoinNFacto);
 
     return result;
 }
 
 
-return result;
-}
 
 
-
-
-int** Graph::allouer_k_uplet(){
+int** Graph::allouer_k_uplet()
+{
     int** mat;
     int cmp=0;
     mat = new int*[ordre];
-    for(int i = 0 ; i < ordre ; i++ ){
+    for(int i = 0 ; i < ordre ; i++ )
+    {
         mat[i]=new int [ordre-i];
     }
-        for(int i = 0 ; i <ordre ; i++){
-            //mat[i][0]=i;
-            for(int j =0 ; j<ordre-i;j++){
-              mat[i][j]=cmp;
-              if(i!=mat[i][j]){
-               std::cout<<i<<" "<< mat[i][j]<<std::endl;
-              }
-                cmp++;
+    for(int i = 0 ; i <ordre ; i++)
+    {
+        //mat[i][0]=i;
+        for(int j =0 ; j<ordre-i; j++)
+        {
+            mat[i][j]=cmp;
+            if(i!=mat[i][j])
+            {
+                std::cout<<i<<" "<< mat[i][j]<<std::endl;
             }
-            cmp=i+1;
-
+            cmp++;
         }
+        cmp=i+1;
+
+    }
 
 }
 
@@ -563,74 +601,96 @@ void Graph::fonctionnel()
 
     /// condition: si l'utilisateur appuie sur play et tant qu'il n'appuie pas sur pause ou rappuie sur play
 
-           if(play)
+    if(play)
+    {
+
+        std::cout << " " <<std::endl;
+        std::cout << " ----- TEST FLUX -----"  <<std::endl;
+        std::cout << " " <<std::endl;
+        /// montee en memoire des valeures sur les curseurs ou sur fichier si curseur pas modi
+
+
+        /// remplit pour chaque sommet vecteur de pred
+        remplirPred();
+        /*/ TEST PREDECESSEURS QUI EST MANGE PAR QUI
+        for(int i=0; i<ordre;i++)
+        {  std::cout << "S"<<i <<" "<<m_vertices[i].m_name<<" ";
+            std::cout << "a "<<m_vertices[i].m_pred.size() <<" predecesseurs, il est mange par: ";
+            for(int j=0; j<m_vertices[i].m_pred.size(); j++) { std::cout << " S"<<m_vertices[i].m_pred[j] <<" "<<m_vertices[m_vertices[i].m_pred[j]].m_name<<" ";}
+            std::cout << " "<<std::endl;
+        }
+        /*/
+        /// remplit pour chaque sommet vecteur de pred
+        remplirSucc();
+        /*/
+        for(int i=0; i<ordre;i++)
+        {  std::cout << "S"<<i <<" "<<m_vertices[i].m_name<<" ";
+            std::cout << "a "<<m_vertices[i].m_succ.size() <<" successeurs, il mange: ";
+            for(int j=0; j<m_vertices[i].m_succ.size(); j++) { std::cout << " S"<<m_vertices[i].m_succ[j] <<" "<<m_vertices[m_vertices[i].m_succ[j]].m_name<<" ";}
+            std::cout << " "<<std::endl;
+        }
+        /*/
+
+
+
+        std::cout << "  ---- Boucle ---- " <<std::endl;
+
+        /// on calcul et met à jour le K de chaque sommet
+        calculK();
+
+
+        for(int i=0; i<ordre; i++)
+        {
+            for(int j=0; j<m_vertices[i].m_succ.size(); j++)
             {
-
-                      std::cout << " " <<std::endl;
-                      std::cout << " ----- TEST FLUX -----"  <<std::endl;
-                      std::cout << " " <<std::endl;
-                /// montee en memoire des valeures sur les curseurs ou sur fichier si curseur pas modi
-
-
-                /// remplit pour chaque sommet vecteur de pred
-                remplirPred();
-                /*/ TEST PREDECESSEURS QUI EST MANGE PAR QUI
-                for(int i=0; i<ordre;i++)
-                {  std::cout << "S"<<i <<" "<<m_vertices[i].m_name<<" ";
-                    std::cout << "a "<<m_vertices[i].m_pred.size() <<" predecesseurs, il est mange par: ";
-                    for(int j=0; j<m_vertices[i].m_pred.size(); j++) { std::cout << " S"<<m_vertices[i].m_pred[j] <<" "<<m_vertices[m_vertices[i].m_pred[j]].m_name<<" ";}
-                    std::cout << " "<<std::endl;
-                }
-                /*/
-                  /// remplit pour chaque sommet vecteur de pred
-                remplirSucc();
-                /*/
-                for(int i=0; i<ordre;i++)
-                {  std::cout << "S"<<i <<" "<<m_vertices[i].m_name<<" ";
-                    std::cout << "a "<<m_vertices[i].m_succ.size() <<" successeurs, il mange: ";
-                    for(int j=0; j<m_vertices[i].m_succ.size(); j++) { std::cout << " S"<<m_vertices[i].m_succ[j] <<" "<<m_vertices[m_vertices[i].m_succ[j]].m_name<<" ";}
-                    std::cout << " "<<std::endl;
-                }
-                /*/
-
-
-
-                    std::cout << "  ---- Boucle ---- " <<std::endl;
-
-                /// on calcul et met à jour le K de chaque sommet
-                calculK();
-
-
-                for(int i=0; i<ordre;i++)
-                {
-                    for(int j=0; j<m_vertices[i].m_succ.size(); j++)
-                    {
-                    coeff=findEdgeWeight(i,m_vertices[i].m_succ[j]);
-                    //std::cout << " "<<m_vertices[m_vertices[i].m_succ[j]].m_value <<"  "<<m_vertices[m_vertices[i].m_succ[j]].m_name<<" * "<<coeff<<" + ";
-                    }
-                    std::cout << "K= "<< m_vertices[i].m_K<<std::endl;
-                }
-
-
-                /// on calcul et met à jour le N de chaque somme
-                calculN();
-/*/
-                for(int i=0; i<ordre;i++)
-                {
-                    for(int j=0; j<m_vertices[i].m_succ.size(); j++)
-                    {
-                      std::cout <<"N = "<<(m_vertices[i].m_value) <<"+ "<<(m_vertices[i].m_r)<<" * " <<(m_vertices[i].m_value)<<" * (1-( " ;
-                     std::cout << m_vertices[i].m_value<<" / "<<m_vertices[i].m_K <<")"<<std::endl;
-                    }
-                    std::cout << "N = "<< m_vertices[i].m_value<<std::endl;
-                    std::cout << "N+1 = "<< m_vertices[i].m_valuePlus1<<std::endl;
-                    std::cout << " "<<std::endl;
-                }
-
-/*/
-                std::cout << " "<<std::endl;
-
+                coeff=findEdgeWeight(i,m_vertices[i].m_succ[j]);
+                //std::cout << " "<<m_vertices[m_vertices[i].m_succ[j]].m_value <<"  "<<m_vertices[m_vertices[i].m_succ[j]].m_name<<" * "<<coeff<<" + ";
             }
+            std::cout << "K= "<< m_vertices[i].m_K<<std::endl;
+        }
+
+
+        /// on calcul et met à jour le N de chaque somme
+        calculN();
+        /*/
+                        for(int i=0; i<ordre;i++)
+                        {
+                            for(int j=0; j<m_vertices[i].m_succ.size(); j++)
+                            {
+                              std::cout <<"N = "<<(m_vertices[i].m_value) <<"+ "<<(m_vertices[i].m_r)<<" * " <<(m_vertices[i].m_value)<<" * (1-( " ;
+                             std::cout << m_vertices[i].m_value<<" / "<<m_vertices[i].m_K <<")"<<std::endl;
+                            }
+                            std::cout << "N = "<< m_vertices[i].m_value<<std::endl;
+                            std::cout << "N+1 = "<< m_vertices[i].m_valuePlus1<<std::endl;
+                            std::cout << " "<<std::endl;
+                        }
+
+        /*/
+
+        for(int i=0; i<ordre; i++)
+        {
+            if(m_vertices[i].get_value()==0)
+            {
+                m_vertices[i].m_interface->m_img.set_pic_name("Dead.png");
+            }
+        }
+
+
+        std::cout << " "<<std::endl;
+
+    }
+
+    else
+    {
+        for(int i=0; i<ordre; i++)
+        {
+            m_vertices[i].m_interface->m_img.set_pic_name(m_vertices[i].m_name);
+        }
+
+    }
+
+
+
 }
 
 /*
@@ -665,7 +725,7 @@ void Graph::calculN()
         N=m_vertices[k].m_interface->m_slider_value.get_value();
         /// conversion de valeur à pourcentage
         N=
-        N_save=m_vertices[k].m_value;
+            N_save=m_vertices[k].m_value;
 
         /// recupere le K
         K=m_vertices[k].m_K;
@@ -677,7 +737,8 @@ void Graph::calculN()
             N= (N_save) + (m_vertices[k].m_r)*(N_save)*(1-(N_save)/K);
 
         }
-        else {//std::cout<< " K=0 -> N+1.1 = N = "<< N <<std::endl;
+        else  //std::cout<< " K=0 -> N+1.1 = N = "<< N <<std::endl;
+        {
             N= N_save;
 
         }
@@ -697,7 +758,7 @@ void Graph::calculN()
                 Npred=m_vertices[id_pred].m_value;
 
                 N=N-(coeff*Npred);
-               // std::cout<< "- ( "<<coeff<<" * "<<Npred<< " ) " ;
+                // std::cout<< "- ( "<<coeff<<" * "<<Npred<< " ) " ;
                 if(N<=0) /// pas de pop negative possible
                 {
                     N=0;
@@ -713,12 +774,12 @@ void Graph::calculN()
         }
         else
         {
-           // std::cout<< " = " << N;
-           // std::cout<< "  car pas de pred  "<<std::endl;
+            // std::cout<< " = " << N;
+            // std::cout<< "  car pas de pred  "<<std::endl;
             liste_N.push_back(N);
 
-         }
-       // std::cout<< " " <<std::endl;
+        }
+        // std::cout<< " " <<std::endl;
     }
 
 
@@ -734,11 +795,11 @@ void Graph::calculN()
 /// methode qui calcul et remplit le K des sommets
 void Graph::calculK()
 {
-     int nb=0;
-     int id_succ=0, id_arc=0;
-     double N=0;
-     double coeff=0;
-     double K=0;
+    int nb=0;
+    int id_succ=0, id_arc=0;
+    double N=0;
+    double coeff=0;
+    double K=0;
 
     /// parcours sommet
     for(int k=0; k<ordre; k++)
@@ -767,7 +828,7 @@ void Graph::calculK()
         }
         /// sauvegarde dans attributs
         m_vertices[k].m_K=K;
-       // std::cout << "K= "<< m_vertices[k].m_K<<std::endl;
+        // std::cout << "K= "<< m_vertices[k].m_K<<std::endl;
     }
 }
 
@@ -775,7 +836,7 @@ void Graph::calculK()
 void Graph::remplirPred()
 {
     int id_arc, id_sfrom, nb;
-   /// on parcourt sommets
+    /// on parcourt sommets
     for(int k=0; k<ordre; k++)
     {
         /// on recupere le nombre de ses predecesseurs = le nombre d'arc
@@ -800,7 +861,7 @@ void Graph::remplirPred()
 void Graph::remplirSucc()
 {
     int id_arc, id_sto, nb;
-   /// on parcourt sommets
+    /// on parcourt sommets
     for(int k=0; k<ordre; k++)
     {
         /// on recupere le nombre de ses succ = le nombre d'arc
@@ -834,16 +895,16 @@ float Graph::findEdgeWeight(int sfrom, int sto)
     for(auto &elt : m_edges)
     {
         /// accede à m-from et m_to
-       s1= elt.second.m_from;
-       s2= elt.second.m_to;
+        s1= elt.second.m_from;
+        s2= elt.second.m_to;
 
-       /// si les sommets s1 et s2 sont les meme que les sommets en parametres on retourne la valeur de l'arete (coeff)
-       if(s1==sfrom && s2==sto)
-       {
-           poids= elt.second.m_interface->m_slider_weight.get_value();
+        /// si les sommets s1 et s2 sont les meme que les sommets en parametres on retourne la valeur de l'arete (coeff)
+        if(s1==sfrom && s2==sto)
+        {
+            poids= elt.second.m_interface->m_slider_weight.get_value();
 
-           return poids;
-       }
+            return poids;
+        }
     }
 }
 
@@ -856,22 +917,27 @@ void Graph::addVertex()
 
 }
 
-void Graph::supprimerVertex(){
+void Graph::supprimerVertex()
+{
 
     std::map<int,Vertex>::iterator it1;
     std::map<int,Edge>::iterator it2;
 
-    for ( auto &elmt : m_vertices){
-        if(elmt.second.IsHide==true){
+    for ( auto &elmt : m_vertices)
+    {
+        if(elmt.second.IsHide==true)
+        {
             elmt.second.Cacher_Sommet();
 
             //std::cout<<elmt.second.m_out.size();
-            for(int i =0 ; i < elmt.second.m_in.size();i++){
-            m_edges[elmt.second.m_in[i]].hide_edge_in(elmt.second);
+            for(int i =0 ; i < elmt.second.m_in.size(); i++)
+            {
+                m_edges[elmt.second.m_in[i]].hide_edge_in(elmt.second);
 
             }
 
-            for(int i =0 ; i < elmt.second.m_out.size();i++){
+            for(int i =0 ; i < elmt.second.m_out.size(); i++)
+            {
                 m_edges[elmt.second.m_out[i]].hide_edge_out(elmt.second);
 
 
@@ -882,7 +948,8 @@ void Graph::supprimerVertex(){
 
 
 
-void Graph::charger(std::string graphName){
+void Graph::charger(std::string graphName)
+{
 
     std::ifstream fichier (graphName+".txt",std::ios::in);
     int indxVertex,posX, posY, r,indxEdge, vertexIn, vertexOut;
@@ -891,23 +958,26 @@ void Graph::charger(std::string graphName){
     bool bo=false;
 
 
-            if (fichier){
+    if (fichier)
+    {
 
         fichier >> Graph::ordre;
         fichier >> Graph::nbrEdge;
 
-        for(int i=0 ; i <ordre  ; i++){
-        fichier >> poidVertex;
-        fichier >> posX;
-        fichier >> posY;
-        fichier >> r;
-        fichier >> picName;
+        for(int i=0 ; i <ordre  ; i++)
+        {
+            fichier >> poidVertex;
+            fichier >> posX;
+            fichier >> posY;
+            fichier >> r;
+            fichier >> picName;
 
-        add_interfaced_vertex(i,poidVertex,r,posX,posY,picName+".jpg");
+            add_interfaced_vertex(i,poidVertex,r,posX,posY,picName+".jpg");
         }
-        for(int j=0 ; j < nbrEdge ; j++){
+        for(int j=0 ; j < nbrEdge ; j++)
+        {
 
-        /// montee en memoire des attributs pour interface
+            /// montee en memoire des attributs pour interface
             fichier >> vertexIn;
             fichier >> vertexOut;
             fichier >> poidEdge;
@@ -918,24 +988,28 @@ void Graph::charger(std::string graphName){
     }
 }
 
-void Graph::sauvgarder(std::string graphName){
+void Graph::sauvgarder(std::string graphName)
+{
 
     std::ofstream fichier(graphName+".txt",std::ios::out | std::ios::trunc);
     std::string picName;
-        if(fichier){
-            fichier << Graph::ordre <<std::endl;
-            fichier << Graph::nbrEdge<<std::endl;
+    if(fichier)
+    {
+        fichier << Graph::ordre <<std::endl;
+        fichier << Graph::nbrEdge<<std::endl;
 
-            for(auto &elt : m_vertices){
-         fichier << elt.second.m_value<<" ";
-         fichier <<elt.second.m_interface->m_top_box.get_frame_pos().x<<" ";
-         fichier <<elt.second.m_interface->m_top_box.get_frame_pos().y<<" ";
-         fichier <<elt.second.m_r<<" ";
-        picName=elt.second.m_interface->m_img.get_pic_name();
-        picName.erase(picName.size()-4,4);
-         fichier <<picName<<std::endl;
-    }
-        for(auto &elt : m_edges){
+        for(auto &elt : m_vertices)
+        {
+            fichier << elt.second.m_value<<" ";
+            fichier <<elt.second.m_interface->m_top_box.get_frame_pos().x<<" ";
+            fichier <<elt.second.m_interface->m_top_box.get_frame_pos().y<<" ";
+            fichier <<elt.second.m_r<<" ";
+            picName=elt.second.m_interface->m_img.get_pic_name();
+            picName.erase(picName.size()-4,4);
+            fichier <<picName<<std::endl;
+        }
+        for(auto &elt : m_edges)
+        {
             std::cout<<elt.second.m_from;
             fichier << elt.second.m_from<<" ";
             fichier << elt.second.m_to<<" ";
@@ -944,7 +1018,7 @@ void Graph::sauvgarder(std::string graphName){
         }
         fichier.close();
         std::cout<<"Sauvgarde done";
-        }
+    }
 
 }
 
@@ -957,54 +1031,75 @@ int Graph::menugraph()
 
 
 
-        for ( auto &elmt : m_vertices ){
+        for ( auto &elmt : m_vertices )
+        {
             elmt.second.IsHide=false;
-           elmt.second.Afficher_Somet();
+            elmt.second.Afficher_Somet();
         }
-        for ( auto & elmt : m_edges ) {
+        for ( auto & elmt : m_edges )
+        {
 
-           elmt.second.Afficher_Edges(m_vertices[Sommet_suite_in[i]],m_vertices[Sommet_suite_out[i]]);
-           i++;
-        //std::cout<<"l'arrete "<< i <<"est composé des sommet " << Sommet_suite_in[i]<<" et "<< Sommet_suite_out[i]<<std::endl;
-            if(Sommet_suite_in[i]==0 && Sommet_suite_out[i]==1){
+            elmt.second.Afficher_Edges(m_vertices[Sommet_suite_in[i]],m_vertices[Sommet_suite_out[i]]);
+            i++;
+            //std::cout<<"l'arrete "<< i <<"est composé des sommet " << Sommet_suite_in[i]<<" et "<< Sommet_suite_out[i]<<std::endl;
+            if(Sommet_suite_in[i]==0 && Sommet_suite_out[i]==1)
+            {
                 std::cout<<i<<"t";
             }
         }
 
 
     }
-    if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over()){
+    if(grman::mouse_click && m_interface->m_savebutton.is_mouse_over())
+    {
 
-       sauvgarder(m_nomgraph);
+        sauvgarder(m_nomgraph);
 
     }
 
     if(grman::mouse_click && m_interface->m_retour.is_mouse_over())
     {
-        return 1;
+        set_quitter(1);
+
     }
 
     if(grman::mouse_click&1 && m_interface->m_button_flux.is_mouse_over())
     {
         fonctionnel();
-       std::cout<<"1";
+        std::cout<<"1";
+        m_interface->m_tool_box.remove_child(m_interface->m_button_flux);
     }
 
 
 
 
     if(grman::mouse_click && m_interface->m_button_play.is_mouse_over())
-        {
-                play=true;
+    {
+        play=true;
 
 
-        }if
-        (grman::mouse_click && m_interface->m_button_pause.is_mouse_over())
-        {
-                play=false;
+    }
+
+    if(grman::mouse_click && m_interface->m_button_pause.is_mouse_over())
+    {
+        play=false;
 
 
-        }
+
+        m_interface->m_tool_box.add_child(m_interface->m_button_flux);
+        m_interface->m_button_flux.set_gravity_x(grman::GravityX::Center);
+        m_interface->m_button_flux.set_posy(363);
+        m_interface->m_button_flux.set_dim(70,30);
+        m_interface->m_button_flux.set_bg_color(ORANGESOMBRE);
+        m_interface->m_button_flux.add_child(m_interface->m_text1_flux);
+        m_interface->m_button_flux.add_child(m_interface->m_text2_flux);
+        m_interface->m_text1_flux.set_message("ModeF");
+        m_interface->m_text2_flux.set_message("OFF");
+        m_interface->m_text1_flux.set_posy(6);
+        m_interface->m_text2_flux.set_posy(18);
+
+
+    }
 
     return 0;
 }
@@ -1013,7 +1108,7 @@ int Graph::menugraph()
 void Graph::destroy_graph()
 {
 
-    for(std::map<int,Vertex>::iterator it= m_vertices.begin(); it!=m_vertices.end();it++)
+    for(std::map<int,Vertex>::iterator it= m_vertices.begin(); it!=m_vertices.end(); it++)
     {
         m_interface->m_main_box.remove_child(it->second.m_interface->m_top_box);
 
@@ -1021,7 +1116,7 @@ void Graph::destroy_graph()
 
     m_vertices.clear();
 
-    for(std::map<int,Edge>::iterator et= m_edges.begin(); et!=m_edges.end();et++)
+    for(std::map<int,Edge>::iterator et= m_edges.begin(); et!=m_edges.end(); et++)
     {
         m_interface->m_main_box.remove_child(et->second.m_interface->m_top_edge);
 
@@ -1033,6 +1128,18 @@ void Graph::destroy_graph()
     m_interface=nullptr;
 
 }
+
+bool Graph::get_quitter()
+{
+    return m_quitter;
+}
+
+void Graph:: set_quitter(bool x)
+{
+    m_quitter =x;
+}
+
+
 
 /// La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
 void Graph::update()
@@ -1049,8 +1156,9 @@ void Graph::update()
     m_interface->m_top_box.update();
     menugraph();
     supprimerVertex();
+
     if(play)
-    fonctionnel();
+        fonctionnel();
 
     for (auto &elt : m_vertices)
         elt.second.post_update();
@@ -1104,17 +1212,17 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     //m_vertices[id_vert2].m_out.push_back(idx);
 
 
-   // std::cout<<"les sommet "<<id_vert1<<" et "<<id_vert2<<" sont relié par l'arrete " <<idx <<std::endl;
+    // std::cout<<"les sommet "<<id_vert1<<" et "<<id_vert2<<" sont relié par l'arrete " <<idx <<std::endl;
     Sommet_suite_in.push_back(id_vert1);
     Sommet_suite_out.push_back(id_vert2);
 
-/*****************************************
-    je laisse pour l'instant c'est 2 ligne
-    et mets les deux du haut en commentaire
-    juste que je verifie que ca pose pas de
-    problmes quand je les utilise
+    /*****************************************
+        je laisse pour l'instant c'est 2 ligne
+        et mets les deux du haut en commentaire
+        juste que je verifie que ca pose pas de
+        problmes quand je les utilise
 
-******************************************/
+    ******************************************/
     if((idx!=id_vert1) ||(idx!=id_vert2))
     {
         m_vertices[id_vert1].m_in.push_back(idx);
@@ -1136,15 +1244,15 @@ int Graph::findEdge(int sfrom, int sto)
     for(auto &elt : m_edges)
     {
         /// accede à m-from et m_to
-       s1= elt.second.m_from;
-       s2= elt.second.m_to;
+        s1= elt.second.m_from;
+        s2= elt.second.m_to;
 
-       /// si les sommets s1 et s2 sont les meme que les sommets en parametres on retourne la valeur de l'arete (coeff)
-       if(s1==sfrom && s2==sto)
-       {
-          idx= elt.first;
+        /// si les sommets s1 et s2 sont les meme que les sommets en parametres on retourne la valeur de l'arete (coeff)
+        if(s1==sfrom && s2==sto)
+        {
+            idx= elt.first;
 
-           return idx;
-       }
+            return idx;
+        }
     }
 }
