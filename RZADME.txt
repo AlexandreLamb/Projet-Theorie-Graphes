@@ -8,3 +8,10 @@ Dans la fenêtre [Project build options]
 	jpgalleg
 	alleg44.dll
 - Valider (OK OK)
+
+
+
+
+SOURCES: 
+  
+   - Algo pour générer les u-plet http://www.commentcamarche.net/forum/affich-4567474-algo-affichage-combinaison-de-p-elemt-parmi-n
